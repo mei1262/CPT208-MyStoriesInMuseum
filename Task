@@ -1,15 +1,32 @@
 3.27
 TASKs：
 
+My Stories in Museums/ XR, GenAI, Location based;
+
 
 1. poster   40%
     week8
 
 2. portfolio    20%
-    week10
+    week10，开发过程，过渡设计，废案，草稿，设定集
+    A hosted web page details the process (github.io).
 
 3. system    20%
-    week10
+    week10， 
+    A functional web-based prototype, ideally via a live URL. 
 
 4. video    20%
     week10
+     2-minute “CHI-style” teaser showcasing the user journey and 
+    interaction.
+
+
+
+1. Who are the stakeholders / users of the system? 
+2. What does the system allow users to do? 
+3. Are there any issues with the existing system(s)? 
+4. Are there any user requirements that are not supported with the existing system(s)? 
+5. What are the design alternatives to solve the existing issues / fulfill user requirements? 
+6. How can you make prototypes of the design alternatives? 
+7. How can you evaluate your design? 
+8. What are the implications of your design?
