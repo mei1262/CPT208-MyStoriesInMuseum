@@ -24,9 +24,9 @@
         <span class="text-2xl font-bold tracking-widest">MyStoryInMuseum</span>
       </div>
       <div class="flex items-center gap-8 text-sm font-medium">
-        <a href=" " class="hover:text-amber-400 transition">探索展馆</a >
-        <a href="#custom" class="hover:text-amber-400 transition">定制导览</a >
-        <a href="#myjourney" class="hover:text-amber-400 transition">我的故事</a >
+        <a href="javascript:void(0)" onclick="openVisitorModule()" class="hover:text-amber-400 transition">参观者中心</a >
+        <a href="javascript:void(0)" onclick="openMuseumAdminModule()" class="hover:text-amber-400 transition">博物馆方中心</a >
+        <a href="javascript:void(0)" onclick="openCreatorModule()" class="hover:text-amber-400 transition">创作者中心</a >
         <div class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center text-black font-bold">YC</div>
       </div>
     </div>
@@ -39,7 +39,7 @@
         你的博物馆<br>不只是看展
       </h1>
       <p class="text-xl text-amber-200 mb-10">XR + AI 虚拟导览 · 让历史与你对话</p >
-      <button onclick="document.getElementById('browse').scrollIntoView({behavior:'smooth'})" 
+      <button onclick="document.getElementById('roles').scrollIntoView({behavior:'smooth'})" 
               class="bg-amber-400 hover:bg-amber-300 text-black px-10 py-4 rounded-2xl text-lg font-semibold flex items-center gap-3 mx-auto">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         开始你的故事
@@ -48,89 +48,27 @@
     </div>
   </header>
 
-  <!-- 1. 浏览博物馆 -->
-  <section id="browse" class="py-20 bg-zinc-900">
+  <!-- 角色中心导航 -->
+  <section id="roles" class="py-16 bg-zinc-900 border-y border-zinc-800">
     <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-4">苏州博物馆 · 等待你的故事</h2>
-      <p class="text-center text-zinc-400 mb-12">选择展馆 → 定制你的专属 XR 导览</p >
-
-      <div id="museum-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- JS 动态生成 -->
-      </div>
-
-      <!-- 博物馆上传入口（模拟管理员） -->
-      <div class="mt-16 text-center">
-        <button onclick="showUploadModal()" 
-                class="border border-dashed border-amber-400 text-amber-400 hover:bg-amber-400/10 px-8 py-6 rounded-3xl text-lg flex items-center gap-4 mx-auto">
-          <i class="fa-solid fa-cloud-upload-alt text-3xl"></i>
-          <div>
-            <div class="font-semibold">我是博物馆方</div>
-            <div class="text-sm">上传展馆信息 &amp; 历史素材</div>
-          </div>
+      <h2 class="text-4xl font-bold text-center mb-4">按角色进入功能模块</h2>
+      <p class="text-center text-zinc-400 mb-10">同一角色功能集中展示，减少跨区切换</p >
+      <div class="grid md:grid-cols-3 gap-6">
+        <button onclick="openVisitorModule()" class="text-left bg-zinc-800 hover:bg-zinc-700/80 rounded-3xl p-6 transition border border-zinc-700 w-full">
+          <p class="text-amber-300 text-sm mb-2">参观者</p>
+          <h3 class="text-2xl font-bold mb-3">探索展馆与定制导览</h3>
+          <p class="text-zinc-400">先选博物馆，再选虚拟形象与语音，最后生成专属计划。</p >
         </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. 定制虚拟导览（核心亮点） -->
-  <section id="custom" class="py-20 bg-black">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">选择你的虚拟导览伙伴</h2>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" id="avatar-grid">
-        <!-- JS 动态生成 -->
-      </div>
-
-      <div class="mt-12 bg-zinc-900 rounded-3xl p-8">
-        <h3 class="text-2xl font-semibold mb-6 flex items-center gap-3">
-          <i class="fa-solid fa-microphone"></i> 选择语音风格
-        </h3>
-        <select id="voice-select" class="w-full bg-zinc-800 text-white rounded-2xl p-4 text-lg">
-          <option value="苏州评弹">苏州评弹（温柔吴侬软语）</option>
-          <option value="历史旁白">历史旁白（沉稳男声）</option>
-          <option value="动漫元气">动漫元气少女</option>
-          <option value="搞笑表情包">表情包吐槽模式</option>
-        </select>
-      </div>
-
-      <button onclick="startTourPlanning()" 
-              class="mt-10 w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black py-6 rounded-3xl text-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition">
-        <i class="fa-solid fa-rocket"></i>
-        开启个性化 XR 游览计划
-      </button>
-    </div>
-  </section>
-
-  <!-- 3. 我的故事（游览后功能） -->
-  <section id="myjourney" class="py-20 bg-zinc-900">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">游览结束 · 留下你的故事</h2>
-      
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- 上传照片 -->
-        <div class="bg-zinc-800 rounded-3xl p-8">
-          <h3 class="text-2xl mb-6">📸 上传你的参展照片</h3>
-          <input type="file" id="photo-upload" accept="image/*" multiple class="hidden">
-          <label onclick="document.getElementById('photo-upload').click()" 
-                 class="cursor-pointer border-2 border-dashed border-amber-400 rounded-3xl h-64 flex flex-col items-center justify-center hover:bg-amber-400/5">
-            <i class="fa-solid fa-cloud-upload-alt text-6xl mb-4"></i>
-            <p class="text-amber-400">点击上传照片（最多 5 张）</p >
-          </label>
-          <button onclick="generateMemorialVideo()" 
-                  class="mt-6 w-full py-4 bg-amber-400 text-black rounded-2xl font-bold text-lg">✨ AI 自动生成纪念视频</button>
-        </div>
-
-        <!-- 生成结果展示区 -->
-        <div id="video-result" class="hidden bg-zinc-800 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
-          <h3 class="text-2xl mb-6">🎬 你的专属纪念视频已生成！</h3>
-          <div class="w-64 h-64 bg-gradient-to-br from-purple-500 to-amber-400 rounded-3xl flex items-center justify-center text-6xl mb-6">
-            ▶️
-          </div>
-          <p class="text-amber-200 mb-8">AI 已将你的照片与展馆历史场景融合</p >
-          <a href="#" class="inline-flex items-center gap-3 bg-white text-black px-8 py-3 rounded-2xl font-semibold">
-            <i class="fa-solid fa-download"></i> 下载视频
-          </a >
-        </div>
+        <button onclick="openMuseumAdminModule()" class="text-left bg-zinc-800 hover:bg-zinc-700/80 rounded-3xl p-6 transition border border-zinc-700 w-full">
+          <p class="text-amber-300 text-sm mb-2">博物馆方</p>
+          <h3 class="text-2xl font-bold mb-3">上传展馆与素材</h3>
+          <p class="text-zinc-400">集中管理展馆信息与历史素材入口，便于持续更新内容。</p >
+        </button>
+        <button onclick="openCreatorModule()" class="text-left bg-zinc-800 hover:bg-zinc-700/80 rounded-3xl p-6 transition border border-zinc-700 w-full">
+          <p class="text-amber-300 text-sm mb-2">创作者</p>
+          <h3 class="text-2xl font-bold mb-3">生成我的参展故事</h3>
+          <p class="text-zinc-400">上传照片并一键生成纪念视频，沉淀你的观展记忆。</p >
+        </button>
       </div>
     </div>
   </section>
@@ -151,6 +89,195 @@
         <button onclick="hideModal()" class="px-8 py-3 text-zinc-400">关闭</button>
         <button onclick="selectMuseum()" 
                 class="ml-4 bg-amber-400 text-black px-8 py-3 rounded-2xl font-bold">进入定制导览 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 参观者模块 Modal -->
+  <div id="visitor-modal" class="hidden fixed inset-0 bg-black/90 z-[998] overflow-y-auto">
+    <div class="min-h-screen py-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-zinc-900 rounded-3xl border border-zinc-800 p-6 md:p-8 mb-8 flex items-center justify-between">
+          <div>
+            <p class="text-amber-300 text-sm">参观者工作台</p>
+            <h2 class="text-3xl font-bold">选馆与导览定制</h2>
+          </div>
+          <button onclick="closeVisitorModule()" class="px-5 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">关闭</button>
+        </div>
+
+        <div id="browse" class="mb-12">
+          <h3 class="text-3xl font-bold mb-3">① 选择你感兴趣的博物馆</h3>
+          <p class="text-zinc-400 mb-8">点击卡片可查看展馆详情并进入导览定制</p >
+          <div id="museum-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- JS 动态生成 -->
+          </div>
+        </div>
+
+        <div id="custom" class="bg-zinc-900 rounded-3xl p-8 md:p-10 border border-zinc-800 mb-12">
+          <h3 class="text-3xl font-bold mb-8">② 定制你的虚拟导览伙伴</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" id="avatar-grid">
+            <!-- JS 动态生成 -->
+          </div>
+
+          <div class="mt-12 bg-zinc-950 rounded-3xl p-8 border border-zinc-800">
+            <h4 class="text-2xl font-semibold mb-6 flex items-center gap-3">
+              <i class="fa-solid fa-microphone"></i> 选择语音风格
+            </h4>
+            <select id="voice-select" class="w-full bg-zinc-800 text-white rounded-2xl p-4 text-lg">
+              <option value="苏州评弹">苏州评弹（温柔吴侬软语）</option>
+              <option value="历史旁白">历史旁白（沉稳男声）</option>
+              <option value="动漫元气">动漫元气少女</option>
+              <option value="搞笑表情包">表情包吐槽模式</option>
+            </select>
+          </div>
+
+          <button onclick="startTourPlanning()"
+                  class="mt-10 w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black py-6 rounded-3xl text-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition">
+            <i class="fa-solid fa-rocket"></i>
+            开启个性化 XR 游览计划
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 博物馆方模块 Modal -->
+  <div id="museum-admin-modal" class="hidden fixed inset-0 bg-black/90 z-[998] overflow-y-auto">
+    <div class="min-h-screen py-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-zinc-900 rounded-3xl border border-zinc-800 p-6 md:p-8 mb-8 flex items-center justify-between">
+          <div>
+            <p class="text-amber-300 text-sm">博物馆方模块</p>
+            <h2 class="text-3xl font-bold">认证、资料与官方内容管理</h2>
+          </div>
+          <button onclick="closeMuseumAdminModule()" class="px-5 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">关闭</button>
+        </div>
+
+        <div id="museum-admin-hub" class="grid lg:grid-cols-3 gap-6">
+          <button onclick="openMuseumAdminPanel('certification')" class="text-left bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-amber-400/60 transition">
+            <h3 class="text-xl font-bold mb-2">博物馆认证及资料提交</h3>
+            <p class="text-sm text-zinc-400 mb-6">提交机构身份信息，进入官方审核流程</p>
+            <span class="inline-block bg-amber-400 text-black px-4 py-2 rounded-xl font-semibold">进入提交界面</span>
+          </button>
+          <button onclick="openMuseumAdminPanel('exhibit')" class="text-left bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-amber-400/60 transition">
+            <h3 class="text-xl font-bold mb-2">文物及展览信息上传</h3>
+            <p class="text-sm text-zinc-400 mb-6">新增文物条目或展览项目，扩充导览内容</p>
+            <span class="inline-block bg-amber-400 text-black px-4 py-2 rounded-xl font-semibold">进入提交界面</span>
+          </button>
+          <button onclick="openMuseumAdminPanel('avatar')" class="text-left bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-amber-400/60 transition">
+            <h3 class="text-xl font-bold mb-2">官方定制虚拟形象提交</h3>
+            <p class="text-sm text-zinc-400 mb-6">提交官方角色设定，用于参观者导览选择</p>
+            <span class="inline-block bg-amber-400 text-black px-4 py-2 rounded-xl font-semibold">进入提交界面</span>
+          </button>
+        </div>
+
+        <div id="museum-admin-cert-panel" class="hidden bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold">博物馆认证及资料提交</h3>
+            <button onclick="backToMuseumAdminHub()" class="px-4 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">返回模块列表</button>
+          </div>
+          <div class="space-y-4">
+            <input id="cert-museum-name" type="text" placeholder="博物馆名称" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <input id="cert-license" type="text" placeholder="统一社会信用代码/机构编号" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <input id="cert-contact" type="text" placeholder="联系人姓名" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <input id="cert-phone" type="text" placeholder="联系电话" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <textarea id="cert-intro" rows="4" placeholder="机构简介（可选）" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400"></textarea>
+            <button onclick="submitMuseumCertification()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-3 rounded-2xl">提交认证资料</button>
+          </div>
+          <div id="museum-cert-status" class="mt-5 text-sm rounded-2xl bg-zinc-800 border border-zinc-700 p-4 text-zinc-300">暂无认证提交记录</div>
+        </div>
+
+        <div id="museum-admin-exhibit-panel" class="hidden bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold">文物及展览信息上传</h3>
+            <button onclick="backToMuseumAdminHub()" class="px-4 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">返回模块列表</button>
+          </div>
+          <div class="space-y-4">
+            <input id="upload-title" type="text" placeholder="文物/展览标题" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <div class="grid grid-cols-2 gap-3">
+              <select id="upload-category" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+                <option value="文物">文物</option>
+                <option value="临展">临展</option>
+                <option value="常设展">常设展</option>
+                <option value="互动展项">互动展项</option>
+              </select>
+              <input id="upload-era" type="text" placeholder="年代/时期" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            </div>
+            <textarea id="upload-desc" rows="4" placeholder="核心介绍（50~120字）" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400"></textarea>
+            <input id="upload-files" type="file" multiple accept="image/*,.pdf,.doc,.docx" class="w-full text-sm text-zinc-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-zinc-700 file:text-white hover:file:bg-zinc-600">
+            <button onclick="submitExhibitItem()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-3 rounded-2xl">提交文物/展览信息</button>
+          </div>
+          <div class="mt-5">
+            <p class="text-sm text-zinc-400 mb-2">最近提交</p>
+            <div id="museum-upload-list" class="space-y-2 text-sm text-zinc-300"></div>
+          </div>
+        </div>
+
+        <div id="museum-admin-avatar-panel" class="hidden bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold">官方定制虚拟形象提交</h3>
+            <button onclick="backToMuseumAdminHub()" class="px-4 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">返回模块列表</button>
+          </div>
+          <div class="space-y-4">
+            <input id="official-avatar-name" type="text" placeholder="形象名称（如：馆藏守护者）" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            <div class="grid grid-cols-2 gap-3">
+              <select id="official-avatar-style" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+                <option value="写实风">写实风</option>
+                <option value="国风">国风</option>
+                <option value="动漫风">动漫风</option>
+                <option value="IP吉祥物">IP吉祥物</option>
+              </select>
+              <input id="official-avatar-scene" type="text" placeholder="应用展厅/场景" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400">
+            </div>
+            <textarea id="official-avatar-desc" rows="4" placeholder="角色背景与讲解定位" class="w-full bg-zinc-800 rounded-2xl px-4 py-3 border border-zinc-700 focus:outline-none focus:border-amber-400"></textarea>
+            <input id="official-avatar-files" type="file" multiple accept="image/*,.zip,.psd" class="w-full text-sm text-zinc-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-zinc-700 file:text-white hover:file:bg-zinc-600">
+            <button onclick="submitOfficialAvatar()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-3 rounded-2xl">提交官方虚拟形象</button>
+          </div>
+          <div class="mt-5">
+            <p class="text-sm text-zinc-400 mb-2">官方形象提报记录</p>
+            <div id="official-avatar-list" class="space-y-2 text-sm text-zinc-300"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 创作者模块 Modal -->
+  <div id="creator-modal" class="hidden fixed inset-0 bg-black/90 z-[998] overflow-y-auto">
+    <div class="min-h-screen py-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-zinc-900 rounded-3xl border border-zinc-800 p-6 md:p-8 mb-8 flex items-center justify-between">
+          <div>
+            <p class="text-amber-300 text-sm">创作者模块</p>
+            <h2 class="text-3xl font-bold">游览结束 · 留下你的故事</h2>
+          </div>
+          <button onclick="closeCreatorModule()" class="px-5 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:bg-zinc-800">关闭</button>
+        </div>
+
+        <div id="myjourney" class="grid md:grid-cols-2 gap-12">
+          <div class="bg-zinc-800 rounded-3xl p-8">
+            <h3 class="text-2xl mb-6">📸 上传你的参展照片</h3>
+            <input type="file" id="photo-upload" accept="image/*" multiple class="hidden">
+            <label onclick="document.getElementById('photo-upload').click()"
+                   class="cursor-pointer border-2 border-dashed border-amber-400 rounded-3xl h-64 flex flex-col items-center justify-center hover:bg-amber-400/5">
+              <i class="fa-solid fa-cloud-upload-alt text-6xl mb-4"></i>
+              <p class="text-amber-400">点击上传照片（最多 5 张）</p >
+            </label>
+            <button onclick="generateMemorialVideo()"
+                    class="mt-6 w-full py-4 bg-amber-400 text-black rounded-2xl font-bold text-lg">✨ AI 自动生成纪念视频</button>
+          </div>
+
+          <div id="video-result" class="hidden bg-zinc-800 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
+            <h3 class="text-2xl mb-6">🎬 你的专属纪念视频已生成！</h3>
+            <div class="w-64 h-64 bg-gradient-to-br from-purple-500 to-amber-400 rounded-3xl flex items-center justify-center text-6xl mb-6">
+              ▶️
+            </div>
+            <p class="text-amber-200 mb-8">AI 已将你的照片与展馆历史场景融合</p >
+            <a href="#" class="inline-flex items-center gap-3 bg-white text-black px-8 py-3 rounded-2xl font-semibold">
+              <i class="fa-solid fa-download"></i> 下载视频
+            </a >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -229,6 +356,174 @@
 
     let selectedMuseum = null
     let selectedAvatar = null
+    const certificationSubmissions = []
+    const exhibitSubmissions = []
+    const officialAvatarSubmissions = []
+
+    function openVisitorModule() {
+      const modal = document.getElementById('visitor-modal')
+      modal.classList.remove('hidden')
+      document.body.classList.add('overflow-hidden')
+    }
+
+    function closeVisitorModule() {
+      const modal = document.getElementById('visitor-modal')
+      modal.classList.add('hidden')
+      document.body.classList.remove('overflow-hidden')
+    }
+
+    function openMuseumAdminModule() {
+      const modal = document.getElementById('museum-admin-modal')
+      modal.classList.remove('hidden')
+      document.body.classList.add('overflow-hidden')
+      backToMuseumAdminHub()
+    }
+
+    function closeMuseumAdminModule() {
+      const modal = document.getElementById('museum-admin-modal')
+      modal.classList.add('hidden')
+      document.body.classList.remove('overflow-hidden')
+    }
+
+    function openMuseumAdminPanel(panelType) {
+      const hub = document.getElementById('museum-admin-hub')
+      const certPanel = document.getElementById('museum-admin-cert-panel')
+      const exhibitPanel = document.getElementById('museum-admin-exhibit-panel')
+      const avatarPanel = document.getElementById('museum-admin-avatar-panel')
+      hub.classList.add('hidden')
+      certPanel.classList.add('hidden')
+      exhibitPanel.classList.add('hidden')
+      avatarPanel.classList.add('hidden')
+
+      if (panelType === 'certification') certPanel.classList.remove('hidden')
+      if (panelType === 'exhibit') exhibitPanel.classList.remove('hidden')
+      if (panelType === 'avatar') avatarPanel.classList.remove('hidden')
+    }
+
+    function backToMuseumAdminHub() {
+      const hub = document.getElementById('museum-admin-hub')
+      const certPanel = document.getElementById('museum-admin-cert-panel')
+      const exhibitPanel = document.getElementById('museum-admin-exhibit-panel')
+      const avatarPanel = document.getElementById('museum-admin-avatar-panel')
+      hub.classList.remove('hidden')
+      certPanel.classList.add('hidden')
+      exhibitPanel.classList.add('hidden')
+      avatarPanel.classList.add('hidden')
+    }
+
+    function getNowText() {
+      return new Date().toLocaleString('zh-CN', { hour12: false })
+    }
+
+    function submitMuseumCertification() {
+      const museumName = document.getElementById('cert-museum-name').value.trim()
+      const license = document.getElementById('cert-license').value.trim()
+      const contact = document.getElementById('cert-contact').value.trim()
+      const phone = document.getElementById('cert-phone').value.trim()
+      const intro = document.getElementById('cert-intro').value.trim()
+
+      if (!museumName || !license || !contact || !phone) {
+        alert('请至少填写：博物馆名称、机构编号、联系人、联系电话')
+        return
+      }
+
+      const record = {
+        museumName,
+        license,
+        contact,
+        phone,
+        intro,
+        status: '待审核',
+        submittedAt: getNowText()
+      }
+      certificationSubmissions.unshift(record)
+
+      const statusBox = document.getElementById('museum-cert-status')
+      statusBox.innerHTML = `
+        <p class="text-amber-300 font-semibold mb-2">最新认证提交：${record.museumName}</p>
+        <p>状态：<span class="text-amber-300">${record.status}</span></p>
+        <p>联系人：${record.contact} / ${record.phone}</p>
+        <p class="text-zinc-400 mt-1">提交时间：${record.submittedAt}</p>
+      `
+      alert('✅ 认证资料已提交，当前状态：待审核')
+    }
+
+    function submitExhibitItem() {
+      const title = document.getElementById('upload-title').value.trim()
+      const category = document.getElementById('upload-category').value
+      const era = document.getElementById('upload-era').value.trim()
+      const desc = document.getElementById('upload-desc').value.trim()
+      const files = document.getElementById('upload-files').files
+
+      if (!title || !desc) {
+        alert('请填写文物/展览标题与核心介绍')
+        return
+      }
+
+      const record = {
+        title,
+        category,
+        era: era || '未填写',
+        fileCount: files ? files.length : 0,
+        submittedAt: getNowText()
+      }
+      exhibitSubmissions.unshift(record)
+
+      const list = document.getElementById('museum-upload-list')
+      list.innerHTML = exhibitSubmissions.slice(0, 5).map(item => `
+        <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-3">
+          <p class="font-semibold">${item.title}</p>
+          <p class="text-zinc-400">${item.category} · ${item.era} · 附件 ${item.fileCount} 份</p>
+          <p class="text-xs text-zinc-500 mt-1">${item.submittedAt}</p>
+        </div>
+      `).join('')
+      alert('✅ 文物/展览信息已提交')
+    }
+
+    function submitOfficialAvatar() {
+      const name = document.getElementById('official-avatar-name').value.trim()
+      const style = document.getElementById('official-avatar-style').value
+      const scene = document.getElementById('official-avatar-scene').value.trim()
+      const desc = document.getElementById('official-avatar-desc').value.trim()
+      const files = document.getElementById('official-avatar-files').files
+
+      if (!name || !scene || !desc) {
+        alert('请填写形象名称、应用场景和角色描述')
+        return
+      }
+
+      const record = {
+        name,
+        style,
+        scene,
+        fileCount: files ? files.length : 0,
+        submittedAt: getNowText(),
+        status: '已提交策划审核'
+      }
+      officialAvatarSubmissions.unshift(record)
+
+      const list = document.getElementById('official-avatar-list')
+      list.innerHTML = officialAvatarSubmissions.slice(0, 5).map(item => `
+        <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-3">
+          <p class="font-semibold">${item.name} <span class="text-zinc-400">(${item.style})</span></p>
+          <p class="text-zinc-400">场景：${item.scene} · 资源 ${item.fileCount} 份</p>
+          <p class="text-amber-300 text-xs mt-1">${item.status}</p>
+        </div>
+      `).join('')
+      alert('✅ 官方虚拟形象提交成功')
+    }
+
+    function openCreatorModule() {
+      const modal = document.getElementById('creator-modal')
+      modal.classList.remove('hidden')
+      document.body.classList.add('overflow-hidden')
+    }
+
+    function closeCreatorModule() {
+      const modal = document.getElementById('creator-modal')
+      modal.classList.add('hidden')
+      document.body.classList.remove('overflow-hidden')
+    }
 
     function showMuseumDetail(id) {
       selectedMuseum = museums.find(m => m.id === id)
