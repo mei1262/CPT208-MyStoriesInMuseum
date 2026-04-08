@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyStoryInMuseum | 让每一次参展都成为你的故事</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/id/1015/2000/1200') center/cover; }
+    .museum-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .museum-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+  <!-- Navbar -->
+  <nav class="bg-black/80 backdrop-blur-md border-b border-amber-500 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-museum text-3xl text-amber-400"></i>
+        <span class="text-2xl font-bold tracking-widest">MyStoryInMuseum</span>
+      </div>
+      <div class="flex items-center gap-8 text-sm font-medium">
+        <a href=" " class="hover:text-amber-400 transition">探索展馆</a >
+        <a href="#custom" class="hover:text-amber-400 transition">定制导览</a >
+        <a href="#myjourney" class="hover:text-amber-400 transition">我的故事</a >
+        <div class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center text-black font-bold">YC</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero-bg h-screen flex items-center">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">
+        你的博物馆<br>不只是看展
+      </h1>
+      <p class="text-xl text-amber-200 mb-10">XR + AI 虚拟导览 · 让历史与你对话</p >
+      <button onclick="document.getElementById('browse').scrollIntoView({behavior:'smooth'})" 
+              class="bg-amber-400 hover:bg-amber-300 text-black px-10 py-4 rounded-2xl text-lg font-semibold flex items-center gap-3 mx-auto">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        开始你的故事
+      </button>
+      <p class="text-xs text-zinc-400 mt-8">A3 项目 · CPT208 Human-Centric Computing</p >
+    </div>
+  </header>
+
+  <!-- 1. 浏览博物馆 -->
+  <section id="browse" class="py-20 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4">苏州博物馆 · 等待你的故事</h2>
+      <p class="text-center text-zinc-400 mb-12">选择展馆 → 定制你的专属 XR 导览</p >
+
+      <div id="museum-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- JS 动态生成 -->
+      </div>
+
+      <!-- 博物馆上传入口（模拟管理员） -->
+      <div class="mt-16 text-center">
+        <button onclick="showUploadModal()" 
+                class="border border-dashed border-amber-400 text-amber-400 hover:bg-amber-400/10 px-8 py-6 rounded-3xl text-lg flex items-center gap-4 mx-auto">
+          <i class="fa-solid fa-cloud-upload-alt text-3xl"></i>
+          <div>
+            <div class="font-semibold">我是博物馆方</div>
+            <div class="text-sm">上传展馆信息 &amp; 历史素材</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 定制虚拟导览（核心亮点） -->
+  <section id="custom" class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">选择你的虚拟导览伙伴</h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" id="avatar-grid">
+        <!-- JS 动态生成 -->
+      </div>
+
+      <div class="mt-12 bg-zinc-900 rounded-3xl p-8">
+        <h3 class="text-2xl font-semibold mb-6 flex items-center gap-3">
+          <i class="fa-solid fa-microphone"></i> 选择语音风格
+        </h3>
+        <select id="voice-select" class="w-full bg-zinc-800 text-white rounded-2xl p-4 text-lg">
+          <option value="苏州评弹">苏州评弹（温柔吴侬软语）</option>
+          <option value="历史旁白">历史旁白（沉稳男声）</option>
+          <option value="动漫元气">动漫元气少女</option>
+          <option value="搞笑表情包">表情包吐槽模式</option>
+        </select>
+      </div>
+
+      <button onclick="startTourPlanning()" 
+              class="mt-10 w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black py-6 rounded-3xl text-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition">
+        <i class="fa-solid fa-rocket"></i>
+        开启个性化 XR 游览计划
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. 我的故事（游览后功能） -->
+  <section id="myjourney" class="py-20 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">游览结束 · 留下你的故事</h2>
+      
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- 上传照片 -->
+        <div class="bg-zinc-800 rounded-3xl p-8">
+          <h3 class="text-2xl mb-6">📸 上传你的参展照片</h3>
+          <input type="file" id="photo-upload" accept="image/*" multiple class="hidden">
+          <label onclick="document.getElementById('photo-upload').click()" 
+                 class="cursor-pointer border-2 border-dashed border-amber-400 rounded-3xl h-64 flex flex-col items-center justify-center hover:bg-amber-400/5">
+            <i class="fa-solid fa-cloud-upload-alt text-6xl mb-4"></i>
+            <p class="text-amber-400">点击上传照片（最多 5 张）</p >
+          </label>
+          <button onclick="generateMemorialVideo()" 
+                  class="mt-6 w-full py-4 bg-amber-400 text-black rounded-2xl font-bold text-lg">✨ AI 自动生成纪念视频</button>
+        </div>
+
+        <!-- 生成结果展示区 -->
+        <div id="video-result" class="hidden bg-zinc-800 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
+          <h3 class="text-2xl mb-6">🎬 你的专属纪念视频已生成！</h3>
+          <div class="w-64 h-64 bg-gradient-to-br from-purple-500 to-amber-400 rounded-3xl flex items-center justify-center text-6xl mb-6">
+            ▶️
+          </div>
+          <p class="text-amber-200 mb-8">AI 已将你的照片与展馆历史场景融合</p >
+          <a href="#" class="inline-flex items-center gap-3 bg-white text-black px-8 py-3 rounded-2xl font-semibold">
+            <i class="fa-solid fa-download"></i> 下载视频
+          </a >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-amber-500/30 text-center text-xs text-zinc-500">
+    <p>© 2026 MyStoryInMuseum • CPT208 A3 项目 • AI 使用记录见 /ai-logs 文件夹</p >
+    <p class="mt-2">虚拟形象、XR 导览、AI 纪念视频 — 让博物馆真正属于每一个人</p >
+  </footer>
+
+  <!-- 博物馆详情 Modal -->
+  <div id="museum-modal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[999]">
+    <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full mx-4 overflow-hidden">
+      <div class="p-8" id="modal-content">
+        <!-- JS 填充 -->
+      </div>
+      <div class="p-6 border-t border-zinc-700 flex justify-end">
+        <button onclick="hideModal()" class="px-8 py-3 text-zinc-400">关闭</button>
+        <button onclick="selectMuseum()" 
+                class="ml-4 bg-amber-400 text-black px-8 py-3 rounded-2xl font-bold">进入定制导览 →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tailwind 初始化
+    tailwind.config = { content: ["./**/*.{html,js}"], theme: { extend: {} } }
+
+    // 博物馆数据
+    const museums = [
+      {
+        id: 1,
+        name: "苏州博物馆",
+        desc: "吴地文化精华，贝聿铭设计代表作",
+        img: "https://picsum.photos/id/1015/800/600",
+        location: "苏州平江路",
+        highlights: "吴门画派、古玉、明清家具"
+      },
+      {
+        id: 2,
+        name: "苏州丝绸博物馆",
+        desc: "千年丝绸之路活化石",
+        img: "https://picsum.photos/id/201/800/600",
+        location: "苏州南门",
+        highlights: "宋锦、缂丝、刺绣"
+      },
+      {
+        id: 3,
+        name: "苏州博物馆新馆",
+        desc: "现代与古典的完美融合",
+        img: "https://picsum.photos/id/870/800/600",
+        location: "苏州工业园区",
+        highlights: "当代艺术 + 苏州园林"
+      }
+    ]
+
+    // 虚拟形象数据（亮点）
+    const avatars = [
+      { id:1, name:"伍子胥", type:"历史人物", img:"https://picsum.photos/id/64/300/300", desc:"吴国忠臣，苏州建城者" },
+      { id:2, name:"苏州评弹小姐姐", type:"吉祥物", img:"https://picsum.photos/id/1005/300/300", desc:"吴侬软语，弹词说书" },
+      { id:3, name:"枫桥夜泊·张继", type:"历史人物", img:"https://picsum.photos/id/201/300/300", desc:"月落乌啼霜满天" },
+      { id:4, name:"表情包小苏", type:"网络IP", img:"https://picsum.photos/id/1009/300/300", desc:"苏州版“doge”" },
+      { id:5, name:"丝绸精灵", type:"动漫IP", img:"https://picsum.photos/id/870/300/300", desc:"官方合作动漫形象" },
+      { id:6, name:"贝聿铭先生", type:"历史人物", img:"https://picsum.photos/id/1011/300/300", desc:"建筑大师本尊" }
+    ]
+
+    // 渲染博物馆卡片
+    function renderMuseums() {
+      const grid = document.getElementById('museum-grid')
+      grid.innerHTML = museums.map(m => `
+        <div onclick="showMuseumDetail(${m.id})" class="museum-card bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
+          < img src="${m.img}" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold">${m.name}</h3>
+            <p class="text-amber-300 text-sm mt-1">${m.location}</p >
+            <p class="text-zinc-400 mt-3 line-clamp-2">${m.desc}</p >
+            <div class="flex gap-2 mt-6">
+              <span class="text-xs bg-amber-400/10 text-amber-400 px-4 py-1 rounded-3xl">${m.highlights}</span>
+            </div>
+          </div>
+        </div>
+      `).join('')
+    }
+
+    // 渲染虚拟形象
+    function renderAvatars() {
+      const grid = document.getElementById('avatar-grid')
+      grid.innerHTML = avatars.map(a => `
+        <div onclick="selectAvatar(${a.id})" class="group cursor-pointer bg-zinc-800 rounded-3xl p-4 text-center hover:ring-2 hover:ring-amber-400 transition">
+          < img src="${a.img}" class="w-24 h-24 mx-auto rounded-2xl mb-4 group-hover:scale-110 transition">
+          <h4 class="font-semibold">${a.name}</h4>
+          <p class="text-xs text-zinc-400">${a.type}</p >
+        </div>
+      `).join('')
+    }
+
+    let selectedMuseum = null
+    let selectedAvatar = null
+
+    function showMuseumDetail(id) {
+      selectedMuseum = museums.find(m => m.id === id)
+      const modal = document.getElementById('museum-modal')
+      const content = document.getElementById('modal-content')
+      
+      content.innerHTML = `
+        < img src="${selectedMuseum.img}" class="w-full rounded-3xl mb-6">
+        <h2 class="text-4xl font-bold">${selectedMuseum.name}</h2>
+        <p class="text-amber-400">${selectedMuseum.location}</p >
+        <p class="mt-6 text-zinc-300">${selectedMuseum.desc}</p >
+        <div class="mt-8 bg-black/50 rounded-2xl p-6">
+          <p class="text-sm uppercase tracking-widest mb-2">展馆亮点</p >
+          <p class="text-amber-200">${selectedMuseum.highlights}</p >
+        </div>
+      `
+      modal.classList.remove('hidden')
+      modal.classList.add('flex')
+    }
+
+    function hideModal() {
+      const modal = document.getElementById('museum-modal')
+      modal.classList.add('hidden')
+      modal.classList.remove('flex')
+    }
+
+    function selectMuseum() {
+      hideModal()
+      document.getElementById('custom').scrollIntoView({ behavior: 'smooth' })
+      // 可选：自动填充已选博物馆
+      console.log('%c✅ 已选择博物馆：' + selectedMuseum.name, 'color:#fbbf24; font-size:16px')
+    }
+
+    function selectAvatar(id) {
+      selectedAvatar = avatars.find(a => a.id === id)
+      alert(`🎉 已选择虚拟导览形象：${selectedAvatar.name}\n\n接下来请定制语音风格并生成游览计划！`)
+    }
+
+    function startTourPlanning() {
+      if (!selectedAvatar) {
+        alert('请先在上方选择一个虚拟导览形象哦~')
+        return
+      }
+      const plan = `【AI 个性化游览计划】\n\n欢迎来到 ${selectedMuseum ? selectedMuseum.name : '苏州博物馆'}！\n你的专属导览：${selectedAvatar.name}\n\n推荐路线：\n1. 入口 → 吴地文化展厅（30分钟）\n2. 互动 XR 重现“姑苏繁华”场景\n3. 纪念品区拍照打卡\n\n预计游览时长：2小时15分钟\n已为你生成专属语音讲解脚本。`
+      alert(plan)
+      // 实际项目中可跳转到更详细的计划页面
+    }
+
+    function showUploadModal() {
+      const info = prompt("🟡 博物馆上传模式\n请输入展馆名称和一句话简介：\n示例：苏州博物馆 | 吴地文化精华")
+      if (info) {
+        const [name, desc] = info.split('|')
+        museums.push({
+          id: Date.now(),
+          name: name.trim(),
+          desc: (desc || "新上传展馆").trim(),
+          img: "https://picsum.photos/id/870/800/600",
+          location: "苏州",
+          highlights: "新增展品"
+        })
+        renderMuseums()
+        alert('✅ 展馆信息已成功上传！（localStorage 模拟）')
+      }
+    }
+
+    function generateMemorialVideo() {
+      const result = document.getElementById('video-result')
+      result.classList.remove('hidden')
+      result.scrollIntoView({ behavior: 'smooth' })
+      
+      // 模拟 AI 生成过程
+      setTimeout(() => {
+        console.log('%c🤖 AI 已生成纪念视频（模拟）', 'color:#fbbf24')
+      }, 800)
+    }
+
+    // 初始化
+    window.onload = () => {
+      renderMuseums()
+      renderAvatars()
+      
+      // 照片上传监听（仅演示）
+      document.getElementById('photo-upload').addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          console.log(`📸 上传了 ${e.target.files.length} 张照片`)
+        }
+      })
+    }
+  </script>
+</body>
+</html>
