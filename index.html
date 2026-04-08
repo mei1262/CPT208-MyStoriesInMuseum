@@ -165,7 +165,7 @@
         id: 1,
         name: "苏州博物馆",
         desc: "吴地文化精华，贝聿铭设计代表作",
-        img: "https://picsum.photos/id/1015/800/600",
+        img: "MuseumSource/苏州博物馆.png",
         location: "苏州平江路",
         highlights: "吴门画派、古玉、明清家具"
       },
@@ -173,28 +173,28 @@
         id: 2,
         name: "苏州丝绸博物馆",
         desc: "千年丝绸之路活化石",
-        img: "https://picsum.photos/id/201/800/600",
+        img: "MuseumSource/苏州丝绸博物馆.png",
         location: "苏州南门",
         highlights: "宋锦、缂丝、刺绣"
       },
       {
         id: 3,
-        name: "苏州博物馆新馆",
-        desc: "现代与古典的完美融合",
-        img: "https://picsum.photos/id/870/800/600",
-        location: "苏州工业园区",
-        highlights: "当代艺术 + 苏州园林"
+        name: "苏州吴文化博物馆",
+        desc: "时光里的文化摆渡",
+        img: "MuseumSource/苏州吴文化博物馆.png",
+        location: "苏州市吴中区",
+        highlights: "吴文化历史 + 传统工艺"
       }
     ]
 
     // 虚拟形象数据（亮点）
     const avatars = [
-      { id:1, name:"伍子胥", type:"历史人物", img:"https://picsum.photos/id/64/300/300", desc:"吴国忠臣，苏州建城者" },
-      { id:2, name:"苏州评弹小姐姐", type:"吉祥物", img:"https://picsum.photos/id/1005/300/300", desc:"吴侬软语，弹词说书" },
-      { id:3, name:"枫桥夜泊·张继", type:"历史人物", img:"https://picsum.photos/id/201/300/300", desc:"月落乌啼霜满天" },
-      { id:4, name:"表情包小苏", type:"网络IP", img:"https://picsum.photos/id/1009/300/300", desc:"苏州版“doge”" },
-      { id:5, name:"丝绸精灵", type:"动漫IP", img:"https://picsum.photos/id/870/300/300", desc:"官方合作动漫形象" },
-      { id:6, name:"贝聿铭先生", type:"历史人物", img:"https://picsum.photos/id/1011/300/300", desc:"建筑大师本尊" }
+      { id:1, name:"伍子胥", type:"历史人物", img:"AvatarSource/伍子胥.png", desc:"吴国忠臣，苏州建城者" },
+      { id:2, name:"苏州评弹小姐姐", type:"吉祥物", img:"AvatarSource/苏州评弹.png", desc:"吴侬软语，弹词说书" },
+      { id:3, name:"枫桥夜泊·张继", type:"历史人物", img:"AvatarSource/张继.png", desc:"月落乌啼霜满天" },
+      { id:4, name:"奶龙", type:"网络IP", img:"AvatarSource/奶龙.png", desc:"苏州版“doge”" },
+      { id:5, name:"哪吒", type:"动漫IP", img:"AvatarSource/哪吒.png", desc:"官方合作动漫形象" },
+      { id:6, name:"贝聿铭先生", type:"历史人物", img:"AvatarSource/贝聿铭.png", desc:"建筑大师本尊" }
     ]
 
     // 渲染博物馆卡片
@@ -202,7 +202,7 @@
       const grid = document.getElementById('museum-grid')
       grid.innerHTML = museums.map(m => `
         <div onclick="showMuseumDetail(${m.id})" class="museum-card bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer">
-          < img src="${m.img}" class="w-full h-56 object-cover">
+          <img src="${m.img}" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-2xl font-bold">${m.name}</h3>
             <p class="text-amber-300 text-sm mt-1">${m.location}</p >
@@ -220,7 +220,7 @@
       const grid = document.getElementById('avatar-grid')
       grid.innerHTML = avatars.map(a => `
         <div onclick="selectAvatar(${a.id})" class="group cursor-pointer bg-zinc-800 rounded-3xl p-4 text-center hover:ring-2 hover:ring-amber-400 transition">
-          < img src="${a.img}" class="w-24 h-24 mx-auto rounded-2xl mb-4 group-hover:scale-110 transition">
+          <img src="${a.img}" class="w-24 h-24 mx-auto rounded-2xl mb-4 group-hover:scale-110 transition">
           <h4 class="font-semibold">${a.name}</h4>
           <p class="text-xs text-zinc-400">${a.type}</p >
         </div>
@@ -236,7 +236,7 @@
       const content = document.getElementById('modal-content')
       
       content.innerHTML = `
-        < img src="${selectedMuseum.img}" class="w-full rounded-3xl mb-6">
+        <img src="${selectedMuseum.img}" class="w-full rounded-3xl mb-6">
         <h2 class="text-4xl font-bold">${selectedMuseum.name}</h2>
         <p class="text-amber-400">${selectedMuseum.location}</p >
         <p class="mt-6 text-zinc-300">${selectedMuseum.desc}</p >
