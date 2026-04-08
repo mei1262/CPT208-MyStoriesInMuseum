@@ -1,0 +1,6 @@
+When we were designing the museum experience, one big question was how to mix storytelling with interaction without making visitors feel overwhelmed or bored. We looked at three options.
+Option A was a pure XR historical reconstruction¡ªbasically, visitors would watch immersive scenes from the past. It looked amazing, but it was pretty passive. There wasn't much real interaction.
+Option B was just an AI voice guide. It could have natural conversations and tailor explanations to each person. That made it more engaging and accessible, but it missed the emotional punch of actually seeing history come to life.
+In the end, we went with Option C, which combines both: XR avatars and historical scenes, plus AI voice interaction.
+The XR part builds the world and the atmosphere¡ªit makes you feel like you're really there in that historical moment. Then the AI voice turns that world into a conversation. Visitors can ask questions on the fly, ask for a simpler explanation, or dive deeper into something they're curious about.
+That turns a one-way tour into a kind of discovery game. It's way less boring. Sure, building this hybrid system is more complicated than just picking one approach, but it's worth it. Visitors remember more, get more curious, and have a better time¡ªwhether they're kids, adults, or just have different ways of learning.
