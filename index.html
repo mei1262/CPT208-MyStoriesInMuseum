@@ -132,6 +132,12 @@
           </div>
 
           <button onclick="startTourPlanning()"
+                      <!-- 新增：AR 演示入口按钮（对应 must-have feature 1） -->
+          <button onclick="window.open('ar-demo.html', '_blank')" 
+                  class="mt-4 w-full bg-gradient-to-r from-purple-500 to-amber-400 text-black py-6 rounded-3xl text-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition">
+            <i class="fa-solid fa-vr-cardboard"></i>
+            立即启动 AR 导览演示（展区切换 + 虚拟伙伴）
+          </button>
                   class="mt-10 w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black py-6 rounded-3xl text-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition">
             <i class="fa-solid fa-rocket"></i>
             开启个性化 XR 游览计划
