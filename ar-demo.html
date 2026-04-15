@@ -10,7 +10,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
     body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
-    model-viewer { width: 100%; height: 520px; background: #111827; border-radius: 1.5rem; }
+    model-viewer { width: 100%; height: 500px; background: #111; border-radius: 1.5rem; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -29,50 +29,53 @@
   </nav>
 
   <div class="max-w-7xl mx-auto px-6 py-10">
-    <h1 id="page-title" class="text-5xl font-bold text-center mb-2">XR 虚拟导览 · AR 实时演示</h1>
-    <p id="subtitle" class="text-center text-amber-300 text-xl mb-8"></p>
+    <h1 class="text-5xl font-bold text-center mb-2">XR 虚拟导览 · AR 实时演示</h1>
+    <p class="text-center text-amber-300 text-xl mb-8">你的专属虚拟伙伴正在展厅里等你</p>
 
-    <!-- 当前信息栏 -->
+    <!-- 当前选择信息 -->
     <div class="bg-zinc-900 rounded-3xl p-6 mb-8 flex flex-wrap gap-6 items-center justify-between">
       <div>
-        <p id="museum-name" class="text-amber-300 text-sm"></p>
-        <p id="avatar-name" class="text-3xl font-bold"></p>
+        <p class="text-amber-300 text-sm">当前博物馆 · 苏州博物馆</p>
+        <p class="text-3xl font-bold">伍子胥（你的虚拟伙伴）</p>
       </div>
-      <div class="flex items-center gap-4" id="zone-buttons">
-        <!-- JS 动态生成展区按钮 -->
+      <div class="flex items-center gap-4">
+        <span onclick="switchZone(1)" class="cursor-pointer px-6 py-3 bg-amber-400 text-black rounded-2xl font-semibold hover:scale-105 transition">展区1：入口大厅</span>
+        <span onclick="switchZone(2)" class="cursor-pointer px-6 py-3 bg-zinc-800 hover:bg-amber-400 hover:text-black rounded-2xl font-semibold transition">展区2：吴地文化厅</span>
+        <span onclick="switchZone(3)" class="cursor-pointer px-6 py-3 bg-zinc-800 hover:bg-amber-400 hover:text-black rounded-2xl font-semibold transition">展区3：明清家具厅</span>
       </div>
       <div class="text-sm text-zinc-400">
-        <i class="fa-solid fa-info-circle"></i> 切换展区可缓解长时间 XR 佩戴疲劳
+        <i class="fa-solid fa-info-circle"></i> 切换展区可缓解长时间佩戴 XR 设备疲劳
       </div>
     </div>
 
     <!-- AR 核心 -->
-    <model-viewer id="ar-model"
-                  src="https://modelviewer.dev/assets/ShopifyModels/Chair.glb"
-                  ar ar-modes="webxr scene-viewer quick-look"
-                  camera-controls
-                  auto-rotate
+    <model-viewer id="ar-model" 
+                  src="https://modelviewer.dev/assets/ShopifyModels/Chair.glb" 
+                  ar ar-modes="webxr scene-viewer quick-look" 
+                  camera-controls 
+                  auto-rotate 
                   shadow-intensity="1"
-                  alt="你的虚拟导览伙伴">
+                  alt="你的虚拟导览伙伴 - 伍子胥">
     </model-viewer>
 
     <div class="mt-6 text-center text-zinc-400 text-sm">
-      💡 在手机上点击右下角“AR”按钮进入真实增强现实<br>
-      （当前使用演示模型，后续替换为 assets/AvatarSource/ 里的 .glb 文件）
+      💡 在手机上点击“AR”按钮即可进入真实增强现实模式<br>
+      （当前为演示模型，请后续替换为你的 Avatar .glb 文件）
     </div>
 
-    <!-- 3 个 Playful Features 区域 -->
+    <!-- Playful 交互区 -->
     <div class="grid md:grid-cols-3 gap-6 mt-12">
-      <!-- Feature 1: 虚拟伙伴对话 -->
+      <!-- Feature 1 -->
       <div class="bg-zinc-900 rounded-3xl p-8">
         <h3 class="text-xl font-bold flex items-center gap-2 mb-4"><i class="fa-solid fa-robot text-amber-400"></i> 虚拟伙伴实时对话</h3>
+        <p class="text-zinc-400 mb-6">伍子胥正在为你讲解吴地文化…</p>
         <button onclick="speakToUser()" 
                 class="w-full bg-gradient-to-r from-amber-400 to-orange-500 text-black py-4 rounded-2xl font-bold">
           🎤 让我听听你的问题
         </button>
       </div>
 
-      <!-- Feature 3: 展区打卡 + 碎片 -->
+      <!-- Feature 3 -->
       <div class="bg-zinc-900 rounded-3xl p-8">
         <h3 class="text-xl font-bold flex items-center gap-2 mb-4"><i class="fa-solid fa-ticket text-amber-400"></i> 展区打卡 · 故事碎片</h3>
         <p id="fragment-count" class="text-3xl font-bold text-amber-400 mb-2">已收集 1/3 碎片</p>
@@ -82,131 +85,53 @@
         </button>
       </div>
 
-      <!-- Feature 2: AI 纪念视频 -->
+      <!-- Feature 2 -->
       <div class="bg-zinc-900 rounded-3xl p-8">
         <h3 class="text-xl font-bold flex items-center gap-2 mb-4"><i class="fa-solid fa-film text-amber-400"></i> AI 纪念视频</h3>
+        <p class="text-zinc-400 mb-6">上传照片后可直接生成你的专属故事视频</p>
         <button onclick="window.location.href='index.html#creator'" 
                 class="w-full bg-gradient-to-r from-purple-500 to-amber-400 text-black py-4 rounded-2xl font-bold">
-          ✨ 去生成专属纪念视频
+          ✨ 去生成纪念视频
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    // ====================== 3 个博物馆配置 ======================
-    const museumConfigs = {
-      1: {  // 苏州博物馆
-        name: "苏州博物馆",
-        avatar: "伍子胥",
-        modelSrc: "https://modelviewer.dev/assets/ShopifyModels/Chair.glb",           // 古典家具风（后续换你的伍子胥.glb）
-        zones: ["入口大厅", "吴地文化厅", "明清家具厅"],
-        dialogues: [
-          "吴国忠臣伍子胥在此！苏州城就是我当年所建，你想听哪一段历史？",
-          "贝聿铭大师的设计，你觉得如何？",
-          "明清家具展厅里，每一件都是真家伙！"
-        ],
-        fragmentName: "吴文化碎片"
-      },
-      2: {  // 苏州丝绸博物馆
-        name: "苏州丝绸博物馆",
-        avatar: "苏州评弹小姐姐",
-        modelSrc: "https://modelviewer.dev/assets/ShopifyModels/RobotExpressive.glb", // 丝绸轻盈灵动风
-        zones: ["丝绸起源厅", "宋锦缂丝厅", "刺绣互动厅"],
-        dialogues: [
-          "吴侬软语来啦～ 今天想听一段评弹，还是看我绣一朵花？",
-          "千年丝绸之路，从这里开始！",
-          "摸摸这块宋锦，手感是不是很舒服？"
-        ],
-        fragmentName: "丝绸故事碎片"
-      },
-      3: {  // 苏州吴文化博物馆
-        name: "苏州吴文化博物馆",
-        avatar: "枫桥夜泊·张继",
-        modelSrc: "https://modelviewer.dev/assets/ShopifyModels/Horse.glb",          // 古诗意境 / 历史感
-        zones: ["吴文化起源厅", "枫桥夜泊展区", "传统工艺厅"],
-        dialogues: [
-          "月落乌啼霜满天…… 你今天在枫桥夜泊打卡了吗？",
-          "吴文化三千年，一脉相承！",
-          "传统工艺厅里，每一件都是匠人用心之作。"
-        ],
-        fragmentName: "古诗文化碎片"
-      }
-    };
-
-    // ====================== 初始化 ======================
-    let currentMuseumId = 1;
-    let fragments = 1;
     let currentZone = 1;
-
-    function getMuseumIdFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get('museum')) || 1;
-    }
-
-    function initAR() {
-      currentMuseumId = getMuseumIdFromUrl();
-      const config = museumConfigs[currentMuseumId];
-
-      // 更新标题和信息
-      document.getElementById('page-title').textContent = `${config.name} · AR 导览`;
-      document.getElementById('subtitle').innerHTML = `你的虚拟伙伴：<span class="text-amber-400">${config.avatar}</span>`;
-      document.getElementById('museum-name').textContent = config.name;
-      document.getElementById('avatar-name').textContent = config.avatar;
-
-      // 设置 3D 模型
-      document.getElementById('ar-model').setAttribute('src', config.modelSrc);
-
-      // 生成展区按钮
-      const zoneContainer = document.getElementById('zone-buttons');
-      zoneContainer.innerHTML = config.zones.map((zoneName, i) => `
-        <span onclick="switchZone(${i+1})" 
-              class="cursor-pointer px-6 py-3 ${i===0 ? 'bg-amber-400 text-black' : 'bg-zinc-800 hover:bg-amber-400 hover:text-black'} rounded-2xl font-semibold transition">
-          展区${i+1}：${zoneName}
-        </span>
-      `).join('');
-
-      // 重置碎片
-      fragments = 1;
-      updateFragmentCount();
-    }
+    let fragments = 1;
 
     function switchZone(zone) {
       currentZone = zone;
-      const config = museumConfigs[currentMuseumId];
-      // 切换展区时可以换不同模型（可选）
-      const models = [config.modelSrc, config.modelSrc, config.modelSrc]; // 目前同一模型，之后可改不同
-      document.getElementById('ar-model').setAttribute('src', models[zone-1]);
-      alert(`✅ 已切换到展区 ${zone}：${config.zones[zone-1]}（缓解 XR 疲劳）`);
-    }
-
-    function updateFragmentCount() {
-      const config = museumConfigs[currentMuseumId];
-      document.getElementById('fragment-count').innerHTML = `已收集 ${fragments}/3 ${config.fragmentName} 🎉`;
+      document.getElementById('ar-model').setAttribute('src', 
+        zone === 1 ? 'https://modelviewer.dev/assets/ShopifyModels/Chair.glb' : 
+        zone === 2 ? 'https://modelviewer.dev/assets/ShopifyModels/RobotExpressive.glb' : 
+        'https://modelviewer.dev/assets/ShopifyModels/Chair.glb'
+      );
+      alert(`✅ 已切换到展区 ${zone}（缓解 XR 疲劳机制）`);
     }
 
     function collectFragment() {
       fragments++;
-      updateFragmentCount();
+      document.getElementById('fragment-count').innerHTML = `已收集 ${fragments}/3 碎片 🎉`;
       if (fragments >= 3) {
         alert('🏆 恭喜！你已集齐所有故事碎片，解锁专属 Avatar 皮肤！');
       }
     }
 
     function speakToUser() {
-      const config = museumConfigs[currentMuseumId];
-      const utterance = new SpeechSynthesisUtterance(
-        config.dialogues[Math.floor(Math.random() * config.dialogues.length)]
-      );
+      const messages = [
+        "吴国忠臣伍子胥在此！苏州城就是我当年所建，你想听哪一段历史？",
+        "月落乌啼霜满天… 你今天在枫桥夜泊展厅打卡了吗？",
+        "哈哈哈，我觉得你应该多看一看明清家具，那可都是真家伙！"
+      ];
+      const utterance = new SpeechSynthesisUtterance(messages[Math.floor(Math.random()*messages.length)]);
       utterance.lang = 'zh-CN';
       speechSynthesis.speak(utterance);
     }
 
-    // Tailwind 初始化
+    // Tailwind
     tailwind.config = { content: ["./**/*.{html,js}"] };
-
-    // 页面加载时自动初始化
-    window.onload = initAR;
   </script>
 </body>
 </html>
