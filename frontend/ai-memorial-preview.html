@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成片预览 | V-Museum 唯博</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+
+  <header class="border-b border-zinc-800 bg-zinc-900/80 backdrop-blur sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <p class="text-amber-500 text-xs font-bold uppercase">成片预览（演示）</p>
+        <h1 id="preview-title" class="text-lg font-bold truncate max-w-[70vw]"></h1>
+        <p id="preview-style" class="text-sm text-zinc-400 mt-1"></p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a id="link-back-edit" href="#" class="text-sm font-bold px-4 py-2 rounded-xl border border-zinc-600 text-zinc-200 hover:bg-zinc-800 transition">返回编辑</a>
+        <a id="link-back-hub" href="#" class="text-sm font-bold px-4 py-2 rounded-xl bg-amber-500 text-zinc-900 hover:bg-amber-400 transition">回到纪念主页</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <div id="missing" class="hidden text-center py-16 text-zinc-400">
+      <p class="mb-6">未找到预览素材，请返回上一页重新选择风格并上传文件后点击生成。</p>
+      <a href="ai-memorial.html" class="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 text-zinc-900 font-bold rounded-xl">回到 AI 纪念视频与影像</a>
+    </div>
+
+    <div id="video-wrap" class="hidden space-y-6">
+      <div class="rounded-2xl overflow-hidden border border-zinc-700 bg-black shadow-2xl">
+        <video id="preview-video" class="w-full max-h-[80vh]" controls playsinline></video>
+      </div>
+      <p class="text-center text-sm text-zinc-500">以上为本次上传的视频；所选风格将在实际产品中应用于剪辑与包装（此处为原始素材预览）。</p>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'vMuseumVisitPlans';
+    const DB_NAME = 'vMuseumMemorial';
+    const STORE_NAME = 'media';
+    const VIDEO_KEY = 'pendingMemorialVideo';
+
+    function loadTrip(tripId) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const all = raw ? JSON.parse(raw) : [];
+        const list = Array.isArray(all) ? all.filter(p => p.completed) : [];
+        return list.find(t => String(t.id) === String(tripId)) || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function openVideoDb() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onerror = () => reject(req.error);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME);
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+      });
+    }
+
+    function getVideoBlob() {
+      return openVideoDb().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const r = tx.objectStore(STORE_NAME).get(VIDEO_KEY);
+        r.onerror = () => reject(r.error);
+        r.onsuccess = () => resolve(r.result || null);
+      }));
+    }
+
+    function deleteVideoBlob() {
+      return openVideoDb().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        tx.objectStore(STORE_NAME).delete(VIDEO_KEY);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      })).catch(() => {});
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get('type');
+      const tripId = params.get('trip');
+      const trip = tripId ? loadTrip(tripId) : null;
+
+      const hub = trip ? ('ai-memorial.html?trip=' + encodeURIComponent(trip.id)) : 'ai-memorial.html';
+      document.getElementById('link-back-hub').href = hub;
+
+      if (type === 'photo') {
+        sessionStorage.removeItem('memorialPreviewImg');
+        sessionStorage.removeItem('memorialPreviewStyle');
+        sessionStorage.removeItem('memorialPhotoFromUpload');
+        const tid = tripId || '';
+        if (tid) {
+          window.location.replace('ai-memorial-photo.html?trip=' + encodeURIComponent(tid));
+        } else {
+          window.location.replace('ai-memorial-photo.html');
+        }
+        return;
+      }
+
+      if (type === 'video') {
+        document.getElementById('link-back-edit').href = trip ? ('ai-memorial-video.html?trip=' + encodeURIComponent(trip.id)) : 'ai-memorial-video.html';
+        const styleName = sessionStorage.getItem('memorialPreviewStyle') || '—';
+        sessionStorage.removeItem('memorialPreviewStyle');
+
+        let blob = null;
+        try {
+          blob = await getVideoBlob();
+        } catch (e) {
+          blob = null;
+        }
+        await deleteVideoBlob();
+
+        if (!blob) {
+          document.getElementById('missing').classList.remove('hidden');
+          return;
+        }
+
+        document.getElementById('preview-title').textContent =
+          (trip && trip.museum ? trip.museum + ' · ' : '') + '纪念视频';
+        document.getElementById('preview-style').textContent = '所选风格：' + styleName;
+        const url = URL.createObjectURL(blob);
+        const vid = document.getElementById('preview-video');
+        vid.src = url;
+        window.addEventListener('pagehide', function revokeBlob() {
+          URL.revokeObjectURL(url);
+          window.removeEventListener('pagehide', revokeBlob);
+        });
+        document.getElementById('video-wrap').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('missing').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

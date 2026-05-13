@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="./" />
+  <title>CPT208 Process Portfolio · My Stories in Museums</title>
+  <meta name="description" content="CPT208 Human-Centric Computing process portfolio: motivation and research, user requirements, ideation and alternatives, implementation, evaluation and reflection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <p class="brand-title">My Stories in Museums</p>
+        <p class="brand-sub">CPT208 · A3 Digital heritage &amp; playful experience · Process portfolio</p>
+      </div>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" aria-label="Page sections">
+        <ul class="nav-list" data-nav-list>
+          <li><a href="#motivation">Motivation &amp; research</a></li>
+          <li><a href="#requirements">User requirements</a></li>
+          <li><a href="#ideation">Ideation &amp; alternatives</a></li>
+          <li><a href="#implementation">Implementation</a></li>
+          <li><a href="#evaluation">Evaluation &amp; reflection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <span class="hero-badge">Process Portfolio</span>
+    <p class="hero-project-name">V-Museum (Weibo)</p>
+    <h1>User-centred design, prototypes, and evaluation</h1>
+    <p class="hero-lead">
+      Team process portfolio documenting motivation and research, user requirements, ideation and alternatives, implementation, and evaluation — with survey charts, concept sketches, and UI iteration screenshots. The deployed high-fidelity prototype is linked below.
+    </p>
+    <p class="hero-repo-links">
+      <a href="https://github.com/LUCK559/CPT208-MyStoriesInMuseum" target="_blank" rel="noopener noreferrer">GitHub · Full repository</a>
+      <span class="hero-repo-links__sep" aria-hidden="true">·</span>
+      <a href="https://github.com/LUCK559/CPT208-MyStoriesInMuseum/tree/main/portfolio" target="_blank" rel="noopener noreferrer">GitHub · Process portfolio <code>portfolio</code> folder</a>
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#motivation">Start from research</a>
+      <a class="btn btn-ghost" href="https://cpt208v-museum.vercel.app/" target="_blank" rel="noopener noreferrer">Open deployed prototype (Vercel)</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- 1 -->
+    <section class="section" id="motivation">
+      <div class="section-head">
+        <h2>Motivation &amp; research</h2>
+        <span class="section-num">01</span>
+      </div>
+
+      <div class="subsection prose">
+        <h3>选题缘由（The Why）</h3>
+        <p lang="en" style="hyphens:auto;">
+          We chose the Heritage (Digital Heritage &amp; Play) track for A3 — My Stories in Museums because many visits remain linear and passive: visitors struggle to connect objects to personal meaning, while mobile guides rarely close the loop between onsite exploration and a shareable takeaway. Our formative survey work surfaced navigation fatigue, uneven interpretive depth, and limited post-visit reflection, alongside conditional interest in AI and AR when accuracy, privacy, and cognitive load were addressed. V-Museum responds by treating visitors as co-creators of a playful yet accountable heritage encounter, combining mobile-friendly XR cues, goal-driven route planning that makes trade-offs explicit, and AI-assisted commemorative storytelling such as short souvenir-style narratives or videos. We pair the visitor journey with a museum administration workflow so playful features remain institutionally grounded. Culturally resonant narration styles bridge expert interpretation and everyday curiosity, while layered depth supports families, students, and tourists with different time budgets. Finally, we treat playful features as optional, legible, and auditable by educators so digital heritage amplifies museums without displacing curatorial authority, aligning with CPT208 goals on equity, inclusion, and ethical computing. This stance ties personas, journey insights, prototypes, and evaluation to a single argument for responsible play in heritage settings.
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>Literature &amp; product gap (The Gap)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type / name</th>
+                <th>Three strengths (They did well)</th>
+                <th>Three limitations (They missed)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Paper 1</strong><br /><small>Almeshari, Dowell &amp; Nyhan (2020). <em>Museum Mobile Guide Preferences of Different Visitor Personas</em>. <em>J. Comput. Cult. Heritage</em> 14(1), art. 9. DOI: 10.1145/3423186</small></td>
+                <td>① Visitor types from questionnaires support personas and prioritisation. ② Compares preferences for guidance, navigation, and social features. ③ Aligns with our background survey on who needs guides most.</td>
+                <td>① Single <strong>science-museum</strong> sample — careful when generalising. ② Little on <strong>crowding / weak networks</strong> and drop-off. ③ No <strong>generative narration fact-checking or museum review</strong> — gaps we address in the system.</td>
+              </tr>
+              <tr>
+                <td><strong>Paper 2</strong><br /><small>Trajkova et al. (2020). <em>Move Your Body: Engaging Museum Visitors with Human-Data Interaction</em>. Proc. ACM CHI. DOI: 10.1145/3313831.3376186</small></td>
+                <td>① Tests playful interaction in a real museum. ② Uses dwell time and gestures as observable “fun” metrics. ③ Embodiment and visuals align with our XR direction.</td>
+                <td>① Focuses on <strong>fixed installations</strong>, not <strong>phone-based whole-museum</strong> routes. ② Weak link to <strong>personalised routes and post-visit mementos</strong>. ③ Limited discussion of <strong>networks and hardware cost</strong> — salient in our Alpha.</td>
+              </tr>
+              <tr>
+                <td><strong>Paper 3</strong><br /><small>Roussou &amp; Katifori (2018). <em>Flow, Staging, Wayfinding, Personalization: Evaluating User Experience with Mobile Museum Narratives</em>. <em>Multimodal Technol. Interact.</em> 2(2), 32. DOI: 10.3390/mti2020032</small></td>
+                <td>① Field iteration of mobile narrative prototypes. ② Combines observation, interviews, surveys, and logs — useful for journey maps. ③ Splits story, wayfinding, and personalisation — helps structure must-haves.</td>
+                <td>① Heavy <strong>curator-written content</strong> — costly to replicate. ② Mostly <strong>pre-authored narratives</strong>, not open <strong>LLM dialogue and compliance</strong>. ③ Little on <strong>peak crowds and network strategy</strong> — we bridge with resource packs and local capacity.</td>
+              </tr>
+              <tr>
+                <td><strong>Paper 4</strong><br /><small>Falk, J. H. (2006). <em>An Identity-Centered Approach to Understanding Museum Learning</em>. <em>Curator: The Museum Journal</em> 49(2), 151–166. DOI: 10.1111/j.2151-6952.2006.tb00207.x</small></td>
+                <td>① Identity and motives explain visitor differences — supports personas. ② Post-visit meaning-making fits commemorative storytelling. ③ Conceptual framing helps align with museums without diving into implementation.</td>
+                <td>① Predates mainstream <strong>mobile guides, generative AI, and XR</strong>. ② Little on <strong>IA or museum review workflows</strong>. ③ No <strong>weak-network or edge deployment</strong> — we add in engineering.</td>
+              </tr>
+              <tr>
+                <td><strong>Product 1</strong><br /><small>British Museum Audio app (official audio guide)</small></td>
+                <td>① Expert-written, authoritative — matches our trust goals. ② Many languages and themed tours; international audiences. ③ Maps and object highlights aid orientation.</td>
+                <td>① <strong>Paid bundles</strong> raise the full-experience threshold. ② Mostly <strong>passive listening</strong>, limited co-creation vs. our <strong>AI routes and memorial video</strong>. ③ Phone + audio form factor, not our <strong>venue XR + local models</strong> stack.</td>
+              </tr>
+              <tr>
+                <td><strong>Product 2</strong><br /><small>My Visit to the Louvre / Louvre : ma visite (official visitor app)</small></td>
+                <td>① Strong indoor maps and suggested routes reduce getting lost. ② Text + optional audio support self-pacing. ③ Pre-visit favourites align with “my visit plan” needs.</td>
+                <td>① Depth often behind <strong>in-app purchases</strong>. ② Core is <strong>navigation + listening</strong>, not our <strong>avatar co-presence or AI video</strong>. ③ Relies on <strong>networks and downloads</strong>; weak Wi-Fi hurts — we stress <strong>stable on-site, HD after the visit</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Product 3</strong><br /><small>Bloomberg Connects (“Connects: Arts &amp; Culture” multi-museum platform)</small></td>
+                <td>① Free, multi-museum aggregation lowers first-use cost. ② Offline downloads help unstable in-museum networks. ③ Subtitles, type, and basic a11y options.</td>
+                <td>① Partner-maintained pages vary in depth and tone. ② More <strong>browsing content</strong> than our <strong>admin governance and review loop</strong>. ③ No out-of-the-box <strong>3D avatar + edge LLM</strong> bundle.</td>
+              </tr>
+              <tr>
+                <td><strong>Product 4</strong><br /><small>Smartify (cross-museum recognition app)</small></td>
+                <td>① Camera recognition lowers “find the number then search” friction. ② Free mode reaches younger audiences. ③ Bite-sized info suits short browsing.</td>
+                <td>① Recognition depends on <strong>lighting, angle, and digitisation</strong> — less stable than fixed XR anchors. ② Still read/listen-first, not our full <strong>personalised route + co-created video</strong>. ③ <strong>Museum-wide review, weak-network fallbacks, and edge ops</strong> need separate build-out.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Background survey: questionnaire statistics and charts</h3>
+        <div class="gallery-grid survey-gallery">
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/01dbc0d42c4b84416c8b9daf2dd0f4f9.png" alt="Background survey: supplementary chart" loading="lazy" />
+            <figcaption>Supplementary chart</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%97%9B%E7%82%B9.png" alt="Survey: pain-point distribution" loading="lazy" />
+            <figcaption>Pain points</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E5%BD%93%E5%89%8D%E7%97%9B%E7%82%B92.png" alt="Survey: current pain points (2)" loading="lazy" />
+            <figcaption>Current pain points (2)</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E5%8F%82%E8%A7%82%E7%9B%AE%E7%9A%84.png" alt="Survey: visit purposes" loading="lazy" />
+            <figcaption>Visit purposes</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E6%98%AF%E5%90%A6%E6%84%BF%E6%84%8Fai%2Bar%E8%BE%85%E5%8A%A9%E8%A7%82%E5%B1%95.png" alt="Survey: willingness to use AI+AR for visits" loading="lazy" />
+            <figcaption>Willingness to use AI+AR during visits</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/ai%E8%BE%85%E5%8A%A9%E6%96%B9%E5%BC%8F%E9%80%89%E6%8B%A9.png" alt="Survey: preferred AI assistance modes" loading="lazy" />
+            <figcaption>Preferred AI assistance modes</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/aiar%E4%B8%8E%E5%8D%9A%E7%89%A9%E9%A6%86%E7%BB%93%E5%90%88%E6%96%B9%E5%BC%8F.png" alt="Survey: how AI/AR could combine with museums" loading="lazy" />
+            <figcaption>How AI/AR could combine with museums</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/arai%E6%8B%85%E5%BF%A7.png" alt="Survey: concerns about AR/AI" loading="lazy" />
+            <figcaption>Concerns about AR/AI</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E8%BE%B9%E7%BC%98%E8%AE%BE%E5%A4%87%E9%80%89%E6%8B%A9.png" alt="Survey: edge-device preferences" loading="lazy" />
+            <figcaption>Edge-device choices</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/Code_Generated_Image.png" alt="Generated chart 1" loading="lazy" />
+            <figcaption>Image</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/Code_Generated_Image1.png" alt="Generated chart 2" loading="lazy" />
+            <figcaption>Image1</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/Code_Generated_Image2.png" alt="Generated chart 3" loading="lazy" />
+            <figcaption>Image2</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Stakeholders &amp; personas (The Stakeholders)</h3>
+        <div class="grid-2">
+          <article class="card">
+            <p class="persona-tag">Primary user</p>
+            <h4 class="persona-name">Lin Xiao · Museum visitor (content experiencer)</h4>
+            <p><strong>Goals:</strong> Understand the visit path in limited time, reduce getting lost and information overload, and turn the visit into a story they can retell; open to light XR / AI support but needs clear flows and an easy way to exit.</p>
+            <p><strong>Context:</strong> Weekends at a general museum with friends and a phone; wants a quick route plan before entry, spatial cues and playful prompts during the visit, and a shareable memento after leaving.</p>
+            <p><strong>Pain points:</strong> Uneven label density, routes that feel generic, scattered memories after the visit; worries whether AI narration is trustworthy and whether it disturbs others.</p>
+            <p><strong>What “playfulness” means:</strong> Light “play mode” choices via goal-based routes (e.g. deeper immersion vs. time-saving); small exploratory tasks or feedback on the floor; an emotional, customisable narrative or video recap at the end.</p>
+          </article>
+          <article class="card">
+            <p class="persona-tag">Secondary user</p>
+            <h4 class="persona-name">Zhou Lan · Museum digital ops / education specialist</h4>
+            <p><strong>Goals:</strong> Keep objects and digital content aligned, configure narration and events in the museum’s tone, and check that the visitor experience still matches curatorial intent.</p>
+            <p><strong>Context:</strong> Updates objects, reviews public-facing copy and assets in the Museum Admin Center, and frequently adjusts routes and placements during temporary shows.</p>
+            <p><strong>Pain points:</strong> Fragmented tools, visitor app and back office drifting out of sync, extra proofreading cost for AI-generated content.</p>
+            <p><strong>Relationship to the system:</strong> Supplies trustworthy content and policy boundaries for the visitor side; pairs with the V-Museum visitor journey so “fun” does not trade off institutional responsibility or ethics.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="requirements">
+      <div class="section-head">
+        <h2>User requirements</h2>
+        <span class="section-num">02</span>
+      </div>
+
+      <div class="subsection">
+        <h3>User journey map &amp; pain points (User Journey Map)</h3>
+        <div class="journey-map-gallery">
+          <figure class="gallery-item gallery-item--journey-hero">
+            <a class="journey-map-hero-link" href="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%94%A8%E6%88%B7%E7%97%9B%E7%82%B9%E8%B7%AF%E7%A8%8B%E5%9B%BE.png" target="_blank" rel="noopener noreferrer" title="Open full image in a new tab for small text"><img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%94%A8%E6%88%B7%E7%97%9B%E7%82%B9%E8%B7%AF%E7%A8%8B%E5%9B%BE.png" alt="User journey map with pain points" loading="lazy" /></a>
+            <figcaption>User journey map (User Journey Map) · Click the image to open the full-size version in a new tab</figcaption>
+          </figure>
+          <div class="journey-map-stats-row">
+            <figure class="gallery-item">
+              <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%97%9B%E7%82%B9.png" alt="Survey: pain-point distribution during visits" loading="lazy" />
+              <figcaption>Pain-point distribution (supports “frustration / insufficient information” stages in the journey)</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img src="%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5-%E5%8D%9A%E7%89%A9%E9%A6%86aixr/%E8%B0%83%E6%9F%A5-%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E7%BB%9F%E8%AE%A1%E5%9B%BE/%E5%BD%93%E5%89%8D%E7%97%9B%E7%82%B92.png" alt="Survey: current pain points (extra dimension)" loading="lazy" />
+              <figcaption>Current pain points (additional dimension)</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection prose" lang="en">
+        <h3>Playfulness must-haves (3 Must-haves)</h3>
+        <ol class="musthave-list">
+          <li>
+            <strong>1. XR Immersive Historical Scene + AI Character Interaction</strong>
+            <ul>
+              <li>1.1 Set up independent experience rooms to ensure a safe and stable experience.</li>
+              <li>1.2 Restore historical scenes of cultural relics 1:1 through XR devices.</li>
+              <li>1.3 Support real-time dialogue, puzzle solving, and task interaction with AI-driven virtual historical figures.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>2. AI Co-created Memorial Video</strong>
+            <ul>
+              <li>2.1 Visitors can capture wonderful moments during the visit through XR devices.</li>
+              <li>2.2 AI automatically edits materials, integrating immersive scene clips and personal participation footage.</li>
+              <li>2.3 Generate an exclusive customised memorial video, supporting one-click saving and sharing.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>3. AI-Powered Personalized Visiting Adaptation</strong>
+            <ul>
+              <li>3.1 AI dynamically adjusts explanation depth and visiting routes based on visitors’ interests and pace.</li>
+              <li>3.2 Support digital check-in at key exhibits and accumulation of points.</li>
+              <li>3.3 Achieve a personalised “thousand people, thousand faces” guidance experience.</li>
+              <li>3.4 Exchange accumulated points for exclusive digital souvenirs or physical cultural and creative gifts.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="subsection">
+        <h3>Field / interview evidence (Evidence of Life · 7 photos)</h3>
+        <div class="media-grid">
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(1).jpg" alt="Mid-project field interview (1)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (1)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(2).jpg" alt="Mid-project field interview (2)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (2)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(3).jpg" alt="Mid-project field interview (3)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (3)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(4).jpg" alt="Mid-project field interview (4)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (4)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(5).jpg" alt="Mid-project field interview (5)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (5)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(6).jpg" alt="Mid-project field interview (6)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (6)</figcaption>
+          </figure>
+          <figure class="gallery-item" style="margin:0;">
+            <img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%9F%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF/%E7%BA%BF%E4%B8%8B%E9%87%87%E8%AE%BF%20(7).jpg" alt="Mid-project field interview (7)" loading="lazy" />
+            <figcaption style="font-size:0.72rem;">Field interview (7)</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Data collection, sample, and analysis</h3>
+        <p><strong>Quantitative:</strong> Online and in-person questionnaires on visitor motives, pain points, and attitudes toward AI/AR-assisted visits (charts in this section and under Motivation &amp; research). Sample: <strong>young adults and general adult museum-goers</strong>; counts and screening rules are in the team questionnaire pack / <code>问卷结果.pdf</code>.</p>
+        <p><strong>Qualitative:</strong> In Alpha we ran semi-structured interviews and walkthroughs with <strong>three</strong> peers, focusing on playfulness, clarity, and in-museum network concerns; themes fed architecture changes (see Evaluation &amp; reflection).</p>
+        <p><strong>Analysis:</strong> Survey data supported journey pain points and must-have prioritisation; interviews and heuristic observation together pointed to <strong>weak-network usability</strong> and <strong>offline / edge inference</strong> as design implications.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="ideation">
+      <div class="section-head">
+        <h2>Ideation &amp; alternatives</h2>
+        <span class="section-num">03</span>
+      </div>
+
+      <div class="subsection">
+        <h3>Early system: web concept sketches &amp; brainstorming</h3>
+        <p class="link-row" style="margin-bottom:1rem;">
+          <a class="btn btn-ghost" href="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E8%BF%AD%E4%BB%A3%E8%8D%89%E7%A8%BF.pdf">System concept iteration sketchbook (PDF)</a>
+        </p>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/brainStorm.jpg" alt="Brainstorming sketch" loading="lazy" />
+            <figcaption>Brainstorm (brainStorm.jpg)</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%9B%BE.jpg" alt="System concept diagram sketch" loading="lazy" />
+            <figcaption>System concept diagram</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/63f7b0c648d546298d50735d37e1fafb.jpg" alt="Web concept sketch 1" loading="lazy" />
+            <figcaption>Web concept sketch 1</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/a7bf45856925971cdb14a1a3d5f7de50.jpg" alt="Web concept sketch 2" loading="lazy" />
+            <figcaption>Web concept sketch 2</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/dbf1aecb5594a36e644ec90e7ab7c3bc.jpg" alt="Web concept sketch 3" loading="lazy" />
+            <figcaption>Web concept sketch 3</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/dc442489e639b0e3473a21df97dc2107.jpg" alt="Web concept sketch 4" loading="lazy" />
+            <figcaption>Web concept sketch 4</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/de0cc8734a073b5a15eabd00c1e192ed.jpg" alt="Web concept sketch 5" loading="lazy" />
+            <figcaption>Web concept sketch 5</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Crazy Eights (eight quick ideas / sketches + early UI)</h3>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/brainStorm.jpg" alt="Crazy eight 1" loading="lazy" />
+            <figcaption>Crazy 8 · 1</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%9B%BE.jpg" alt="Crazy eight 2" loading="lazy" />
+            <figcaption>Crazy 8 · 2</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/63f7b0c648d546298d50735d37e1fafb.jpg" alt="Crazy eight 3" loading="lazy" />
+            <figcaption>Crazy 8 · 3</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/a7bf45856925971cdb14a1a3d5f7de50.jpg" alt="Crazy eight 4" loading="lazy" />
+            <figcaption>Crazy 8 · 4</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/dbf1aecb5594a36e644ec90e7ab7c3bc.jpg" alt="Crazy eight 5" loading="lazy" />
+            <figcaption>Crazy 8 · 5</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/dc442489e639b0e3473a21df97dc2107.jpg" alt="Crazy eight 6" loading="lazy" />
+            <figcaption>Crazy 8 · 6</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/de0cc8734a073b5a15eabd00c1e192ed.jpg" alt="Crazy eight 7" loading="lazy" />
+            <figcaption>Crazy 8 · 7</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="system-picture/0408/384f7f9132b71f49db396dfa3efdaf41.png" alt="Crazy eight 8 — early UI" loading="lazy" />
+            <figcaption>Crazy 8 · 8 (early UI)</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="subsection prose" lang="en">
+        <h3>Design alternatives (2–3 options)</h3>
+        <p>During the early stages, we seriously considered two alternative approaches that leaned more heavily on a single technology:</p>
+        <div class="compare-grid">
+          <div class="card compare-card">
+            <h4>Alternative Option A: Pure XR Historical Recreation</h4>
+            <p>Focused on creating highly immersive, photorealistic recreations of historical environments and events, allowing visitors to “travel back in time.” It looked amazing, but it was pretty passive. There wasn’t much real interaction.</p>
+          </div>
+          <div class="card compare-card">
+            <h4>Alternative Option B: Pure AI Voice Chatbot Guide</h4>
+            <p>Developing a knowledgeable, conversational AI voice assistant that visitors could freely question about any exhibit. It could have natural conversations and tailor explanations to each person. That made it more engaging and accessible, but it missed the emotional punch of actually seeing history come to life.</p>
+          </div>
+          <div class="card compare-card chosen">
+            <h4>Final hybrid Option C (XR + AI) — adopted for this project</h4>
+            <p><strong>Advantages of the final hybrid option C (XR + AI):</strong></p>
+            <p>The XR part builds the world and the atmosphere — it makes you feel like you’re really there in that historical moment. Then the AI voice turns that world into a conversation. Visitors can ask questions on the fly, ask for a simpler explanation, or dive deeper into something they’re curious about.</p>
+            <p>That turns a one-way tour into a kind of discovery game. It’s way less boring. Sure, building this hybrid system is more complicated than just picking one approach, but it’s worth it. Visitors remember more, get more curious, and have a better time — whether they’re kids, adults, or just have different ways of learning.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Low-fidelity clickable prototype</h3>
+        <p class="link-row">
+          <a class="btn btn-primary" href="https://cpt-208-my-stories-in-museum.vercel.app/" target="_blank" rel="noopener noreferrer">Figma low-fidelity prototype</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="implementation">
+      <div class="section-head">
+        <h2>Implementation</h2>
+        <span class="section-num">04</span>
+      </div>
+
+      <div class="subsection">
+        <h3>System architecture (data flow)</h3>
+        <figure class="figure figure-architecture">
+          <img src="assets/system-architecture.png" alt="V-Museum architecture: portal on Vercel, XR on venue devices with QR sync, LLM+RAG guidance and video synthesis, cloud data store" loading="lazy" />
+          <figcaption>Left to right: visitors configure museum and avatar on the Vercel-hosted portal → scan on-site to sync profile with venue XR devices → LLM+RAG live guidance and post-visit AI memorial video → cloud manages profiles, digital assets, and AI jobs.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection iteration-screens">
+        <h3>UI iteration screenshots (<code>system-picture/</code>)<span class="heading-gloss"> · incremental web UI changes</span></h3>
+
+        <div class="milestone-block">
+          <h4>0408 · Early UI</h4>
+          <div class="gallery-grid dense-grid">
+            <figure class="gallery-item"><img src="system-picture/0408/384f7f9132b71f49db396dfa3efdaf41.png" alt="0408 screenshot 1" loading="lazy" /><figcaption>0408-1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0408/8718bf9c427ed085d25549c528b2961b.png" alt="0408 screenshot 2" loading="lazy" /><figcaption>0408-2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0408/a48f82f865c052f08590ebcc87f67a39.png" alt="0408 screenshot 3" loading="lazy" /><figcaption>0408-3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0408/d47d0d8fe76a107ba12564f777fdc90b.png" alt="0408 screenshot 4" loading="lazy" /><figcaption>0408-4</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0410 · WebXR mock-ups (desktop / mobile)</h4>
+          <div class="gallery-grid">
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/pc%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F.png" alt="0410 PC WebXR 1" loading="lazy" /><figcaption>PC WebXR 1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/pc%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F2.png" alt="0410 PC WebXR 2" loading="lazy" /><figcaption>PC WebXR 2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/%E6%89%8B%E6%9C%BA%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F%20%281%29.jpg" alt="0410 mobile WebXR 1" loading="lazy" /><figcaption>Mobile WebXR 1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/%E6%89%8B%E6%9C%BA%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F%20%282%29.jpg" alt="0410 mobile WebXR 2" loading="lazy" /><figcaption>Mobile WebXR 2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/%E6%89%8B%E6%9C%BA%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F%20%283%29.jpg" alt="0410 mobile WebXR 3" loading="lazy" /><figcaption>Mobile WebXR 3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0410webxr%E6%A8%A1%E6%8B%9F/%E6%89%8B%E6%9C%BA%E7%AB%AFwebxr%E6%A8%A1%E6%8B%9F%20%284%29.jpg" alt="0410 mobile WebXR 4" loading="lazy" /><figcaption>Mobile WebXR 4</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0412</h4>
+          <div class="gallery-grid dense-grid">
+            <figure class="gallery-item"><img src="system-picture/0412/0d9d2a9fd4617ecfa52f80220d4ca6b9.png" alt="0412 screenshot 1" loading="lazy" /><figcaption>0412-1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0412/4629910366d8192540597cb3fd63aeac.png" alt="0412 screenshot 2" loading="lazy" /><figcaption>0412-2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0412/bf4776afdc99932d20748d5136eeff5f.png" alt="0412 screenshot 3" loading="lazy" /><figcaption>0412-3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0412/ffe9860ab6fcf6b203742b9c45bb2817.png" alt="0412 screenshot 4" loading="lazy" /><figcaption>0412-4</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0416 · WebXR layout &amp; styling experiments (deprecated)</h4>
+          <div class="gallery-grid">
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9Fpc%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%281%29.png" alt="0416 PC layout polish 1" loading="lazy" /><figcaption>PC layout polish 1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9Fpc%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%282%29.png" alt="0416 PC layout polish 2" loading="lazy" /><figcaption>PC layout polish 2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9Fpc%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%283%29.png" alt="0416 PC layout polish 3" loading="lazy" /><figcaption>PC layout polish 3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9F%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%20%281%29.jpg" alt="0416 mobile layout polish 1" loading="lazy" /><figcaption>Mobile layout polish 1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9F%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%20%282%29.jpg" alt="0416 mobile layout polish 2" loading="lazy" /><figcaption>Mobile layout polish 2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0416webxr%E6%A8%A1%E6%8B%9F%EF%BC%88%E9%A3%8E%E6%A0%BC%E6%8E%92%E7%89%88%E4%BC%98%E5%8C%96/webxr%E6%A8%A1%E6%8B%9F%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%AB%AF%EF%BC%88%E5%B8%83%E5%B1%80%E9%A3%8E%E6%A0%BC%E4%BC%98%E5%8C%96%20%20%283%29.jpg" alt="0416 mobile layout polish 3" loading="lazy" /><figcaption>Mobile layout polish 3</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0421</h4>
+          <div class="gallery-grid dense-grid">
+            <figure class="gallery-item"><img src="system-picture/0421/270ddf9585878cc148ff2724b1ede9e1.png" alt="0421 screenshot 1" loading="lazy" /><figcaption>0421-1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/2bb5e15c40f586a721fb9c55b77e1296.png" alt="0421 screenshot 2" loading="lazy" /><figcaption>0421-2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/37e79167b4242c2921859096b0435ae5.png" alt="0421 screenshot 3" loading="lazy" /><figcaption>0421-3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/3aebb0908275b06f49d46bcdce7efcc7.png" alt="0421 screenshot 4" loading="lazy" /><figcaption>0421-4</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/481454f27fc47be05ec1898db4eb0640.png" alt="0421 screenshot 5" loading="lazy" /><figcaption>0421-5</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/4f1b214c2d8bf12bc7c37ae2a3f4414f.png" alt="0421 screenshot 6" loading="lazy" /><figcaption>0421-6</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/a6a43813eda28a95c77b1d95d49e811e.png" alt="0421 screenshot 7" loading="lazy" /><figcaption>0421-7</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/a70d8a8c50dcb3c46d93fd5a5bcb3d34.png" alt="0421 screenshot 8" loading="lazy" /><figcaption>0421-8</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/d747253478c7b8f677bae3df95d0919c.png" alt="0421 screenshot 9" loading="lazy" /><figcaption>0421-9</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/e807f06e754de307c037f83f59c9d3f5.png" alt="0421 screenshot 10" loading="lazy" /><figcaption>0421-10</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/e9fce635c72b6f16f4217668a967c758.png" alt="0421 screenshot 11" loading="lazy" /><figcaption>0421-11</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0421/ffc81e98ffd5792e030889c75da9de56.png" alt="0421 screenshot 12" loading="lazy" /><figcaption>0421-12</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0422 · Visit route customisation</h4>
+          <div class="gallery-grid">
+            <figure class="gallery-item"><img src="system-picture/0422tourplan/%E5%AE%9A%E5%88%B6%E8%B7%AF%E7%BA%BF%283%29.png" alt="Custom route 3" loading="lazy" /><figcaption>Custom route (3)</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0422tourplan/%E5%AE%9A%E5%88%B6%E8%B7%AF%E7%BA%BF%284%29.png" alt="Custom route 4" loading="lazy" /><figcaption>Custom route (4)</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0422tourplan/%E5%AE%9A%E5%88%B6%E8%B7%AF%E7%BA%BF%285%29.png" alt="Custom route 5" loading="lazy" /><figcaption>Custom route (5)</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0422tourplan/%E5%AE%9A%E5%88%B6%E8%B7%AF%E7%BA%BF%286%29.png" alt="Custom route 6" loading="lazy" /><figcaption>Custom route (6)</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0430 · AI memorial video UI</h4>
+          <div class="gallery-grid">
+            <figure class="gallery-item"><img src="system-picture/0430ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2/ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2%20%281%29.png" alt="AI memorial video UI 1" loading="lazy" /><figcaption>AI memorial video 1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0430ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2/ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2%20%282%29.png" alt="AI memorial video UI 2" loading="lazy" /><figcaption>AI memorial video 2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0430ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2/ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2%20%283%29.png" alt="AI memorial video UI 3" loading="lazy" /><figcaption>AI memorial video 3</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0501 · Integrated build — key screens</h4>
+          <div class="gallery-grid">
+            <figure class="gallery-item"><img src="system-picture/0501%E6%95%B4%E5%90%88/%E5%8E%86%E5%8F%B2%E6%B8%B8%E8%A7%88%E8%AF%A6%E6%83%85%2B%E8%B7%AF%E7%BA%BF%E5%AE%9A%E5%88%B6%E4%BF%A1%E6%81%AF.png" alt="Past visit details and route customisation" loading="lazy" /><figcaption>Past visit details + route customisation</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="milestone-block">
+          <h4>0506 · Refined backgrounds + bilingual refresh</h4>
+          <div class="gallery-grid dense-grid">
+            <figure class="gallery-item"><img src="system-picture/0506%E7%BE%8E%E5%8C%96%E8%83%8C%E6%99%AF%2B%E5%8F%8C%E8%AF%AD%E6%9B%B4%E6%96%B0/61af6a6c4757e84eda794fa77b3cfebe.png" alt="0506 screen 1" loading="lazy" /><figcaption>0506-1</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0506%E7%BE%8E%E5%8C%96%E8%83%8C%E6%99%AF%2B%E5%8F%8C%E8%AF%AD%E6%9B%B4%E6%96%B0/80e468f028f0ba6d97d21df37e212b23.png" alt="0506 screen 2" loading="lazy" /><figcaption>0506-2</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0506%E7%BE%8E%E5%8C%96%E8%83%8C%E6%99%AF%2B%E5%8F%8C%E8%AF%AD%E6%9B%B4%E6%96%B0/ad835e6e7d9076739c30fba5bff9bd43.png" alt="0506 screen 3" loading="lazy" /><figcaption>0506-3</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0506%E7%BE%8E%E5%8C%96%E8%83%8C%E6%99%AF%2B%E5%8F%8C%E8%AF%AD%E6%9B%B4%E6%96%B0/b2c0e43022626bdb6c424863afa732b8.png" alt="0506 screen 4" loading="lazy" /><figcaption>0506-4</figcaption></figure>
+            <figure class="gallery-item"><img src="system-picture/0506%E7%BE%8E%E5%8C%96%E8%83%8C%E6%99%AF%2B%E5%8F%8C%E8%AF%AD%E6%9B%B4%E6%96%B0/eb807b105bf2920e259669a566e59821.png" alt="0506 screen 5" loading="lazy" /><figcaption>0506-5</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection prose">
+        <h3>High-fidelity / runnable prototype</h3>
+        <p>Live interactive build:</p>
+        <p class="link-row">
+          <a class="btn btn-primary" href="https://cpt208v-museum.vercel.app/" target="_blank" rel="noopener noreferrer">https://cpt208v-museum.vercel.app/</a>
+        </p>
+        <p>Offline HTML demos in the repo (system iteration snapshots):</p>
+        <ul class="resource-list" style="margin-top:1rem;">
+          <li><a href="system/index0501%E6%95%B4%E5%90%88.html">Integrated UI · index0501整合.html</a></li>
+          <li><a href="system/index0430ai%E7%BA%AA%E5%BF%B5%E8%A7%86%E9%A2%91%E7%95%8C%E9%9D%A2.html">AI memorial video UI · index0430ai纪念视频界面.html</a></li>
+          <li><a href="system/index0422tourplan.html">Visit plan · index0422tourplan.html</a></li>
+          <li><a href="system/index0422.html">Iteration snapshot · index0422.html</a></li>
+          <li><a href="system/index0421.html">index0421.html</a></li>
+          <li><a href="system/index0418.html">index0418.html</a></li>
+          <li><a href="system/index3.html">index3.html</a></li>
+          <li><a href="system/index2.html">index2.html</a></li>
+          <li><a href="system/index1.html">index1.html</a></li>
+          <li><a href="system/ar-demo0423.html">AR demo · ar-demo0423.html</a></li>
+          <li><a href="system/ar-demo0415.html">AR demo · ar-demo0415.html</a></li>
+        </ul>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Individual contributions (four team members)</h3>
+        <p>Primary owners for <strong>pulling each deliverable together</strong> against Poster, Portfolio, System, and Video formats:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Main responsibility (integration)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Yuhan Mei · 2362444</td>
+                <td>System development + process portfolio</td>
+              </tr>
+              <tr>
+                <td>Yixuan Chen · 2362456</td>
+                <td>System development + process portfolio</td>
+              </tr>
+              <tr>
+                <td>Ziheng Li · 2363040</td>
+                <td>Poster assets + layout</td>
+              </tr>
+              <tr>
+                <td>Yifei Dou · 2362307</td>
+                <td>Video production + related assets</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Note:</strong> All four contributed across research, design, prototyping, testing, and documentation; the table only highlights who led <strong>assembly and hand-in</strong>, not exclusive ownership of tasks.</p>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Technical reflection (AI-assisted coding)</h3>
+        <p>We used AI for part of the front-end scaffolding and debugging. Validation included must-have walkthroughs, on-device mobile checks, and Alpha task scripts. Ethically we watched default accessibility in generated code (contrast, focus order, keyboard paths) and transparency of third-party APIs; prompts and tool versions are cited in References.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="evaluation">
+      <div class="section-head">
+        <h2>Evaluation &amp; reflection</h2>
+        <span class="section-num">05</span>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Usability testing (Alpha · three participants)</h3>
+        <p>Once the full journey was demoable, we ran <strong>semi-structured interviews plus task walkthroughs</strong>: participants first worked alone through “browse overview → understand route / guide logic → imagine an on-site visit”, then we probed <strong>playfulness, clarity, network concerns, and privacy</strong>. This was a qualitative Alpha round without a formal SUS score; notes were thematically coded to feed architecture and UI priorities.</p>
+
+        <div class="callout-major iteration-callout">
+          <h4>Key takeaway from Alpha (before case detail)</h4>
+          <p>All three saw potential in <strong>personalised routes + narrative-style guidance</strong>, but <strong>agreed the main risk was weak in-museum networks</strong>: they would try it only if they were not “stuck waiting for loads in crowds”. That pushed us to move <strong>compute and content from always-on public cloud to local LLMs plus pre-installed resource packs</strong>, and to fetch large video / high-res assets <strong>asynchronously after the visit on a good connection</strong>.</p>
+        </div>
+
+        <div class="interview-grid">
+          <article class="interview-card" lang="zh-CN">
+            <h4>受访者1</h4>
+            <dl>
+              <dt>背景与动机</dt>
+              <dd>青年在校学生，常去城市博物馆；手机流量有限，对「现场连不上 Wi-Fi」有真实焦虑。</dd>
+              <dt>任务表现</dt>
+              <dd>能快速理解「我的路线」与讲解入口；在追问环节主动对比「在家流畅预览」与「馆内可能卡顿」的差异。</dd>
+              <dt>主要观点</dt>
+              <dd>强调<strong>可用性要先于炫技</strong>：若导览在排队或展厅深处断流，会立刻放弃使用。</dd>
+              <dt>观察笔记</dt>
+              <dd>多次复述「离线 / 本地」关键词；对「边缘设备」概念接受度高，更关心「是否提前下好包」。</dd>
+              <dt>匿名引语</dt>
+              <dd>「节假日博物馆网很差的话，会不会卡？<strong>要是能离线就更放心。</strong>」</dd>
+            </dl>
+          </article>
+          <article class="interview-card" lang="zh-CN">
+            <h4>受访者2</h4>
+            <dl>
+              <dt>背景与动机</dt>
+              <dd>同龄朋友，偏好轻游戏化、短视频式信息节奏，反感长段纯文字展板。</dd>
+              <dt>任务表现</dt>
+              <dd>对互动节奏评价积极，能指出哪些模块「像在玩」、哪些仍偏说明文档。</dd>
+              <dt>主要观点</dt>
+              <dd>趣味来自<strong>反馈及时 + 叙事连贯</strong>；同时希望展后仍能「带走一点东西」（照片/小结），但接受「回家再下」。</dd>
+              <dt>观察笔记</dt>
+              <dd>在演示纪念/分享相关界面时停留较久，追问「会不会很大、要不要流量」。</dd>
+              <dt>匿名引语</dt>
+              <dd>「<strong>整体挺好玩的，不是光看字那种。</strong>」</dd>
+            </dl>
+          </article>
+          <article class="interview-card" lang="zh-CN">
+            <h4>受访者3</h4>
+            <dl>
+              <dt>背景与动机</dt>
+              <dd>习惯提前做攻略；重视时间预算与「不走回头路」。</dd>
+              <dt>任务表现</dt>
+              <dd>优先阅读路线定制与历史游览模块；对信息层级是否一眼可扫非常敏感。</dd>
+              <dt>主要观点</dt>
+              <dd>认可<strong>可定制的导览动线</strong>是差异化卖点；建议弱网时仍保留「最低限度」的文本/图标兜底。</dd>
+              <dt>观察笔记</dt>
+              <dd>反复确认「到馆后第一步点哪里」；对网络问题的担忧弱于 P1，但更在意<strong>逻辑是否自洽</strong>。</dd>
+              <dt>匿名引语</dt>
+              <dd>「<strong>路线自己定这一点挺有意思，愿意去馆里试一次。</strong>」</dd>
+            </dl>
+          </article>
+        </div>
+
+        <div class="callout callout--insight">
+          <h4>Cross-participant themes</h4>
+          <ul style="margin:0; padding-left:1.2rem;">
+            <li><strong>Playfulness:</strong> Narrative pacing and interaction received positive feedback; the “game-like” feel held up.</li>
+            <li><strong>Adoption intent:</strong> All would try it on a real visit, <strong>provided weak networks do not break the core path</strong>.</li>
+            <li><strong>Risks:</strong> Reliance on public internet, heavy assets, holiday congestion — aligning with respondent 1’s offline ask and respondent 2’s post-visit download preference.</li>
+          </ul>
+        </div>
+
+        <div class="callout callout--response">
+          <h4>Design and implementation responses (engineering)</h4>
+          <p><strong>Local LLM + resource packs (during the visit):</strong> Run the real-time guide model on <strong>venue AR devices / edge</strong>; wall text, structured object data, essential voice, and fallback assets ship as <strong>pre-installed or pre-visit bulk packages</strong> so core inference and playback stay <strong>mostly local</strong>, reducing dependence on in-building Wi-Fi / cellular quality.</p>
+          <p><strong>Post-visit async cloud pulls (bandwidth safety):</strong> During the visit we can surface <strong>light previews and metadata</strong>; high-res photos, AI-rendered videos, and share cards download from a cloud queue <strong>after people leave and networks improve</strong>, avoiding contention with the critical on-floor path.</p>
+          <p><strong>Route choice:</strong> The WebAR path that assumed continuous browser loads and public connectivity was deprioritised / retired in favour of assumptions that match <strong>venue devices + offline packs</strong>, consistent with the Alpha consensus that offline feels safer.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Iterative improvement (Before / After · feedback-driven)</h3>
+        <div class="callout-major iteration-callout">
+          <h4>UI layer: from scattered early screens to integrated flow + route customisation</h4>
+          <p>The screenshots below are web prototype iterations; the <strong>architecture shift</strong> described above sits behind them: <strong>local LLM + pre-installed packs</strong> keep narration from stalling on weak networks, while heavy media use <strong>post-visit cloud sync</strong> — splitting “play on the floor” from “share afterward” into two bandwidth strategies.</p>
+        </div>
+        <div class="before-after">
+          <figure class="figure before-after__manuscript">
+            <img src="%E7%B3%BB%E7%BB%9Fconcept%E8%8D%89%E7%A8%BF-%E8%BF%AD%E4%BB%A3/webpage%E6%A6%82%E5%BF%B5-%E6%89%8B%E7%A8%BF/dc442489e639b0e3473a21df97dc2107.jpg" alt="Crazy 8 · 6 — early sketch discussing iterative improvements" loading="lazy" />
+            <figcaption><strong>Crazy 8 · 6</strong> · early sketch outcome for iterative-improvement discussion (manuscript)</figcaption>
+          </figure>
+          <div class="before-after__pair">
+            <figure class="figure">
+              <img src="%E5%8F%8D%E7%94%A8%E6%88%B7%E9%A6%88%E5%AF%B9%E6%AF%94%E5%9B%BE%E7%89%87/%E5%89%8D.png" alt="Before — user-feedback comparison (before.png)" loading="lazy" />
+              <figcaption><strong>Before</strong> · user-feedback comparison / before.png</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="%E5%8F%8D%E7%94%A8%E6%88%B7%E9%A6%88%E5%AF%B9%E6%AF%94%E5%9B%BE%E7%89%87/%E6%94%B9%E5%90%8E.png" alt="After — user-feedback comparison (after.png)" loading="lazy" />
+              <figcaption><strong>After</strong> · user-feedback comparison / after.png</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="before-after-rationale">
+          <h4>Concrete optimisations (mapped to the figures)</h4>
+          <ul>
+            <li><strong>Flow consolidation (respondent 3):</strong> Route and detail sit in one view to cut mid-visit hopping — each hop is extra latency and requests that hurt most on weak networks.</li>
+            <li><strong>Weak-network first (respondent 1):</strong> Interaction assumes “packs ready + local LLM” instead of “always online fetch”; basic guidance can continue if the stream drops.</li>
+            <li><strong>Defer heavy media (respondents 1 + 2):</strong> Final cuts and high-res cloud imagery move to <strong>post-visit download / background sync</strong>, balancing “I want a memento” with “the floor experience must stay stable”.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection prose">
+        <h3>Societal / ethical impact and the role of AI (final reflection)</h3>
+        <p>When V-Museum uses generative tools for narration style and commemorative media, we must govern <strong>factual accuracy</strong> (alignment with curatorial copy, review of sensitive wording), <strong>copyright and likeness</strong> (boundaries for portraits and AI re-rendering), and <strong>public audio and camera privacy</strong> (others overhearing guidance, field of view). The museum admin surface exists to keep “fun” inside <strong>auditable content boundaries</strong> so excitement about tech does not outrank inclusion (language, hearing, device variance) or respect for diverse audiences.</p>
+        <p><strong>Generative AI in this project:</strong> We used AI for <strong>code scaffolding, copy polish, and visual sketch variants</strong>; requirements, interview synthesis, architecture trade-offs, and test logs were <strong>human-checked</strong>. We separated model suggestions from participant quotes and logged tools with access dates in References. A risk is that plausible model prose hides unverified claims — mitigations include <strong>quoting real participants, keeping Before/After and design alternatives visible, and stating weak-network engineering commitments</strong> rather than marketing-only claims.</p>
+      </div>
+
+      <div class="subsection prose">
+        <h3>References (selected)</h3>
+        <ol class="ref-list" style="padding-left:1.25rem; font-size:0.9rem; color:var(--muted);">
+          <li>Almeshari, M., Dowell, J., &amp; Nyhan, J. (2020). <em>Museum Mobile Guide Preferences of Different Visitor Personas</em>. <em>Journal on Computing and Cultural Heritage</em>, 14(1), article 9. Accessed on 2026-05-10, available at <a href="https://doi.org/10.1145/3423186" target="_blank" rel="noopener noreferrer">https://doi.org/10.1145/3423186</a>. Used as literature for the “The Gap” comparison on persona-based mobile guide preferences.</li>
+          <li>Trajkova, J., et al. (2020). <em>Move Your Body: Engaging Museum Visitors with Human-Data Interaction</em>. In <em>Proceedings of ACM CHI</em>. Accessed on 2026-05-10, available at <a href="https://doi.org/10.1145/3313831.3376186" target="_blank" rel="noopener noreferrer">https://doi.org/10.1145/3313831.3376186</a>. Used as literature for the “The Gap” comparison on embodied interaction in museums.</li>
+          <li>Roussou, M., &amp; Katifori, A. (2018). <em>Flow, Staging, Wayfinding, Personalization: Evaluating User Experience with Mobile Museum Narratives</em>. <em>Multimodal Technologies and Interaction</em>, 2(2), 32. Accessed on 2026-05-10, available at <a href="https://doi.org/10.3390/mti2020032" target="_blank" rel="noopener noreferrer">https://doi.org/10.3390/mti2020032</a>. Used as literature for the “The Gap” comparison on mobile narrative UX in a real museum setting.</li>
+          <li>Falk, J. H. (2006). <em>An Identity-Centered Approach to Understanding Museum Learning</em>. <em>Curator: The Museum Journal</em>, 49(2), 151–166. Accessed on 2026-05-10, available at <a href="https://doi.org/10.1111/j.2151-6952.2006.tb00207.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.2151-6952.2006.tb00207.x</a>. Used as literature for the “The Gap” comparison on visitor identity and learning motivations.</li>
+          <li>British Museum. <em>British Museum Audio app</em> (official audio guide application). Accessed on 2026-05-10, available at <a href="https://www.britishmuseum.org/visit/mobile-audio-guides-app" target="_blank" rel="noopener noreferrer">https://www.britishmuseum.org/visit/mobile-audio-guides-app</a>. Used as a product benchmark in the “The Gap” section.</li>
+          <li>Musée du Louvre. <em>My Visit to the Louvre / Louvre : ma visite</em> (official visitor app). Accessed on 2026-05-10, available at <a href="https://www.louvre.fr/en/visit-us/louvre-app" target="_blank" rel="noopener noreferrer">https://www.louvre.fr/en/visit-us/louvre-app</a>. Used as a product benchmark in the “The Gap” section.</li>
+          <li>Bloomberg Philanthropies. <em>Bloomberg Connects</em> (multi-museum guide platform). Accessed on 2026-05-10, available at <a href="https://www.bloombergconnects.org/" target="_blank" rel="noopener noreferrer">https://www.bloombergconnects.org/</a>. Used as a product benchmark in the “The Gap” section.</li>
+          <li>Smartify CIC. <em>Smartify</em> (museum artwork recognition and guide app). Accessed on 2026-05-10, available at <a href="https://smartify.org/" target="_blank" rel="noopener noreferrer">https://smartify.org/</a>. Used as a product benchmark in the “The Gap” section.</li>
+          <li>Claude 3.5 Sonnet, v1.0, accessed on 2026-05-10, available at <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">https://claude.ai</a>. Used for refining the user persona descriptions and generating the initial storyboard script for the video demo.</li>
+          <li>Cursor, v0.40, accessed on 2026-05-10, available at <a href="https://cursor.com" target="_blank" rel="noopener noreferrer">https://cursor.com</a>. Used for assisted coding of the system’s front-end scaffolding and debugging the CSS layout for mobile responsiveness.</li>
+          <li>CPT208 Human-Centric Computing module materials (AY2526), Coursework Project briefing.</li>
+          <li>V-Museum deployable prototype, accessed on 2026-05-10, available at <a href="https://cpt208v-museum.vercel.app/" target="_blank" rel="noopener noreferrer">https://cpt208v-museum.vercel.app/</a>.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>CPT208 Human-Centric Computing · Process Portfolio · V-Museum</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

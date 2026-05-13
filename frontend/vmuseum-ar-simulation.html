@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth" data-page-title-key="arSim.metaTitle">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR 展区模拟画面 | V-Museum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 min-h-screen pb-16">
+
+  <nav class="bg-white/95 backdrop-blur border-b border-zinc-200 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 min-w-0">
+        <i class="fa-solid fa-vr-cardboard text-amber-600 text-xl shrink-0"></i>
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-wide" data-i18n="arSim.navKicker"></span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="inline-flex rounded-xl border border-zinc-200 overflow-hidden shadow-sm" role="group" aria-label="Language">
+          <button type="button" data-lang-btn="zh" onclick="window.VMI18n&&VMI18n.setLocale('zh')" class="px-3 py-2 text-sm font-bold transition touch-manipulation" data-i18n="nav.langZh"></button>
+          <button type="button" data-lang-btn="en" onclick="window.VMI18n&&VMI18n.setLocale('en')" class="px-3 py-2 text-sm font-bold border-l border-zinc-200 transition touch-manipulation" data-i18n="nav.langEn"></button>
+        </div>
+        <a href="index.html" class="text-sm font-bold text-zinc-600 hover:text-amber-600 inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 hover:border-amber-400 transition">
+          <i class="fa-solid fa-arrow-left"></i> <span data-i18n="arSim.backHome"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <header class="mb-10">
+      <h1 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-4 leading-tight" data-i18n="arSim.h1"></h1>
+      <p class="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-3xl" data-i18n-html="arSim.leadHtml"></p>
+    </header>
+
+    <section class="bg-white rounded-3xl border border-zinc-200 p-6 sm:p-8 shadow-sm mb-10" aria-labelledby="ar-sim-steps-heading">
+      <h2 id="ar-sim-steps-heading" class="text-lg font-bold text-zinc-900 mb-4" data-i18n="arSim.stepsTitle"></h2>
+      <ol class="list-decimal list-inside space-y-2 text-sm sm:text-base text-zinc-600 leading-relaxed">
+        <li data-i18n="arSim.step1"></li>
+        <li data-i18n="arSim.step2"></li>
+        <li data-i18n="arSim.step3"></li>
+        <li data-i18n="arSim.step4"></li>
+      </ol>
+    </section>
+
+    <section class="mb-6" aria-labelledby="ar-sim-gallery-heading">
+      <h2 id="ar-sim-gallery-heading" class="text-lg font-bold text-zinc-900 mb-2" data-i18n="arSim.galleryTitle"></h2>
+      <p class="text-xs sm:text-sm text-zinc-500 mb-6" data-i18n-html="arSim.galleryHint"></p>
+
+      <div id="empty-hint" class="hidden rounded-2xl border border-amber-200 bg-amber-50/80 p-6 text-sm text-amber-900 text-center" data-i18n="arSim.empty"></div>
+
+      <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8"></div>
+    </section>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script>
+    (function () {
+      var BASE = 'MuseumSource/avatar效果图片/';
+      /** 与文件夹内一致：效果图 (1).png … 效果图 (60).png（空格 + 半角括号） */
+      var MANUAL_FILENAMES = (function () {
+        var a = [];
+        for (var i = 1; i <= 60; i++) {
+          a.push('效果图 (' + i + ').png');
+        }
+        return a;
+      })();
+
+      /** 若实际文件名为全角括号「效果图（1）.png」等，可改用下列备用名参与探测 */
+      var FALLBACK_ALIASES = (function () {
+        var a = [];
+        for (var j = 1; j <= 60; j++) {
+          a.push('效果图（' + j + '）.png');
+        }
+        return a;
+      })();
+
+      function encPath(name) {
+        return encodeURI(BASE + name);
+      }
+
+      function probeOne(url) {
+        return new Promise(function (resolve) {
+          var im = new Image();
+          im.onload = function () { resolve(url); };
+          im.onerror = function () { resolve(null); };
+          im.src = url;
+        });
+      }
+
+      function collectSequentialNumbered(ext, max) {
+        var out = [];
+        var chain = Promise.resolve();
+        for (var i = 1; i <= max; i++) {
+          (function (idx) {
+            chain = chain.then(function () {
+              return probeOne(encPath(idx + '.' + ext)).then(function (ok) {
+                if (ok) out.push(ok);
+              });
+            });
+          })(i);
+        }
+        return chain.then(function () { return out; });
+      }
+
+      function collectAliases(list) {
+        var out = [];
+        var chain = Promise.resolve();
+        list.forEach(function (name) {
+          chain = chain.then(function () {
+            return probeOne(encPath(name)).then(function (ok) {
+              if (ok) out.push(ok);
+            });
+          });
+        });
+        return chain.then(function () { return out; });
+      }
+
+      function renderGallery(urls) {
+        var gal = document.getElementById('gallery');
+        var empty = document.getElementById('empty-hint');
+        var cap = (window.VMI18n && VMI18n.getLocale() === 'en')
+          ? 'Simulation still'
+          : '模拟画面';
+        if (!urls.length) {
+          gal.innerHTML = '';
+          empty.classList.remove('hidden');
+          return;
+        }
+        empty.classList.add('hidden');
+        gal.innerHTML = urls.map(function (src, idx) {
+          var safe = String(src).replace(/"/g, '&quot;');
+          return (
+            '<figure class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm">' +
+            '<div class="aspect-[4/3] bg-zinc-100">' +
+            '<img src="' + safe + '" alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" width="1200" height="900">' +
+            '</div>' +
+            '<figcaption class="px-4 py-3 text-xs font-medium text-zinc-500 border-t border-zinc-100">' + cap + ' ' + (idx + 1) + '</figcaption>' +
+            '</figure>'
+          );
+        }).join('');
+      }
+
+      function runCollect() {
+        return collectAliases(MANUAL_FILENAMES).then(function (primary) {
+          if (primary.length) {
+            renderGallery(primary);
+            return;
+          }
+          return collectAliases(FALLBACK_ALIASES).then(function (fb) {
+            if (fb.length) {
+              renderGallery(fb);
+              return;
+            }
+            return collectSequentialNumbered('png', 30).then(function (pngs) {
+              if (pngs.length) {
+                renderGallery(pngs);
+                return;
+              }
+              var exts = ['jpg', 'jpeg', 'webp'];
+              var chain = Promise.resolve([]);
+              exts.forEach(function (ext) {
+                chain = chain.then(function (acc) {
+                  if (acc.length) return acc;
+                  return collectSequentialNumbered(ext, 30);
+                });
+              });
+              return chain.then(function (found) {
+                if (found.length) renderGallery(found);
+                else renderGallery([]);
+              });
+            });
+          });
+        });
+      }
+
+      window.vmSecondaryPageAfterLocale = function () {
+        runCollect();
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        runCollect();
+      });
+    })();
+  </script>
+</body>
+</html>

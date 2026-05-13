@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth" data-page-title-key="memorial.metaHubTitle">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 纪念视频与影像 | V-Museum 唯博</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .vm-memorial-surface {
+      background-image: url('MuseumSource/系统背景.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    @media (max-width: 640px) {
+      .vm-memorial-surface { background-attachment: scroll; }
+    }
+  </style>
+</head>
+<body class="vm-memorial-surface text-zinc-900 min-h-screen pb-[env(safe-area-inset-bottom,0px)]">
+
+  <nav class="bg-white/90 backdrop-blur-md border-b border-zinc-200/80 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-3 min-w-0">
+        <i class="fa-solid fa-clapperboard text-2xl text-amber-600 shrink-0"></i>
+        <div class="min-w-0">
+          <p class="text-amber-600 text-xs font-bold uppercase tracking-wide">V-Museum</p>
+          <h1 class="text-lg sm:text-xl font-bold leading-snug" data-i18n="memorial.hubTitle"></h1>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <div class="inline-flex rounded-xl border border-zinc-200 overflow-hidden shadow-sm" role="group" aria-label="Language">
+          <button type="button" data-lang-btn="zh" onclick="window.VMI18n&&VMI18n.setLocale('zh')" class="px-3 py-2 text-sm font-bold transition touch-manipulation" data-i18n="nav.langZh"></button>
+          <button type="button" data-lang-btn="en" onclick="window.VMI18n&&VMI18n.setLocale('en')" class="px-3 py-2 text-sm font-bold border-l border-zinc-200 transition touch-manipulation" data-i18n="nav.langEn"></button>
+        </div>
+        <a href="index.html" class="shrink-0 text-sm font-bold text-zinc-600 hover:text-amber-600 inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 hover:border-amber-400 transition">
+          <i class="fa-solid fa-arrow-left"></i> <span data-i18n="memorial.backHome"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 pb-20 sm:pb-16">
+    <p class="text-zinc-600 text-sm sm:text-base max-w-2xl leading-relaxed mb-8 break-words" data-i18n-html="memorial.introHtml"></p>
+
+    <div id="empty-state" class="hidden bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 p-8 sm:p-12 text-center shadow-sm">
+      <div class="w-16 h-16 bg-zinc-100 rounded-full flex items-center justify-center text-3xl text-zinc-400 mx-auto mb-6">📭</div>
+      <h2 class="text-xl font-bold text-zinc-900 mb-2" data-i18n="memorial.emptyTitle"></h2>
+      <p class="text-zinc-500 text-sm mb-8 max-w-md mx-auto leading-relaxed" data-i18n="memorial.emptyDesc"></p>
+      <a href="index.html" class="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-600 transition shadow-lg" data-i18n="memorial.emptyCta"></a>
+    </div>
+
+    <div id="workspace" class="hidden grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-start">
+      <div class="lg:col-span-2 space-y-3 lg:sticky lg:top-24">
+        <h2 class="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-2" data-i18n="memorial.listHeading"></h2>
+        <div id="completed-trip-list" class="space-y-3 max-h-[min(55vh,28rem)] lg:max-h-none overflow-y-auto pr-1"></div>
+      </div>
+
+      <div id="detail-panel" class="hidden lg:col-span-3 space-y-6 w-full min-w-0">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 shadow-xl overflow-hidden">
+          <div class="p-5 sm:p-8 border-b border-zinc-100 flex flex-wrap items-start justify-between gap-4">
+            <div class="min-w-0 flex-1">
+              <p class="text-emerald-600 text-xs font-bold uppercase mb-1" data-i18n="memorial.detailKicker"></p>
+              <h2 id="detail-museum" class="text-xl sm:text-2xl font-bold text-zinc-900 break-words"></h2>
+              <p class="text-sm text-zinc-500 mt-2 leading-relaxed" data-i18n="memorial.detailMeta"></p>
+            </div>
+            <button type="button" id="btn-close-detail" class="lg:hidden text-sm font-bold text-zinc-500 border border-zinc-200 px-4 py-2 rounded-xl hover:bg-zinc-50 shrink-0" data-i18n="memorial.btnCollapse"></button>
+          </div>
+          <div class="p-5 sm:p-8 space-y-6">
+            <div>
+              <p class="text-xs font-bold text-zinc-400 uppercase mb-3" data-i18n="memorial.customInfo"></p>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
+                  <p class="text-xs text-zinc-400 font-bold mb-1 flex items-center gap-1"><i class="fa-solid fa-calendar-check text-amber-500"></i> <span data-i18n="memorial.completedAt"></span></p>
+                  <p id="detail-completed-at" class="font-bold text-zinc-900 text-sm break-words"></p>
+                </div>
+                <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
+                  <p class="text-xs text-zinc-400 font-bold mb-1 flex items-center gap-1"><i class="fa-solid fa-user-astronaut text-amber-500"></i> <span data-i18n="memorial.avatar"></span></p>
+                  <p id="detail-avatar" class="font-bold text-zinc-900 text-sm break-words"></p>
+                </div>
+                <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100 sm:col-span-2">
+                  <p class="text-xs text-zinc-400 font-bold mb-1 flex items-center gap-1"><i class="fa-solid fa-microphone-lines text-amber-500"></i> <span data-i18n="memorial.voice"></span></p>
+                  <p id="detail-voice" class="font-bold text-zinc-900 text-sm break-words"></p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-zinc-400 uppercase mb-2" data-i18n="memorial.route"></p>
+              <p id="detail-plan" class="text-zinc-700 text-sm leading-relaxed bg-zinc-50 rounded-2xl p-4 border border-zinc-100 break-words"></p>
+            </div>
+            <p class="text-sm text-zinc-600" data-i18n="memorial.chooseCreate"></p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a id="link-photo" href="#" class="group flex flex-col p-5 sm:p-6 rounded-2xl border-2 border-zinc-200 bg-gradient-to-br from-amber-50 to-white hover:border-amber-500 hover:shadow-lg transition min-h-0">
+                <span class="inline-flex w-12 h-12 rounded-xl bg-white border border-amber-200 items-center justify-center text-amber-600 text-xl mb-4 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-image"></i>
+                </span>
+                <span class="font-bold text-lg text-zinc-900" data-i18n="memorial.cardPhotoTitle"></span>
+                <span class="text-sm text-zinc-500 mt-2 leading-snug flex-1" data-i18n="memorial.cardPhotoDesc"></span>
+                <span class="mt-4 text-sm font-bold text-amber-700 inline-flex items-center gap-1"><span data-i18n="memorial.cardPhotoCta"></span> <i class="fa-solid fa-arrow-right text-xs"></i></span>
+              </a>
+              <a id="link-video" href="#" class="group flex flex-col p-5 sm:p-6 rounded-2xl border-2 border-zinc-200 bg-gradient-to-br from-violet-50 to-white hover:border-violet-400 hover:shadow-lg transition min-h-0">
+                <span class="inline-flex w-12 h-12 rounded-xl bg-white border border-violet-200 items-center justify-center text-violet-600 text-xl mb-4 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-film"></i>
+                </span>
+                <span class="font-bold text-lg text-zinc-900" data-i18n="memorial.cardVideoTitle"></span>
+                <span class="text-sm text-zinc-500 mt-2 leading-snug flex-1" data-i18n="memorial.cardVideoDesc"></span>
+                <span class="mt-4 text-sm font-bold text-violet-700 inline-flex items-center gap-1"><span data-i18n="memorial.cardVideoCta"></span> <i class="fa-solid fa-arrow-right text-xs"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script>
+    const STORAGE_KEY = 'vMuseumVisitPlans';
+    let completedTrips = [];
+    let activeTrip = null;
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      try {
+        const loc = (window.VMI18n && VMI18n.getLocale() === 'en') ? 'en-US' : 'zh-CN';
+        return new Date(iso).toLocaleString(loc, { dateStyle: 'medium', timeStyle: 'short' });
+      } catch (e) {
+        return '—';
+      }
+    }
+
+    function loadCompleted() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const all = raw ? JSON.parse(raw) : [];
+        completedTrips = Array.isArray(all) ? all.filter(p => p.completed) : [];
+        completedTrips.sort((a, b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0));
+      } catch (e) {
+        completedTrips = [];
+      }
+    }
+
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function updateDetailLinks() {
+      if (!activeTrip) return;
+      const id = encodeURIComponent(activeTrip.id);
+      document.getElementById('link-photo').href = 'ai-memorial-photo.html?trip=' + id;
+      document.getElementById('link-video').href = 'ai-memorial-video.html?trip=' + id;
+    }
+
+    function renderList() {
+      const listEl = document.getElementById('completed-trip-list');
+      listEl.innerHTML = completedTrips.map((p) => `
+        <button type="button" data-trip-id="${String(p.id).replace(/"/g, '')}"
+          class="trip-item w-full text-left p-4 sm:p-5 rounded-2xl border-2 transition bg-white/95 backdrop-blur-sm border-zinc-200 hover:border-amber-400 hover:shadow-md ${activeTrip && String(activeTrip.id) === String(p.id) ? 'ring-2 ring-amber-500 border-amber-500' : ''}">
+          <p class="font-bold text-zinc-900 break-words">${escapeHtml(p.museum)}</p>
+          <p class="text-xs text-zinc-500 mt-1 line-clamp-2 break-words">${escapeHtml(p.plan || '')}</p>
+          <p class="text-[10px] text-emerald-700 font-medium mt-2">${escapeHtml(formatDate(p.completedAt || p.createdAt))}</p>
+        </button>
+      `).join('');
+
+      listEl.querySelectorAll('.trip-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-trip-id');
+          const trip = completedTrips.find(t => String(t.id) === String(id));
+          if (trip) openDetail(trip);
+        });
+      });
+    }
+
+    function openDetail(trip) {
+      activeTrip = trip;
+      document.getElementById('detail-panel').classList.remove('hidden');
+      document.getElementById('detail-museum').textContent = trip.museum || '—';
+      document.getElementById('detail-completed-at').textContent = formatDate(trip.completedAt);
+      document.getElementById('detail-avatar').textContent = trip.avatar || '—';
+      document.getElementById('detail-voice').textContent = trip.voice || '—';
+      const noPlan = window.VMI18n ? VMI18n.t('memorial.noPlan') : '（无路线摘要）';
+      document.getElementById('detail-plan').textContent = trip.plan || noPlan;
+      updateDetailLinks();
+
+      try {
+        const u = new URL(window.location.href);
+        u.searchParams.set('trip', trip.id);
+        window.history.replaceState({}, '', u.pathname + u.search);
+      } catch (e) { /* ignore */ }
+
+      renderList();
+      document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    window.vmSecondaryPageAfterLocale = function () {
+      loadCompleted();
+      if (!completedTrips.length) return;
+      renderList();
+      if (activeTrip) {
+        const still = completedTrips.find(t => String(t.id) === String(activeTrip.id));
+        if (still) {
+          activeTrip = still;
+          document.getElementById('detail-completed-at').textContent = formatDate(still.completedAt);
+          const noPlan = window.VMI18n ? VMI18n.t('memorial.noPlan') : '（无路线摘要）';
+          document.getElementById('detail-plan').textContent = still.plan || noPlan;
+        }
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCompleted();
+
+      document.getElementById('btn-close-detail').onclick = () => {
+        activeTrip = null;
+        document.getElementById('detail-panel').classList.add('hidden');
+        renderList();
+      };
+
+      if (!completedTrips.length) {
+        document.getElementById('empty-state').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('workspace').classList.remove('hidden');
+
+      let initial = completedTrips[0];
+      try {
+        const q = new URLSearchParams(window.location.search).get('trip');
+        if (q) {
+          const found = completedTrips.find(t => String(t.id) === String(q));
+          if (found) initial = found;
+        }
+      } catch (e) { /* ignore */ }
+
+      renderList();
+      openDetail(initial);
+    });
+  </script>
+</body>
+</html>

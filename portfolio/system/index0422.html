@@ -98,13 +98,24 @@
               <button onclick="showFeatureDetail(2)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition">深入了解详情</button>
             </div>
             <div class="feature-card bg-white rounded-3xl p-8 border border-zinc-200 shadow-sm">
-              <div class="text-amber-500 text-4xl mb-6"><i class="fa-solid fa-map-location-dot"></i></div>
-              <h4 class="text-2xl font-bold mb-4">3. 展区展品打卡</h4>
-              <p class="text-zinc-500 mb-8 text-sm leading-relaxed">完成博物馆设置的专属任务，赢取线上及线下纪念品。</p>
+              <div class="text-amber-500 text-4xl mb-6"><i class="fa-solid fa-route"></i></div>
+              <h4 class="text-2xl font-bold mb-4">3. 个性化路线定制<br>+展区展品打卡</h4>
+              <p class="text-zinc-500 mb-8 text-sm leading-relaxed">一键生成专属 XR 路线，沿途完成专属任务，赢取纪念品。</p>
               <button onclick="showFeatureDetail(3)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition">深入了解详情</button>
             </div>
           </div>
-          <button onclick="startFormalFlow()" class="w-full py-6 bg-amber-500 text-white text-2xl font-bold rounded-3xl shadow-xl hover:bg-amber-600 transition-all">立即开启博物馆之旅</button>
+          
+          <div class="flex flex-col md:flex-row gap-6 mt-8">
+            <button onclick="startFormalFlow()" class="md:w-3/5 py-6 bg-amber-500 text-white text-2xl font-bold rounded-3xl shadow-xl hover:bg-amber-600 transition-all">
+              立即开启博物馆之旅
+            </button>
+            <div class="md:w-2/5 bg-white border border-zinc-200 rounded-3xl p-6 flex flex-col items-center justify-center gap-4 shadow-sm hover:border-amber-400 transition">
+               <span class="text-zinc-600 font-bold">已定制计划？</span>
+               <button onclick="window.open('ar-demo.html', '_blank')" class="w-full py-4 bg-amber-50 border border-amber-500 text-amber-600 font-bold rounded-2xl shadow-sm hover:bg-amber-500 hover:text-white transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-qrcode text-xl"></i> 在 XR 展区扫码开启 V-MUSEUM 之旅！
+               </button>
+            </div>
+          </div>
         </div>
 
         <div id="feature-1-detail" class="hidden animate-in slide-in-from-right duration-300">
@@ -187,23 +198,52 @@
         <div id="feature-3-detail" class="hidden animate-in slide-in-from-right duration-300">
           <div class="bg-white rounded-3xl p-10 border border-zinc-200 shadow-lg">
             <h3 class="text-3xl font-bold mb-8 text-amber-600 flex items-center gap-3">
-              <i class="fa-solid fa-star"></i> 展区打卡与任务系统
+              <i class="fa-solid fa-route"></i> 个性化路线定制 + 展区展品打卡
             </h3>
-            <div class="grid md:grid-cols-2 gap-10">
+            
+            <div class="space-y-8">
               <div class="bg-zinc-50 p-8 rounded-3xl border border-zinc-200">
-                <h4 class="text-xl font-bold mb-6 flex items-center gap-2 text-zinc-900"><i class="fa-solid fa-tasks text-amber-500"></i> 打卡任务说明</h4>
-                <p class="text-zinc-600 leading-relaxed mb-6">在博物馆通过 AR 引导完成指定的打卡项目，深入了解文物，赢取独家纪念奖励。</p>
-                <div class="p-4 bg-white rounded-xl border-l-4 border-amber-500 shadow-sm">
-                  <p class="text-sm italic text-zinc-500">“选择具体博物馆后，即可查看该馆的具体打卡任务与奖品。”</p>
+                <h4 class="text-xl font-bold mb-6 flex items-center gap-2 text-zinc-900">
+                  <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> AI 个性化路线生成
+                </h4>
+                <p class="text-zinc-600 leading-relaxed mb-6">选择您的偏好或输入个性化需求，AI 将为您无缝串联本馆重点展品与 <span class="text-amber-600 font-bold underline decoration-amber-300 underline-offset-4">XR 沉浸式互动展区</span>，规划最契合您的游览路线。</p>
+                
+                <div class="space-y-6">
+                  <div>
+                    <label class="block text-sm font-bold text-zinc-700 mb-3">选择路线偏好关键词：</label>
+                    <div class="flex flex-wrap gap-3">
+                      <button class="px-5 py-2.5 bg-white border border-zinc-200 rounded-full text-sm font-medium hover:border-amber-500 hover:text-amber-600 hover:shadow-sm transition">🏺 探寻镇馆之宝</button>
+                      <button class="px-5 py-2.5 bg-white border border-zinc-200 rounded-full text-sm font-medium hover:border-amber-500 hover:text-amber-600 hover:shadow-sm transition">🕶️ XR 深度体验</button>
+                      <button class="px-5 py-2.5 bg-white border border-zinc-200 rounded-full text-sm font-medium hover:border-amber-500 hover:text-amber-600 hover:shadow-sm transition">📸 绝美出片机位</button>
+                      <button class="px-5 py-2.5 bg-white border border-zinc-200 rounded-full text-sm font-medium hover:border-amber-500 hover:text-amber-600 hover:shadow-sm transition">🏃 时间紧凑速览</button>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-bold text-zinc-700 mb-3">或手动输入具体要求：</label>
+                    <input type="text" placeholder="例如：我想带孩子体验有趣的互动展品，重点看 XR 展区..." class="w-full bg-white p-4 rounded-xl border border-zinc-200 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition shadow-sm">
+                  </div>
+                  <button onclick="alert('🗺️ AI 正在为您生成专属 XR 观展路线...')" class="w-full md:w-auto px-10 py-4 bg-amber-500 text-white font-bold rounded-xl shadow-md hover:bg-amber-600 hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> 一键生成专属路线
+                  </button>
                 </div>
               </div>
-              <div class="bg-zinc-50 p-8 rounded-3xl border border-zinc-200 text-center">
-                <h4 class="text-xl font-bold mb-6 text-zinc-900">纪念品预览</h4>
-                <div class="flex justify-center gap-6 mb-8">
-                  <div class="text-center"><div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl mb-2 border border-amber-400 shadow-sm">💎</div><p class="text-[10px] text-zinc-500 font-bold">数字藏品</p></div>
-                  <div class="text-center"><div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl mb-2 border border-zinc-300 shadow-sm">📜</div><p class="text-[10px] text-zinc-500 font-bold">限量明信片</p></div>
+
+              <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-zinc-50 p-8 rounded-3xl border border-zinc-200">
+                  <h4 class="text-xl font-bold mb-6 flex items-center gap-2 text-zinc-900"><i class="fa-solid fa-tasks text-amber-500"></i> 展区打卡任务</h4>
+                  <p class="text-zinc-600 leading-relaxed mb-6">沿着生成的专属路线，在对应的博物馆展区通过 AR 引导完成指定的打卡项目，深入了解文物背景，赢取独家纪念奖励。</p>
+                  <div class="p-4 bg-white rounded-xl border-l-4 border-amber-500 shadow-sm">
+                    <p class="text-sm italic text-zinc-500">“选择具体博物馆后，即可查看该馆的具体打卡任务与奖品。”</p>
+                  </div>
                 </div>
-                <p class="text-zinc-500 text-xs">完成特定任务后，前往文创区即可领取实体礼品。</p>
+                <div class="bg-zinc-50 p-8 rounded-3xl border border-zinc-200 text-center">
+                  <h4 class="text-xl font-bold mb-6 text-zinc-900">纪念品预览</h4>
+                  <div class="flex justify-center gap-6 mb-8">
+                    <div class="text-center"><div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl mb-2 border border-amber-400 shadow-sm">💎</div><p class="text-[10px] text-zinc-500 font-bold">数字藏品</p></div>
+                    <div class="text-center"><div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl mb-2 border border-zinc-300 shadow-sm">📜</div><p class="text-[10px] text-zinc-500 font-bold">限量明信片</p></div>
+                  </div>
+                  <p class="text-zinc-500 text-xs">完成特定打卡任务后，前往文创区即可领取实体礼品。</p>
+                </div>
               </div>
             </div>
           </div>
@@ -251,7 +291,7 @@
                 <i class="fa-solid fa-video text-3xl mb-4 text-amber-500"></i><br><span class="font-bold">AI视频生成</span>
               </button>
               <button onclick="showFeatureDetail(3)" class="p-8 bg-white border border-zinc-200 rounded-3xl hover:border-amber-500 transition shadow-sm">
-                <i class="fa-solid fa-location-crosshairs text-3xl mb-4 text-amber-500"></i><br><span class="font-bold">展区打卡</span>
+                <i class="fa-solid fa-route text-3xl mb-4 text-amber-500"></i><br><span class="font-bold">路线定制与打卡</span>
               </button>
             </div>
           </div>

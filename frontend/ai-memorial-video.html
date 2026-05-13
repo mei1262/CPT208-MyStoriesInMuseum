@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth" data-page-title-key="memVideo.metaTitle">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成纪念视频 | V-Museum 唯博</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .vm-memorial-surface {
+      background-image: url('MuseumSource/系统背景.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    @media (max-width: 640px) {
+      .vm-memorial-surface { background-attachment: scroll; }
+    }
+    .pick-card { transition: border-color .15s, box-shadow .15s, background .15s; }
+    .pick-card.is-on { border-color: rgb(139 92 246); box-shadow: 0 0 0 2px rgba(139,92,246,.22); background: rgb(245 243 255); }
+  </style>
+</head>
+<body class="vm-memorial-surface text-zinc-900 min-h-screen pb-[env(safe-area-inset-bottom,0px)]">
+
+  <nav class="bg-white/90 backdrop-blur-md border-b border-zinc-200/80 sticky top-0 z-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-3 min-w-0">
+        <i class="fa-solid fa-film text-2xl text-violet-600 shrink-0"></i>
+        <div class="min-w-0">
+          <p class="text-violet-700 text-xs font-bold uppercase tracking-wide">V-Museum</p>
+          <h1 class="text-lg sm:text-xl font-bold leading-snug" data-i18n="memVideo.pageH1"></h1>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="inline-flex rounded-xl border border-zinc-200 overflow-hidden shadow-sm" role="group" aria-label="Language">
+          <button type="button" data-lang-btn="zh" onclick="window.VMI18n&&VMI18n.setLocale('zh')" class="px-3 py-2 text-sm font-bold transition touch-manipulation" data-i18n="nav.langZh"></button>
+          <button type="button" data-lang-btn="en" onclick="window.VMI18n&&VMI18n.setLocale('en')" class="px-3 py-2 text-sm font-bold border-l border-zinc-200 transition touch-manipulation" data-i18n="nav.langEn"></button>
+        </div>
+        <a id="nav-back" href="ai-memorial.html" class="shrink-0 text-sm font-bold text-zinc-600 hover:text-violet-700 inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 hover:border-violet-300 transition">
+          <i class="fa-solid fa-arrow-left"></i> <span data-i18n="memVideo.back"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-10 pb-20 space-y-8">
+    <div id="invalid" class="hidden bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 p-8 sm:p-10 text-center">
+      <p class="text-zinc-600 mb-6" data-i18n="memorial.invalidMsg"></p>
+      <a href="ai-memorial.html" class="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600" data-i18n="memorial.invalidCta"></a>
+    </div>
+
+    <div id="content" class="hidden space-y-8">
+      <div class="bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 shadow-lg p-6 sm:p-8 space-y-5">
+        <p class="text-emerald-600 text-xs font-bold uppercase" data-i18n="memorial.customInfo"></p>
+        <h2 id="trip-museum" class="text-xl sm:text-2xl font-bold text-zinc-900 break-words"></h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
+            <p class="text-xs text-zinc-400 font-bold mb-1" data-i18n="memorial.completedAt"></p>
+            <p id="trip-completed" class="font-bold text-zinc-900 text-sm break-words"></p>
+          </div>
+          <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
+            <p class="text-xs text-zinc-400 font-bold mb-1" data-i18n="memorial.avatar"></p>
+            <p id="trip-avatar" class="font-bold text-zinc-900 text-sm break-words"></p>
+          </div>
+          <div class="bg-zinc-50 rounded-2xl p-4 border border-zinc-100 sm:col-span-2">
+            <p class="text-xs text-zinc-400 font-bold mb-1" data-i18n="memorial.voice"></p>
+            <p id="trip-voice" class="font-bold text-zinc-900 text-sm break-words"></p>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-zinc-400 font-bold mb-2" data-i18n="memorial.route"></p>
+          <p id="trip-plan" class="text-sm text-zinc-700 leading-relaxed bg-zinc-50 rounded-xl p-4 border border-zinc-100 break-words"></p>
+        </div>
+      </div>
+
+      <section class="bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 shadow-lg overflow-hidden">
+        <div class="p-5 sm:p-6 border-b border-violet-100 bg-gradient-to-r from-violet-50 to-white">
+          <h2 class="text-lg font-bold text-zinc-900 flex items-center gap-2">
+            <i class="fa-solid fa-upload text-violet-600"></i> <span data-i18n="memVideo.uploadTitle"></span>
+          </h2>
+          <p class="text-sm text-zinc-600 mt-1 leading-relaxed" data-i18n-html="memVideo.uploadHintHtml"></p>
+        </div>
+        <div class="p-5 sm:p-6">
+          <input type="file" id="video-file" accept="video/*" class="block w-full text-sm text-zinc-600 file:mr-4 file:py-3 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-violet-600 file:text-white hover:file:bg-violet-700 cursor-pointer">
+          <p id="file-name-hint" class="text-xs text-zinc-500 mt-2 min-h-[1rem] break-all"></p>
+        </div>
+      </section>
+
+      <section class="bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 shadow-lg overflow-hidden">
+        <div class="p-5 sm:p-6 border-b border-violet-100 bg-gradient-to-r from-violet-50 to-white">
+          <h2 class="text-lg font-bold text-zinc-900 flex items-center gap-2">
+            <i class="fa-solid fa-clapperboard text-violet-600"></i> <span data-i18n="memVideo.styleTitle"></span>
+          </h2>
+          <p class="text-sm text-zinc-600 mt-1 leading-relaxed" data-i18n-html="memVideo.styleHintHtml"></p>
+        </div>
+        <div class="p-5 sm:p-6 space-y-4">
+          <p class="text-xs font-bold text-zinc-400 uppercase" data-i18n="memVideo.pickLabel"></p>
+          <div id="video-styles" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          <button type="button" id="btn-gen-video" class="w-full py-4 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-600 transition shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base">
+            <i class="fa-solid fa-clapperboard"></i> <span data-i18n="memVideo.genBtn"></span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script>
+    const STORAGE_KEY = 'vMuseumVisitPlans';
+    const DB_NAME = 'vMuseumMemorial';
+    const STORE_NAME = 'media';
+    const VIDEO_KEY = 'pendingMemorialVideo';
+
+    const VIDEO_STYLES = [
+      { id: 'custom', icon: 'fa-sliders' },
+      { id: 'trend', icon: 'fa-hashtag' },
+      { id: 'bgm', icon: 'fa-music' },
+      { id: 'transition', icon: 'fa-shuffle' },
+      { id: 'slow', icon: 'fa-cloud' },
+      { id: 'knowledge', icon: 'fa-book-open' },
+    ];
+
+    let activeTrip = null;
+    let selectedVideoStyle = null;
+
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      try {
+        const loc = (window.VMI18n && VMI18n.getLocale() === 'en') ? 'en-US' : 'zh-CN';
+        return new Date(iso).toLocaleString(loc, { dateStyle: 'medium', timeStyle: 'short' });
+      } catch (e) {
+        return '—';
+      }
+    }
+
+    function loadTrip(tripId) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const all = raw ? JSON.parse(raw) : [];
+        const list = Array.isArray(all) ? all.filter(p => p.completed) : [];
+        return list.find(t => String(t.id) === String(tripId)) || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function styleName(id) {
+      return window.VMI18n ? VMI18n.t('memVideo.style.' + id + '.name') : id;
+    }
+    function styleDesc(id) {
+      return window.VMI18n ? VMI18n.t('memVideo.style.' + id + '.desc') : '';
+    }
+
+    function putVideoBlob(file) {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onerror = () => reject(req.error);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME);
+          }
+        };
+        req.onsuccess = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.close();
+            reject(new Error('No store'));
+            return;
+          }
+          const tx = db.transaction(STORE_NAME, 'readwrite');
+          tx.objectStore(STORE_NAME).put(file, VIDEO_KEY);
+          tx.oncomplete = () => { db.close(); resolve(); };
+          tx.onerror = () => { db.close(); reject(tx.error); };
+        };
+      });
+    }
+
+    function renderVideoStyles() {
+      const el = document.getElementById('video-styles');
+      el.innerHTML = VIDEO_STYLES.map(t => `
+        <button type="button" class="pick-card text-left p-4 rounded-2xl border-2 border-zinc-200 bg-zinc-50/50 hover:border-violet-300 ${selectedVideoStyle === t.id ? 'is-on' : ''}" data-id="${t.id}">
+          <span class="inline-flex w-10 h-10 rounded-xl bg-white border border-violet-100 items-center justify-center text-violet-600 mb-2">
+            <i class="fa-solid ${t.icon}"></i>
+          </span>
+          <p class="font-bold text-zinc-900 text-sm break-words">${escapeHtml(styleName(t.id))}</p>
+          <p class="text-xs text-zinc-500 mt-1 leading-snug">${escapeHtml(styleDesc(t.id))}</p>
+        </button>
+      `).join('');
+      el.querySelectorAll('.pick-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedVideoStyle = btn.getAttribute('data-id');
+          renderVideoStyles();
+        });
+      });
+    }
+
+    window.vmSecondaryPageAfterLocale = function () {
+      renderVideoStyles();
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tripId = new URLSearchParams(window.location.search).get('trip');
+      if (!tripId) {
+        document.getElementById('invalid').classList.remove('hidden');
+        return;
+      }
+      activeTrip = loadTrip(tripId);
+      if (!activeTrip) {
+        document.getElementById('invalid').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('nav-back').href = 'ai-memorial.html?trip=' + encodeURIComponent(activeTrip.id);
+
+      document.getElementById('trip-museum').textContent = activeTrip.museum || '—';
+      document.getElementById('trip-completed').textContent = formatDate(activeTrip.completedAt);
+      document.getElementById('trip-avatar').textContent = activeTrip.avatar || '—';
+      document.getElementById('trip-voice').textContent = activeTrip.voice || '—';
+      const noPlan = window.VMI18n ? VMI18n.t('memorial.noPlan') : '（无路线摘要）';
+      document.getElementById('trip-plan').textContent = activeTrip.plan || noPlan;
+
+      const fileInput = document.getElementById('video-file');
+      const nameHint = document.getElementById('file-name-hint');
+      fileInput.addEventListener('change', () => {
+        const f = fileInput.files && fileInput.files[0];
+        const prefix = window.VMI18n ? VMI18n.t('memVideo.filePickedPrefix') : '';
+        nameHint.textContent = f ? (prefix + f.name) : '';
+      });
+
+      document.getElementById('content').classList.remove('hidden');
+      renderVideoStyles();
+
+      document.getElementById('btn-gen-video').onclick = async () => {
+        if (!selectedVideoStyle) {
+          alert(window.VMI18n ? VMI18n.t('memVideo.alertStyle') : '');
+          return;
+        }
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) {
+          alert(window.VMI18n ? VMI18n.t('memVideo.alertFile') : '');
+          return;
+        }
+        if (!file.type.startsWith('video/')) {
+          alert(window.VMI18n ? VMI18n.t('memVideo.alertType') : '');
+          return;
+        }
+        const st = VIDEO_STYLES.find(t => t.id === selectedVideoStyle);
+        if (!st) return;
+
+        if (file.size > 200 * 1024 * 1024) {
+          alert(window.VMI18n ? VMI18n.t('memVideo.alertSize') : '');
+          return;
+        }
+
+        try {
+          sessionStorage.setItem('memorialPreviewStyle', styleName(st.id));
+          await putVideoBlob(file);
+          window.location.href = 'ai-memorial-preview.html?type=video&trip=' + encodeURIComponent(activeTrip.id);
+        } catch (e) {
+          alert(window.VMI18n ? VMI18n.t('memVideo.alertStore') : '');
+        }
+      };
+    });
+  </script>
+</body>
+</html>

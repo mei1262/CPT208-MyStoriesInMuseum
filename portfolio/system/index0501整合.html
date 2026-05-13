@@ -19,32 +19,9 @@
     
     .tag-selected { background-color: #f59e0b !important; color: white !important; border-color: #f59e0b !important; }
 
-    /* 参观者工作台：与 AI 纪念页统一的系统背景（进入首页后的工作台界面） */
-    #visitor-modal.vm-workspace-bg {
-      background-image: url('MuseumSource/系统背景.png');
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
-    }
-
-    .hero-title { text-wrap: balance; }
-    html[lang="en"] .hero-title {
-      font-size: clamp(1.75rem, 5.5vw + 0.35rem, 3.65rem);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-    @media (min-width: 640px) {
-      html[lang="en"] .hero-title {
-        font-size: clamp(2.35rem, 3.5vw + 1.25rem, 4.25rem);
-        line-height: 1.1;
-      }
-    }
-
     /* 移动端优化 */
     @media (max-width: 640px) {
       .hero-title { font-size: 2.25rem; line-height: 1.1; }
-      html[lang="en"] .hero-title { font-size: clamp(1.65rem, 6.2vw + 0.25rem, 2.35rem); line-height: 1.14; }
       .nav-link { font-size: 0.875rem; }
       #visitor-modal .visitor-card-pad { padding: 1.25rem !important; }
       #visitor-modal .visitor-card-pad-lg { padding: 1.25rem !important; }
@@ -60,13 +37,9 @@
         <i class="fa-solid fa-museum text-3xl text-amber-600"></i>
         <span class="text-2xl font-bold tracking-widest uppercase text-zinc-900">V-Museum 唯博</span>
       </div>
-      <div class="flex items-center gap-3 sm:gap-4 flex-wrap justify-end text-sm font-medium">
-        <div class="inline-flex rounded-xl border border-zinc-200 overflow-hidden shadow-sm" role="group" aria-label="Language">
-          <button type="button" data-lang-btn="zh" onclick="window.VMI18n&&VMI18n.setLocale('zh')" class="px-3 py-2 font-bold transition touch-manipulation" data-i18n="nav.langZh"></button>
-          <button type="button" data-lang-btn="en" onclick="window.VMI18n&&VMI18n.setLocale('en')" class="px-3 py-2 font-bold border-l border-zinc-200 transition touch-manipulation" data-i18n="nav.langEn"></button>
-        </div>
+      <div class="flex items-center gap-4 sm:gap-8 text-sm font-medium">
         <a href="javascript:void(0)" onclick="openVisitorModule()" 
-           class="nav-link text-zinc-600 hover:text-amber-600 transition" data-i18n="nav.visitorCenter"></a>
+           class="nav-link text-zinc-600 hover:text-amber-600 transition">参观者中心</a>
         <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-md text-sm">YC</div>
       </div>
     </div>
@@ -75,31 +48,31 @@
   <!-- Hero - 移动端优化 -->
   <header class="hero-bg h-[85vh] sm:h-[80vh] flex items-center text-white">
     <div class="max-w-4xl mx-auto text-center px-5 sm:px-6">
-      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6 px-2 sm:px-4">
-        <span data-i18n="hero.line1"></span><br><span data-i18n="hero.line2"></span>
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6">
+        你的博物馆<br>不只是看展
       </h1>
-      <p class="text-lg sm:text-xl text-amber-100 mb-10 px-2" data-i18n="hero.subtitle"></p>
+      <p class="text-lg sm:text-xl text-amber-100 mb-10 px-2">XR + AI 虚拟导览 · 让历史与你对话</p>
       <button onclick="document.getElementById('roles').scrollIntoView({behavior:'smooth'})" 
               class="bg-amber-500 hover:bg-amber-400 text-white px-10 sm:px-12 py-5 rounded-3xl text-lg font-bold flex items-center gap-3 mx-auto transition-all active:scale-95 shadow-xl">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <span data-i18n="hero.cta"></span>
+        开启 V-Museum 之旅
       </button>
-      <p class="text-xs text-zinc-300 mt-12 tracking-widest opacity-70" data-i18n="hero.footer"></p>
+      <p class="text-xs text-zinc-300 mt-12 tracking-widest opacity-70">A3 项目 • CPT208</p>
     </div>
   </header>
 
   <!-- 参观者主入口（馆方入口见右下角固定按钮） -->
   <section id="roles" class="py-16 sm:py-24 bg-zinc-50 border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 text-zinc-900" data-i18n="roles.title"></h2>
-      <p class="text-center text-zinc-500 text-sm mb-10 sm:mb-14 max-w-xl mx-auto" data-i18n="roles.hint"></p>
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 text-zinc-900">进入参观者模式</h2>
+      <p class="text-center text-zinc-500 text-sm mb-10 sm:mb-14 max-w-xl mx-auto">博物馆方工作人员请使用页面右下角的「博物馆方入口」。</p>
       
       <div class="max-w-2xl mx-auto">
         <button type="button" onclick="openVisitorModule()" 
                 class="w-full text-left bg-white hover:bg-zinc-50 rounded-3xl p-8 sm:p-10 transition border-2 border-zinc-200 hover:border-amber-500 group shadow-md hover:shadow-xl">
-          <p class="text-amber-600 text-sm font-bold mb-3" data-i18n="roles.cardKicker"></p>
-          <h3 class="text-2xl sm:text-3xl font-bold mb-5 group-hover:text-amber-600 transition" data-i18n="roles.cardTitle"></h3>
-          <p class="text-zinc-500 leading-relaxed text-[15px]" data-i18n="roles.cardDesc"></p>
+          <p class="text-amber-600 text-sm font-bold mb-3">参观者 | Visitor</p>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-5 group-hover:text-amber-600 transition">探索、定制与生成</h3>
+          <p class="text-zinc-500 leading-relaxed text-[15px]">选定展馆后，定制您的专属虚拟形象，开启 AR 导航并在游览结束后生成 AI 故事视频。</p>
         </button>
       </div>
     </div>
@@ -108,100 +81,103 @@
   <!-- 博物馆方：固定于右下角，醒目但不抢占主视觉 -->
   <button type="button" onclick="openMuseumAdminModule()"
           class="fixed bottom-5 right-4 sm:bottom-8 sm:right-8 z-[60] flex items-center gap-2.5 pl-4 pr-5 py-3.5 rounded-2xl border-2 border-amber-500 bg-white/95 backdrop-blur-sm text-amber-900 font-bold text-sm sm:text-base shadow-lg shadow-amber-900/10 hover:bg-amber-500 hover:text-white hover:border-amber-500 hover:shadow-xl active:scale-[0.98] transition-all group"
-          data-i18n-title="fab.museumAdminTitle">
+          title="博物馆方工作台">
     <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 group-hover:bg-white/20 group-hover:text-white transition-colors">
       <i class="fa-solid fa-building-columns text-lg"></i>
     </span>
-    <span class="pr-0.5 leading-snug text-left max-w-[7.5rem] sm:max-w-none" data-i18n="fab.museumAdmin"></span>
+    <span class="pr-0.5 leading-snug text-left max-w-[7.5rem] sm:max-w-none">博物馆方入口</span>
   </button>
 
 
   
-  <div id="visitor-modal" class="hidden fixed inset-0 z-[998] overflow-y-auto vm-workspace-bg">
+  <div id="visitor-modal" class="hidden fixed inset-0 bg-zinc-100/95 z-[998] overflow-y-auto">
     <div class="min-h-screen py-6 sm:py-10 pb-24 sm:pb-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl border border-zinc-200 p-6 md:p-8 mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between shadow-xl">
+        <div class="bg-white rounded-3xl border border-zinc-200 p-6 md:p-8 mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between shadow-xl">
           <div class="flex items-center gap-4 min-w-0">
-            <button type="button" id="visitor-back-btn" onclick="performVisitorBack()" class="hidden shrink-0 items-center justify-center gap-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 sm:text-zinc-700 transition w-10 h-10 sm:w-auto sm:h-auto sm:px-4 sm:py-2.5 sm:rounded-xl sm:font-bold sm:text-sm" data-i18n-title="common.backShortTitle" aria-label="返回上一页">
+            <button type="button" id="visitor-back-btn" onclick="performVisitorBack()" class="hidden shrink-0 items-center justify-center gap-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 sm:text-zinc-700 transition w-10 h-10 sm:w-auto sm:h-auto sm:px-4 sm:py-2.5 sm:rounded-xl sm:font-bold sm:text-sm" title="返回上一页" aria-label="返回上一页">
               <i class="fa-solid fa-arrow-left"></i>
-              <span class="hidden sm:inline" data-i18n="common.back"></span>
+              <span class="hidden sm:inline">返回上一页</span>
             </button>
             <div class="min-w-0">
-              <p class="text-amber-600 text-sm font-bold" data-i18n="visitor.workbench"></p>
-              <h2 id="visitor-title" class="text-xl sm:text-2xl font-bold text-zinc-900 truncate" data-title-key="visitor.titleOverview">趣味功能概览</h2>
+              <p class="text-amber-600 text-sm font-bold">参观者工作台</p>
+              <h2 id="visitor-title" class="text-xl sm:text-2xl font-bold text-zinc-900 truncate">趣味功能概览</h2>
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-end gap-2 shrink-0">
-            <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-700 text-sm font-bold hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 transition" data-i18n-title="visitor.xrBtnTitle">
+            <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-700 text-sm font-bold hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 transition" title="在 XR 展区扫码开启">
               <i class="fa-solid fa-qrcode text-amber-600"></i>
-              <span data-i18n="visitor.xrBtn"></span>
+              <span>XR 展区扫码</span>
             </button>
-            <button type="button" onclick="closeVisitorModule()" class="px-5 py-2 rounded-xl border border-zinc-200 text-zinc-500 hover:bg-red-50 hover:text-red-600 transition font-medium" data-i18n="visitor.close"></button>
+            <button type="button" onclick="closeVisitorModule()" class="px-5 py-2 rounded-xl border border-zinc-200 text-zinc-500 hover:bg-red-50 hover:text-red-600 transition font-medium">关闭</button>
           </div>
         </div>
 
         <div id="step-0" class="space-y-8 animate-in fade-in duration-500">
           <div class="grid md:grid-cols-3 gap-6">
-            <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-sm">
+            <div class="feature-card bg-white rounded-3xl p-8 border border-zinc-200 shadow-sm">
               <div class="text-amber-500 text-4xl mb-4"><i class="fa-solid fa-user-astronaut"></i></div>
-              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold" data-i18n="feature1.badge"></span>
-              <h4 class="text-2xl font-bold mb-3 text-zinc-900" data-i18n="feature1.title"></h4>
-              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2" data-i18n="feature1.lead"></p>
-              <p class="text-zinc-500 mb-8 text-sm leading-relaxed" data-i18n="feature1.desc"></p>
-              <button onclick="showFeatureDetail(1)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition" data-i18n="feature1.more"></button>
+              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">陪看讲解</span>
+              <h4 class="text-2xl font-bold mb-3 text-zinc-900">1. 虚拟形象导览</h4>
+              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2">选形象、配语音，虚拟人一路讲给你听。</p>
+              <p class="text-zinc-500 mb-8 text-sm leading-relaxed">历史人物或馆方 IP，口播对齐展线，告别「只看不说」。</p>
+              <button onclick="showFeatureDetail(1)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition">深入了解详情</button>
             </div>
-            <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-sm">
+            <div class="feature-card bg-white rounded-3xl p-8 border border-zinc-200 shadow-sm">
               <div class="text-amber-500 text-4xl mb-4"><i class="fa-solid fa-clapperboard"></i></div>
-              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold" data-i18n="feature2.badge"></span>
-              <h4 class="text-2xl font-bold mb-3 text-zinc-900" data-i18n="feature2.title"></h4>
-              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2" data-i18n="feature2.lead"></p>
-              <p class="text-zinc-500 mb-8 text-sm leading-relaxed" data-i18n="feature2.desc"></p>
-              <button onclick="showFeatureDetail(2)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition" data-i18n="feature2.more"></button>
+              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">游后记念</span>
+              <h4 class="text-2xl font-bold mb-3 text-zinc-900">2. AI 纪念视频</h4>
+              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2">上传照片 + AR 抓拍，一键合成短视频。</p>
+              <p class="text-zinc-500 mb-8 text-sm leading-relaxed">自动配乐、字幕与转场，方便分享与留存。</p>
+              <button onclick="showFeatureDetail(2)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition">深入了解详情</button>
             </div>
-            <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-sm">
+            <div class="feature-card bg-white rounded-3xl p-8 border border-zinc-200 shadow-sm">
               <div class="text-amber-500 text-4xl mb-4"><i class="fa-solid fa-route"></i></div>
-              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold" data-i18n="feature3.badge"></span>
-              <h4 class="text-2xl font-bold mb-3 text-zinc-900" data-i18n="feature3.title"></h4>
-              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2" data-i18n="feature3.lead"></p>
-              <p class="text-zinc-500 mb-8 text-sm leading-relaxed" data-i18n="feature3.desc"></p>
-              <button onclick="showFeatureDetail(3)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition" data-i18n="feature3.more"></button>
+              <span class="inline-block mb-3 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">路线 + 任务</span>
+              <h4 class="text-2xl font-bold mb-3 text-zinc-900">3. 路线定制与打卡</h4>
+              <p class="text-lg font-bold text-zinc-800 leading-snug mb-2">AI 排专属路线，沿路 AR 打卡换奖励。</p>
+              <p class="text-zinc-500 mb-8 text-sm leading-relaxed">偏好关键词 + 文字需求，任务与纪念品一链打通。</p>
+              <button onclick="showFeatureDetail(3)" class="w-full py-4 bg-zinc-50 border border-amber-200 text-amber-700 rounded-2xl font-bold hover:bg-amber-500 hover:text-white transition">深入了解详情</button>
             </div>
           </div>
           
           <div class="flex flex-col md:flex-row gap-6 mt-8">
-            <button type="button" onclick="startFormalFlow()" class="md:flex-1 py-5 sm:py-6 px-3 bg-amber-500 text-white text-base sm:text-xl font-bold rounded-3xl shadow-xl hover:bg-amber-600 transition-all leading-snug" data-i18n="step0.startJourney"></button>
-            <button type="button" id="view-my-plan-btn" onclick="showMyPlans()" class="md:flex-1 py-5 sm:py-6 px-3 bg-white/95 backdrop-blur-sm border-2 border-amber-500 text-amber-600 text-base sm:text-xl font-bold rounded-3xl shadow-lg hover:bg-amber-50 transition-all flex items-center justify-center gap-2 leading-snug">
-              <i class="fa-solid fa-map-location-dot shrink-0"></i> <span data-i18n="step0.myPlans"></span>
+            <button type="button" onclick="startFormalFlow()" class="md:flex-1 py-6 bg-amber-500 text-white text-xl font-bold rounded-3xl shadow-xl hover:bg-amber-600 transition-all">
+              开始定制 V-Museum 旅程
             </button>
-            <button type="button" onclick="window.open('ai-memorial.html', '_blank')" class="group md:flex-1 py-5 sm:py-6 px-3 bg-white/95 backdrop-blur-sm border-2 border-zinc-900 text-zinc-900 text-base sm:text-xl font-bold rounded-3xl shadow-lg hover:bg-zinc-900 hover:text-white transition-all flex items-center justify-center gap-2 leading-snug">
-              <i class="fa-solid fa-clapperboard shrink-0 text-amber-500 group-hover:text-white transition-colors"></i> <span data-i18n="step0.aiMemorial"></span>
+            <button type="button" id="view-my-plan-btn" onclick="showMyPlans()" class="md:flex-1 py-6 bg-white border-2 border-amber-500 text-amber-600 text-xl font-bold rounded-3xl shadow-lg hover:bg-amber-50 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-map-location-dot"></i> 我的游览计划
+            </button>
+            <button type="button" onclick="window.open('ai-memorial.html', '_blank')" class="group md:flex-1 py-6 bg-white border-2 border-zinc-900 text-zinc-900 text-xl font-bold rounded-3xl shadow-lg hover:bg-zinc-900 hover:text-white transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-clapperboard text-amber-500 group-hover:text-white transition-colors"></i> AI 纪念视频生成
             </button>
           </div>
         </div>
 
-        <!-- 我的游览计划：左未完成 / 右已完成 -->
+        <!-- 我的游览计划：左未完成 / 右已完成，点击条目查看详情 -->
         <div id="my-plans-panel" class="hidden animate-in zoom-in duration-300">
           <div class="bg-white rounded-3xl p-6 md:p-8 border border-zinc-200 shadow-2xl max-w-5xl mx-auto">
             <div class="flex items-center justify-between mb-6">
               <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 flex items-center gap-3">
-                <i class="fa-solid fa-map-location-dot text-amber-500"></i> <span data-i18n="plans.title"></span>
+                <i class="fa-solid fa-map-location-dot text-amber-500"></i> 我的游览计划
               </h3>
-              <button type="button" onclick="performVisitorBack()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-200 text-sm font-bold text-zinc-600 hover:border-amber-400 hover:text-amber-800 transition" data-i18n-title="common.backShortTitle">
-                <i class="fa-solid fa-arrow-left"></i> <span data-i18n="common.back"></span>
+              <button type="button" onclick="performVisitorBack()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-200 text-sm font-bold text-zinc-600 hover:border-amber-400 hover:text-amber-800 transition" title="返回上一页">
+                <i class="fa-solid fa-arrow-left"></i> 返回上一页
               </button>
             </div>
+            <p class="text-zinc-500 text-sm mb-6">每次在流程中生成专属计划后都会自动保存。左侧为进行中的方案，右侧为已完成的记录。</p>
             <div class="grid md:grid-cols-2 gap-6 min-h-[280px]">
               <div class="flex flex-col rounded-2xl border-2 border-amber-200 bg-amber-50/40 p-4 md:p-5">
                 <h4 class="text-amber-800 font-bold text-sm uppercase tracking-wide mb-3 flex items-center gap-2">
-                  <span class="text-lg">📍</span> <span data-i18n="plans.incomplete"></span>
+                  <span class="text-lg">📍</span> 未完成
                 </h4>
                 <div id="incomplete-plans-list" class="flex-1 space-y-3 overflow-y-auto max-h-[min(420px,50vh)] pr-1">
                 </div>
               </div>
               <div class="flex flex-col rounded-2xl border-2 border-emerald-200 bg-emerald-50/40 p-4 md:p-5">
                 <h4 class="text-emerald-800 font-bold text-sm uppercase tracking-wide mb-3 flex items-center gap-2">
-                  <span class="text-lg">✅</span> <span data-i18n="plans.completed"></span>
+                  <span class="text-lg">✅</span> 已完成
                 </h4>
                 <div id="completed-plans-list" class="flex-1 space-y-3 overflow-y-auto max-h-[min(420px,50vh)] pr-1">
                 </div>
@@ -215,17 +191,17 @@
           <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-2xl max-w-2xl mx-auto">
             <div class="mb-6">
               <button type="button" onclick="performPlanDetailBack()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-bold text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-                <i class="fa-solid fa-arrow-left"></i> <span data-i18n="common.back"></span>
+                <i class="fa-solid fa-arrow-left"></i> 返回上一页
               </button>
             </div>
             <h3 id="uncompleted-detail-title" class="text-2xl sm:text-3xl font-bold mb-6 text-zinc-900 flex flex-wrap items-center gap-3">
-              <i class="fa-solid fa-clipboard-list text-amber-500"></i> <span data-i18n="planDetail.title"></span>
+              <i class="fa-solid fa-clipboard-list text-amber-500"></i> 游览计划详情
             </h3>
             <div class="space-y-5 sm:space-y-6">
               <div class="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-zinc-50 rounded-2xl border border-zinc-100">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 shrink-0 text-lg sm:text-xl"><i class="fa-solid fa-museum"></i></div>
                 <div class="min-w-0">
-                  <p class="text-xs text-zinc-400 font-bold uppercase" data-i18n="planDetail.labelMuseum"></p>
+                  <p class="text-xs text-zinc-400 font-bold uppercase">选定博物馆</p>
                   <p id="display-museum-uncompleted" class="text-lg sm:text-xl font-bold text-zinc-900 break-words"></p>
                 </div>
               </div>
@@ -237,55 +213,55 @@
                   </div>
                 </div>
                 <div class="min-w-0 flex-1">
-                  <p class="text-xs text-zinc-400 font-bold uppercase" data-i18n="planDetail.labelAvatar"></p>
+                  <p class="text-xs text-zinc-400 font-bold uppercase">虚拟导览伙伴</p>
                   <p id="display-avatar-uncompleted" class="text-lg sm:text-xl font-bold text-zinc-900 break-words"></p>
                 </div>
               </div>
               <div class="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-zinc-50 rounded-2xl border border-zinc-100">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 shrink-0"><i class="fa-solid fa-microphone-lines"></i></div>
                 <div class="min-w-0">
-                  <p class="text-xs text-zinc-400 font-bold uppercase" data-i18n="planDetail.labelVoice"></p>
+                  <p class="text-xs text-zinc-400 font-bold uppercase">语音风格</p>
                   <p id="display-voice-uncompleted" class="text-base sm:text-lg font-bold text-zinc-900 break-words"></p>
                 </div>
               </div>
               <div class="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-amber-50 rounded-2xl border border-amber-100">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500 rounded-full flex items-center justify-center text-white shrink-0"><i class="fa-solid fa-route"></i></div>
                 <div class="min-w-0">
-                  <p class="text-xs text-amber-600 font-bold uppercase" data-i18n="planDetail.labelRoute"></p>
+                  <p class="text-xs text-amber-600 font-bold uppercase">定制游览路线</p>
                   <p id="display-plan-uncompleted" class="text-base sm:text-lg font-bold text-zinc-900 leading-relaxed break-words"></p>
                 </div>
               </div>
               <!-- 游览路线图（三处详情共用同一路径，可自行替换图片文件） -->
               <div class="rounded-2xl overflow-hidden border-2 border-amber-100 bg-gradient-to-br from-amber-50 to-zinc-100">
                 <p class="text-xs font-bold text-amber-800/90 px-3 py-2 bg-amber-100/80 border-b border-amber-100 flex items-center gap-2">
-                  <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="planDetail.mapCaption"></span>
+                  <i class="fa-solid fa-map-location-dot"></i> 定制游览路线示意图
                 </p>
                 <div class="relative aspect-[16/10] max-h-64 sm:max-h-80 bg-zinc-200/50">
-                  <img src="MuseumSource/tour-route-map.png" alt="" class="visitor-route-map-img absolute inset-0 w-full h-full object-cover object-center">
+                  <img src="MuseumSource/tour-route-map.png" alt="本次游览路线示意图" class="visitor-route-map-img absolute inset-0 w-full h-full object-cover object-center">
                   <div class="visitor-route-map-fallback absolute inset-0 flex flex-col items-center justify-center text-zinc-500 text-xs sm:text-sm px-4 text-center p-4 hidden">
                     <i class="fa-solid fa-image text-3xl text-amber-400 mb-2 opacity-80"></i>
-                    <span data-i18n-html="planDetail.mapFallbackHtml"></span>
+                    <span>请将路线图文件命名为 <code class="text-amber-800 bg-white/80 px-1 rounded">tour-route-map.png</code> 放入 <code class="text-amber-800">MuseumSource/</code> 文件夹</span>
                   </div>
                 </div>
               </div>
               <div id="plan-detail-postgen-next-wrap" class="hidden">
                 <button type="button" onclick="goToPlanSuccessScreen()" class="w-full py-4 bg-zinc-900 text-white text-lg font-bold rounded-2xl hover:bg-black transition shadow-lg flex items-center justify-center gap-2">
-                  <span data-i18n="planDetail.nextMore"></span> <i class="fa-solid fa-arrow-right"></i>
+                  下一步：完成提示与更多 <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
               <div id="plan-detail-actions-row" class="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button type="button" onclick="markViewingPlanCompleted()" class="flex-1 py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition shadow-lg flex items-center justify-center gap-2">
-                  <i class="fa-solid fa-circle-check"></i> <span data-i18n="planDetail.markDone"></span>
+                  <i class="fa-solid fa-circle-check"></i> 标记为已完成
                 </button>
-                <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="flex-1 py-4 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition shadow-lg" data-i18n="planDetail.tour"></button>
+                <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="flex-1 py-4 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition shadow-lg">开始/继续游览</button>
               </div>
               <div id="plan-detail-delete-wrap" class="pt-2">
                 <button type="button" onclick="deleteViewingIncompletePlan()" class="w-full py-3 border-2 border-red-200 text-red-600 font-bold rounded-xl hover:bg-red-50 transition flex items-center justify-center gap-2">
-                  <i class="fa-solid fa-trash-can"></i> <span data-i18n="planDetail.deletePlan"></span>
+                  <i class="fa-solid fa-trash-can"></i> 删除该计划
                 </button>
               </div>
               <div class="pt-2">
-                <button type="button" id="plan-detail-bottom-btn" onclick="performPlanDetailBack()" class="w-full py-3 bg-zinc-100 text-zinc-700 font-bold rounded-xl hover:bg-zinc-200 transition" data-i18n="planDetail.backPlans"></button>
+                <button type="button" id="plan-detail-bottom-btn" onclick="performPlanDetailBack()" class="w-full py-3 bg-zinc-100 text-zinc-700 font-bold rounded-xl hover:bg-zinc-200 transition">返回我的计划</button>
               </div>
             </div>
           </div>
@@ -295,40 +271,40 @@
         <div id="completed-plans-panel" class="hidden animate-in zoom-in duration-300">
           <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-2xl max-w-3xl mx-auto">
             <button type="button" onclick="performVisitorBack()" class="mb-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-bold text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="common.back"></span>
+              <i class="fa-solid fa-arrow-left"></i> 返回上一页
             </button>
             
-            <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-zinc-900" data-i18n="completed.title"></h3>
+            <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-zinc-900">已完成 · 计划详情</h3>
             
             <div class="space-y-6 sm:space-y-8">
               <div class="border border-zinc-200 rounded-3xl visitor-card-pad p-5 sm:p-8">
                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
                   <div>
-                    <p class="text-emerald-600 text-sm font-bold" data-i18n="completed.tripLabel"></p>
+                    <p class="text-emerald-600 text-sm font-bold">该次游览</p>
                     <p id="completed-museum" class="text-xl sm:text-2xl font-bold text-zinc-900 break-words"></p>
                   </div>
                   <div class="sm:text-right">
-                    <p class="text-xs text-zinc-400" data-i18n="completed.timeLabel"></p>
+                    <p class="text-xs text-zinc-400">完成时间</p>
                     <p id="completed-plan-date" class="text-sm font-medium text-zinc-600"></p>
                   </div>
                 </div>
 
                 <div class="rounded-2xl overflow-hidden border-2 border-emerald-100 bg-gradient-to-br from-emerald-50 to-zinc-100 mb-6">
                   <p class="text-xs font-bold text-emerald-800/90 px-3 py-2 bg-emerald-100/80 border-b border-emerald-100 flex items-center gap-2">
-                    <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="completed.mapCaption"></span>
+                    <i class="fa-solid fa-map-location-dot"></i> 定制游览路线示意图
                   </p>
                   <div class="relative aspect-[16/10] max-h-64 sm:max-h-80 bg-zinc-200/50">
-                    <img src="MuseumSource/tour-route-map.png" alt="" class="visitor-route-map-img absolute inset-0 w-full h-full object-cover object-center">
+                    <img src="MuseumSource/tour-route-map.png" alt="本次游览路线示意图" class="visitor-route-map-img absolute inset-0 w-full h-full object-cover object-center">
                     <div class="visitor-route-map-fallback absolute inset-0 flex flex-col items-center justify-center text-zinc-500 text-xs sm:text-sm px-4 text-center p-4 hidden">
                       <i class="fa-solid fa-image text-3xl text-emerald-500 mb-2 opacity-80"></i>
-                      <span data-i18n-html="completed.mapFallbackHtml"></span>
+                      <span>请将路线图文件命名为 <code class="text-emerald-900 bg-white/80 px-1 rounded">tour-route-map.png</code> 放入 <code class="text-emerald-900">MuseumSource/</code> 文件夹</span>
                     </div>
                   </div>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
                   <div class="bg-zinc-50 p-5 rounded-2xl">
-                    <p class="text-xs text-zinc-400 font-bold mb-3" data-i18n="planDetail.labelAvatar"></p>
+                    <p class="text-xs text-zinc-400 font-bold mb-3">虚拟导览伙伴</p>
                     <div class="flex items-center gap-4">
                       <div class="relative shrink-0">
                         <img id="completed-plan-avatar-img" alt="" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white shadow-md ring-2 ring-emerald-100/80 hidden" width="80" height="80" decoding="async">
@@ -340,27 +316,27 @@
                     </div>
                   </div>
                   <div class="bg-zinc-50 p-5 rounded-2xl">
-                    <p class="text-xs text-zinc-400 font-bold mb-2" data-i18n="completed.voice"></p>
+                    <p class="text-xs text-zinc-400 font-bold mb-2">语音风格</p>
                     <p id="completed-voice" class="font-bold text-lg"></p>
                   </div>
                 </div>
                 <div class="bg-zinc-50 p-5 rounded-2xl mb-8">
-                  <p class="text-xs text-zinc-400 font-bold mb-2" data-i18n="completed.route"></p>
+                  <p class="text-xs text-zinc-400 font-bold mb-2">游览路线</p>
                   <p id="completed-plan" class="text-sm leading-relaxed"></p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4">
-                  <button type="button" onclick="alert(VMI18n.t('alert.downloadAr'))" 
+                  <button onclick="alert('📸 已打开AR云端截图下载页面')" 
                           class="flex-1 py-4 bg-white border-2 border-zinc-300 hover:border-zinc-400 text-zinc-700 font-bold rounded-2xl transition flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-download"></i> <span data-i18n="completed.download"></span>
+                    <i class="fa-solid fa-download"></i> 下载AR云端截图
                   </button>
-                  <button type="button" onclick="openAIMemorialForCompletedTrip()" 
+                  <button onclick="generateMemorialVideo()" 
                           class="flex-1 py-4 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-600 transition flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-clapperboard"></i> <span data-i18n="completed.genVideo"></span>
+                    <i class="fa-solid fa-wand-sparkles"></i> 生成AI共创纪念视频
                   </button>
                 </div>
                 <button type="button" onclick="deleteViewingCompletedPlan()" class="w-full mt-4 py-3 border-2 border-red-200 text-red-600 font-bold rounded-xl hover:bg-red-50 transition flex items-center justify-center gap-2">
-                  <i class="fa-solid fa-trash-can"></i> <span data-i18n="completed.delete"></span>
+                  <i class="fa-solid fa-trash-can"></i> 删除该记录
                 </button>
               </div>
             </div>
@@ -371,25 +347,25 @@
         <div id="feature-1-detail" class="hidden animate-in slide-in-from-right duration-300">
           <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-lg">
             <button type="button" onclick="performVisitorBack()" class="mb-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-bold text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="f1.back"></span>
+              <i class="fa-solid fa-arrow-left"></i> 返回上一页
             </button>
             <h3 class="text-2xl sm:text-3xl font-bold mb-8 text-amber-600 flex items-center gap-3">
-              <i class="fa-solid fa-user-check"></i> <span data-i18n="f1.title"></span>
+              <i class="fa-solid fa-user-check"></i> 虚拟形象导览详情
             </h3>
             <div class="grid md:grid-cols-2 gap-12">
               <div class="space-y-6 text-zinc-600 leading-relaxed">
                 <div class="p-6 bg-zinc-50 rounded-2xl border border-zinc-100">
-                  <h4 class="text-zinc-900 font-bold mb-2" data-i18n="f1.h1"></h4>
-                  <p data-i18n="f1.p1"></p>
+                  <h4 class="text-zinc-900 font-bold mb-2">定制您的导览伙伴</h4>
+                  <p>您可以从历史名家或博物馆吉祥物中选择最合适自己的形象，鲜活的角色将与您同行讲解。</p>
                 </div>
                 <div class="p-6 bg-zinc-50 rounded-2xl border border-zinc-100">
-                  <h4 class="text-zinc-900 font-bold mb-2" data-i18n="f1.h2"></h4>
-                  <p data-i18n="f1.p2"></p>
+                  <h4 class="text-zinc-900 font-bold mb-2">个性化语音匹配</h4>
+                  <p>匹配吴侬软语、资深学者或元气少女等多样化语音风格，让讲解符合您的听觉偏好。</p>
                 </div>
               </div>
               <div class="bg-zinc-100 rounded-3xl border border-zinc-200 flex flex-col items-center justify-center p-8 text-center">
                 <i class="fa-solid fa-microphone-lines text-6xl text-amber-500 mb-4 opacity-30"></i>
-                <p class="text-zinc-400 italic" data-i18n="f1.side"></p>
+                <p class="text-zinc-400 italic">在后续定制流程中，您将自由组合形象与音色</p>
               </div>
             </div>
           </div>
@@ -398,117 +374,117 @@
         <div id="feature-2-detail" class="hidden animate-in slide-in-from-right duration-300">
           <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-lg">
             <button type="button" onclick="performVisitorBack()" class="mb-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-bold text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="f2.back"></span>
+              <i class="fa-solid fa-arrow-left"></i> 返回上一页
             </button>
             <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-amber-600 flex items-center gap-3">
-              <i class="fa-solid fa-film"></i> <span data-i18n="f2.title"></span>
+              <i class="fa-solid fa-film"></i> AI 纪念视频生成
             </h3>
             <div class="grid sm:grid-cols-2 gap-4">
               <div class="flex gap-4 p-4 rounded-2xl border border-amber-100 bg-amber-50/60">
                 <span class="text-3xl shrink-0" aria-hidden="true">🎞️</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f2.b1t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f2.b1d"></p>
+                  <p class="font-bold text-zinc-900">素材一键凑齐</p>
+                  <p class="text-sm text-zinc-600 mt-1">手机图 + XR 抓拍 + 虚拟人镜头，自动对齐时间轴。</p>
                 </div>
               </div>
               <div class="flex gap-4 p-4 rounded-2xl border border-amber-100 bg-white">
                 <span class="text-3xl shrink-0" aria-hidden="true">🖼️</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f2.b2t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f2.b2d"></p>
+                  <p class="font-bold text-zinc-900">爆款封面模板</p>
+                  <p class="text-sm text-zinc-600 mt-1">展签风、九宫格、夜场霓虹等，一键裁 9:16 / 1:1。</p>
                 </div>
               </div>
               <div class="flex gap-4 p-4 rounded-2xl border border-zinc-200 bg-zinc-50 sm:col-span-2">
                 <span class="text-3xl shrink-0" aria-hidden="true">📱</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f2.b3t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f2.b3d"></p>
+                  <p class="font-bold text-zinc-900">跟趋势，不用会剪</p>
+                  <p class="text-sm text-zinc-600 mt-1">选「慢治愈 / 高燃卡点 / 知识口播」标签 → 自动配乐、字幕与转场，导出可直接发短视频平台。</p>
                   <div class="flex flex-wrap gap-2 mt-3">
-                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900" data-i18n="f2.tag1"></span>
-                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900" data-i18n="f2.tag2"></span>
-                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900" data-i18n="f2.tag3"></span>
+                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900">#博物馆漫步</span>
+                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900">#XR 第一视角</span>
+                    <span class="text-xs font-medium px-2 py-1 rounded-full bg-white border border-amber-200 text-amber-900">#一日一展</span>
                   </div>
                 </div>
               </div>
             </div>
-            <p class="text-center text-sm text-zinc-500 mt-8" data-i18n-html="f2.footerHtml"></p>
+            <p class="text-center text-sm text-zinc-500 mt-8">游后在首页进入「AI 纪念视频生成」页，选用<strong class="text-zinc-700">已完成旅程</strong>即可成片。</p>
           </div>
         </div>
 
         <div id="feature-3-detail" class="hidden animate-in slide-in-from-right duration-300">
           <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-lg">
             <button type="button" onclick="performVisitorBack()" class="mb-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-bold text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="f3.back"></span>
+              <i class="fa-solid fa-arrow-left"></i> 返回上一页
             </button>
             <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-amber-600 flex items-center gap-3">
-              <i class="fa-solid fa-route"></i> <span data-i18n="f3.title"></span>
+              <i class="fa-solid fa-route"></i> 路线定制与打卡
             </h3>
             <div class="space-y-4">
               <div class="flex gap-4 p-4 rounded-2xl border border-zinc-200 bg-zinc-50">
                 <span class="text-3xl shrink-0">🧭</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f3.b1t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f3.b1d"></p>
+                  <p class="font-bold text-zinc-900">AI 画路线</p>
+                  <p class="text-sm text-zinc-600 mt-1">关键词 + 一句话需求 → 串联镇馆之宝与 XR 区，可看路线图。</p>
                 </div>
               </div>
               <div class="flex gap-4 p-4 rounded-2xl border border-amber-100 bg-amber-50/50">
                 <span class="text-3xl shrink-0">📍</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f3.b2t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f3.b2d"></p>
+                  <p class="font-bold text-zinc-900">沿路打卡</p>
+                  <p class="text-sm text-zinc-600 mt-1">AR 扫展品、动线集章、限时彩蛋任务，完成兑徽章 / 券 / 明信片。</p>
                 </div>
               </div>
               <div class="flex gap-4 p-4 rounded-2xl border border-emerald-100 bg-emerald-50/40">
                 <span class="text-3xl shrink-0">🎁</span>
                 <div>
-                  <p class="font-bold text-zinc-900" data-i18n="f3.b3t"></p>
-                  <p class="text-sm text-zinc-600 mt-1" data-i18n="f3.b3d"></p>
+                  <p class="font-bold text-zinc-900">奖励一眼懂</p>
+                  <p class="text-sm text-zinc-600 mt-1">选馆时弹窗里写清任务与奖品；本页只做能力说明。</p>
                 </div>
               </div>
             </div>
-            <p class="text-center text-sm text-zinc-500 mt-8" data-i18n-html="f3.footerHtml"></p>
+            <p class="text-center text-sm text-zinc-500 mt-8">正式定制请点工作台「<strong class="text-zinc-700">开始定制 V-Museum 旅程</strong>」。</p>
           </div>
         </div>
 
         <div id="formal-flow" class="hidden">
           <div id="step-1" class="mb-8 sm:mb-12">
-            <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-zinc-900 px-2" data-i18n="flow.step1Title"></h3>
+            <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-zinc-900 px-2">① 选择您感兴趣的博物馆</h3>
             <div id="museum-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
           </div>
 
           <div id="step-2" class="hidden">
-            <button type="button" onclick="showStep(1)" class="mb-4 sm:mb-6 bg-white px-4 sm:px-6 py-2 rounded-xl text-zinc-600 text-sm font-bold flex items-center gap-2 hover:text-zinc-900 transition border border-zinc-200 shadow-sm"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="flow.step2Back"></span></button>
+            <button type="button" onclick="showStep(1)" class="mb-4 sm:mb-6 bg-white px-4 sm:px-6 py-2 rounded-xl text-zinc-600 text-sm font-bold flex items-center gap-2 hover:text-zinc-900 transition border border-zinc-200 shadow-sm"><i class="fa-solid fa-arrow-left"></i> 返回上一页</button>
             <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-xl">
-              <h3 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center text-zinc-900" data-i18n="flow.step2Title"></h3>
+              <h3 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center text-zinc-900">② 定制导览伙伴与语音风格</h3>
               <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12" id="avatar-grid"></div>
               <div class="max-w-xl mx-auto space-y-8">
                 <div class="bg-zinc-50 p-6 rounded-2xl border border-zinc-200">
-                  <label class="block text-amber-700 font-bold mb-4" data-i18n="flow.voiceLabel"></label>
+                  <label class="block text-amber-700 font-bold mb-4">选择语音风格</label>
                   <select id="voice-select" class="w-full bg-white border border-zinc-200 rounded-xl p-4 text-zinc-900 outline-none focus:border-amber-500 shadow-sm">
                     <option value="温柔导览">苏州评弹（温柔婉约）</option>
                     <option value="博学教授">资深学者（沉稳博学）</option>
                     <option value="活泼少年">元气少年（生动有趣）</option>
                   </select>
                 </div>
-                <button onclick="goToPlanStep()" class="w-full py-5 bg-amber-500 text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-amber-600 transition" data-i18n="flow.nextPlan"></button>
+                <button onclick="goToPlanStep()" class="w-full py-5 bg-amber-500 text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-amber-600 transition">下一步：定制游览计划</button>
               </div>
             </div>
           </div>
 
           <div id="step-2-5" class="hidden">
-            <button type="button" onclick="showStep(2)" class="mb-4 sm:mb-6 bg-white px-4 sm:px-6 py-2 rounded-xl text-zinc-600 text-sm font-bold flex items-center gap-2 hover:text-zinc-900 transition border border-zinc-200 shadow-sm"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="flow.step25Back"></span></button>
+            <button type="button" onclick="showStep(2)" class="mb-4 sm:mb-6 bg-white px-4 sm:px-6 py-2 rounded-xl text-zinc-600 text-sm font-bold flex items-center gap-2 hover:text-zinc-900 transition border border-zinc-200 shadow-sm"><i class="fa-solid fa-arrow-left"></i> 返回上一页</button>
             <div class="bg-white rounded-3xl visitor-card-pad-lg p-6 sm:p-8 md:p-10 border border-zinc-200 shadow-xl max-w-4xl mx-auto">
-              <h3 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center text-zinc-900" data-i18n="flow.step25Title"></h3>
+              <h3 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center text-zinc-900">③ 定制游览计划</h3>
               
               <div class="space-y-8">
                 <div>
-                  <label class="block text-zinc-700 font-bold mb-4 text-center" data-i18n="flow.kwLabel"></label>
+                  <label class="block text-zinc-700 font-bold mb-4 text-center">点击选择路线关键词（可多选）：</label>
                   <div class="flex flex-wrap justify-center gap-4" id="plan-keywords">
-                    <button type="button" onclick="toggleKeyword(this)" data-kw="leastCrowded" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最不拥挤</button>
-                    <button type="button" onclick="toggleKeyword(this)" data-kw="fastest" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最快捷</button>
-                    <button type="button" onclick="toggleKeyword(this)" data-kw="immersive" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最沉浸</button>
-                    <button type="button" onclick="toggleKeyword(this)" data-kw="comprehensive" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最全面</button>
-                    <button type="button" onclick="toggleKeyword(this)" data-kw="fun" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">活动最丰富/最好玩</button>
+                    <button onclick="toggleKeyword(this)" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最不拥挤</button>
+                    <button onclick="toggleKeyword(this)" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最快捷</button>
+                    <button onclick="toggleKeyword(this)" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最沉浸</button>
+                    <button onclick="toggleKeyword(this)" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">最全面</button>
+                    <button onclick="toggleKeyword(this)" class="px-6 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl font-medium hover:border-amber-500 transition shadow-sm">活动最丰富/最好玩</button>
                   </div>
                 </div>
 
@@ -517,19 +493,19 @@
                     <div class="w-full border-t border-zinc-200"></div>
                   </div>
                   <div class="relative flex justify-center text-sm">
-                    <span class="px-4 bg-white text-zinc-400 uppercase font-bold" data-i18n="flow.or"></span>
+                    <span class="px-4 bg-white text-zinc-400 uppercase font-bold">或</span>
                   </div>
                 </div>
 
                 <div class="bg-zinc-50 p-8 rounded-3xl border border-zinc-200">
                   <label class="block text-zinc-700 font-bold mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-pen-nib text-amber-500"></i> <span data-i18n="flow.customLabel"></span>
+                    <i class="fa-solid fa-pen-nib text-amber-500"></i> 输入您的个性化游览需求：
                   </label>
-                  <textarea id="custom-plan-input" rows="3" data-i18n-placeholder="flow.customPlaceholder" placeholder="例如：我想避开人群，先看镇馆之宝，然后在文创店多停留一会儿..." class="w-full bg-white p-5 rounded-2xl border border-zinc-200 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition shadow-sm"></textarea>
+                  <textarea id="custom-plan-input" rows="3" placeholder="例如：我想避开人群，先看镇馆之宝，然后在文创店多停留一会儿..." class="w-full bg-white p-5 rounded-2xl border border-zinc-200 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition shadow-sm"></textarea>
                 </div>
 
                 <button onclick="generateAIPlan()" class="w-full py-6 bg-zinc-900 text-white text-2xl font-bold rounded-2xl shadow-2xl hover:bg-black transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="flow.genPlan"></span>
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> 智能生成我的专属计划
                 </button>
               </div>
             </div>
@@ -537,29 +513,23 @@
 
           <div id="step-3" class="hidden text-center py-12 sm:py-20 px-4">
             <div class="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl sm:text-4xl mx-auto mb-6 sm:mb-8 shadow-sm"><i class="fa-solid fa-check"></i></div>
-            <h2 class="text-2xl sm:text-4xl font-bold mb-4 text-zinc-900" data-i18n="flow.successTitle"></h2>
+            <h2 class="text-2xl sm:text-4xl font-bold mb-4 text-zinc-900">计划生成成功！</h2>
             <div id="plan-feedback-msg" class="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-2xl max-w-xl mx-auto mb-8 sm:mb-10 font-bold text-base sm:text-lg"></div>
-            <p class="text-zinc-500 text-base sm:text-lg mb-10 sm:mb-12 max-w-xl mx-auto leading-relaxed" data-i18n="flow.successHint"></p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 max-w-6xl mx-auto">
-              <button type="button" onclick="startFormalFlow()" class="p-5 sm:p-6 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
-                <i class="fa-solid fa-museum text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base" data-i18n="flow.btnNextJourney"></span>
+            <p class="text-zinc-500 text-base sm:text-lg mb-10 sm:mb-12 max-w-xl mx-auto leading-relaxed">虚拟伙伴已根据您的喜好准备就绪。您可以随时出发，或在下方尝试更多功能。</p>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-stretch sm:items-center max-w-xl mx-auto">
+              <button type="button" onclick="showStep(0)" class="px-8 sm:px-12 py-4 sm:py-5 bg-white border border-zinc-900 text-zinc-900 rounded-2xl text-lg sm:text-xl font-bold hover:bg-zinc-50 transition shadow-sm">
+                <i class="fa-solid fa-house mr-2"></i> 回到工作台
               </button>
-              <button type="button" onclick="showMyPlans()" class="p-5 sm:p-6 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
-                <i class="fa-solid fa-clapperboard text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base" data-i18n="flow.btnMemorial"></span>
-              </button>
-              <button type="button" onclick="showFeatureDetail(3)" class="p-5 sm:p-6 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
-                <i class="fa-solid fa-route text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base" data-i18n="flow.btnTasks"></span>
-              </button>
-              <button type="button" onclick="window.open('vmuseum-ar-simulation.html', '_blank')" class="p-5 sm:p-6 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
-                <i class="fa-solid fa-vr-cardboard text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base" data-i18n="flow.btnArSimulation"></span>
+              <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="px-8 sm:px-12 py-4 sm:py-5 bg-amber-500 text-white rounded-2xl text-lg sm:text-xl font-bold shadow-xl hover:bg-amber-600 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-qrcode text-xl sm:text-2xl"></i> 扫码解锁 AR 之旅
               </button>
             </div>
-            <div class="mt-8 sm:mt-10 flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-sm font-bold text-zinc-500">
-              <button type="button" onclick="showStep(0)" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-200 bg-white text-zinc-700 hover:border-amber-400 hover:text-amber-800 transition">
-                <i class="fa-solid fa-house"></i> <span data-i18n="flow.backHub"></span>
+            <div id="more-fun-menu" class="mt-10 sm:mt-12 grid grid-cols-2 gap-4 sm:gap-6 max-w-md mx-auto">
+              <button type="button" onclick="showFeatureDetail(2)" class="p-5 sm:p-8 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
+                <i class="fa-solid fa-video text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base">AI视频生成</span>
               </button>
-              <button type="button" onclick="window.open('ar-demo.html', '_blank')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100 transition">
-                <i class="fa-solid fa-qrcode"></i> <span data-i18n="flow.arQr"></span>
+              <button type="button" onclick="showFeatureDetail(3)" class="p-5 sm:p-8 bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl hover:border-amber-500 transition shadow-sm">
+                <i class="fa-solid fa-route text-2xl sm:text-3xl mb-3 sm:mb-4 text-amber-500"></i><br><span class="font-bold text-sm sm:text-base">打卡任务列表</span>
               </button>
             </div>
           </div>
@@ -574,64 +544,64 @@
       <div class="max-w-7xl mx-auto">
         <div class="bg-white border border-zinc-200 rounded-3xl p-8 mb-8 flex justify-between items-center shadow-md">
           <div class="flex items-center gap-4">
-             <button type="button" id="admin-back-btn" onclick="backToMuseumAdminHub()" class="hidden items-center justify-center gap-2 rounded-full sm:rounded-xl bg-zinc-100 hover:bg-zinc-200 transition text-zinc-700 font-bold text-sm w-10 h-10 sm:w-auto sm:h-auto sm:px-4 sm:py-2.5" data-i18n-title="common.backShortTitle">
+             <button type="button" id="admin-back-btn" onclick="backToMuseumAdminHub()" class="hidden items-center justify-center gap-2 rounded-full sm:rounded-xl bg-zinc-100 hover:bg-zinc-200 transition text-zinc-700 font-bold text-sm w-10 h-10 sm:w-auto sm:h-auto sm:px-4 sm:py-2.5" title="返回上一页">
                 <i class="fa-solid fa-arrow-left"></i>
-                <span class="hidden sm:inline" data-i18n="common.back"></span>
+                <span class="hidden sm:inline">返回上一页</span>
              </button>
              <div>
                 <p class="text-amber-600 text-xs font-bold uppercase">Museum Admin Center</p>
                 <h2 id="admin-title" class="text-2xl font-bold">后台内容管理系统</h2>
              </div>
           </div>
-          <button onclick="closeMuseumAdminModule()" class="px-6 py-2 border border-zinc-200 rounded-xl hover:bg-zinc-100 transition" data-i18n="admin.exit"></button>
+          <button onclick="closeMuseumAdminModule()" class="px-6 py-2 border border-zinc-200 rounded-xl hover:bg-zinc-100 transition">退出系统</button>
         </div>
         <div id="museum-admin-hub" class="grid lg:grid-cols-3 gap-8">
           <button onclick="openMuseumAdminPanel('certification')" class="text-left bg-white border border-zinc-200 p-8 rounded-3xl hover:border-amber-500 transition group shadow-sm hover:shadow-lg">
             <i class="fa-solid fa-id-card text-4xl mb-6 text-zinc-300 group-hover:text-amber-500"></i>
-            <h3 class="text-xl font-bold mb-2" data-i18n="admin.p1t"></h3>
-            <p class="text-zinc-500 text-sm" data-i18n="admin.p1d"></p>
+            <h3 class="text-xl font-bold mb-2">1. 身份认证与入驻</h3>
+            <p class="text-zinc-500 text-sm">提交馆方资质及联系信息。</p>
           </button>
           <button onclick="openMuseumAdminPanel('exhibit')" class="text-left bg-white border border-zinc-200 p-8 rounded-3xl hover:border-amber-500 transition group shadow-sm hover:shadow-lg">
             <i class="fa-solid fa-cloud-upload text-4xl mb-6 text-zinc-300 group-hover:text-amber-500"></i>
-            <h3 class="text-xl font-bold mb-2" data-i18n="admin.p2t"></h3>
-            <p class="text-zinc-500 text-sm" data-i18n="admin.p2d"></p>
+            <h3 class="text-xl font-bold mb-2">2. 文物素材与打卡任务</h3>
+            <p class="text-zinc-500 text-sm">上传文物 3D 模型与设置任务。</p>
           </button>
           <button onclick="openMuseumAdminPanel('avatar')" class="text-left bg-white border border-zinc-200 p-8 rounded-3xl hover:border-amber-500 transition group shadow-sm hover:shadow-lg">
             <i class="fa-solid fa-wand-magic text-4xl mb-6 text-zinc-300 group-hover:text-amber-500"></i>
-            <h3 class="text-xl font-bold mb-2" data-i18n="admin.p3t"></h3>
-            <p class="text-zinc-500 text-sm" data-i18n="admin.p3d"></p>
+            <h3 class="text-xl font-bold mb-2">3. 官方导览形象维护</h3>
+            <p class="text-zinc-500 text-sm">管理本馆专属虚拟讲解员。</p>
           </button>
         </div>
         
         <div id="museum-admin-certification-panel" class="hidden bg-white border border-zinc-200 p-10 rounded-3xl shadow-xl">
-           <h3 class="text-2xl font-bold mb-8" data-i18n="admin.certTitle"></h3>
+           <h3 class="text-2xl font-bold mb-8">身份入驻申请</h3>
            <div class="space-y-6 max-w-2xl">
-             <input type="text" data-i18n-placeholder="admin.certPh" placeholder="博物馆全称" class="w-full bg-zinc-50 p-4 rounded-xl border border-zinc-200 outline-none focus:border-amber-500">
-             <button onclick="alert(VMI18n.t('alert.adminSubmit'))" class="w-full py-4 bg-zinc-900 text-white font-bold rounded-xl hover:bg-black transition" data-i18n="admin.certSubmit"></button>
+             <input type="text" placeholder="博物馆全称" class="w-full bg-zinc-50 p-4 rounded-xl border border-zinc-200 outline-none focus:border-amber-500">
+             <button onclick="alert('✅ 资料已提交')" class="w-full py-4 bg-zinc-900 text-white font-bold rounded-xl hover:bg-black transition">提交审核</button>
            </div>
         </div>
         
         <div id="museum-admin-exhibit-panel" class="hidden bg-white border border-zinc-200 p-10 rounded-3xl shadow-xl">
-           <h3 class="text-2xl font-bold mb-8 text-amber-600" data-i18n="admin.exTitle"></h3>
+           <h3 class="text-2xl font-bold mb-8 text-amber-600">素材与打卡任务发布</h3>
            <div class="grid md:grid-cols-2 gap-10">
               <div class="space-y-6 bg-zinc-50 p-8 rounded-2xl border border-zinc-100">
-                <h4 class="font-bold border-b border-zinc-200 pb-2 mb-4" data-i18n="admin.exUp"></h4>
-                <input type="text" data-i18n-placeholder="admin.exNamePh" placeholder="文物名称" class="w-full bg-white p-3 rounded-xl border border-zinc-200">
-                <button onclick="alert(VMI18n.t('alert.adminAsset'))" class="w-full bg-white border border-amber-500 text-amber-600 py-2 rounded-lg font-bold" data-i18n="admin.exPick"></button>
+                <h4 class="font-bold border-b border-zinc-200 pb-2 mb-4">文物素材上传</h4>
+                <input type="text" placeholder="文物名称" class="w-full bg-white p-3 rounded-xl border border-zinc-200">
+                <button onclick="alert('✅ 素材已存入库')" class="w-full bg-white border border-amber-500 text-amber-600 py-2 rounded-lg font-bold">点击选择 3D 模型文件</button>
               </div>
               <div class="space-y-6 bg-zinc-50 p-8 rounded-2xl border border-zinc-100">
-                <h4 class="font-bold border-b border-zinc-200 pb-2 mb-4" data-i18n="admin.exTask"></h4>
-                <textarea rows="3" data-i18n-placeholder="admin.exTaskPh" placeholder="描述任务内容..." class="w-full bg-white p-3 rounded-xl border border-zinc-200"></textarea>
-                <button onclick="alert(VMI18n.t('alert.adminTask'))" class="w-full bg-amber-500 text-white py-2 rounded-lg font-bold" data-i18n="admin.exPub"></button>
+                <h4 class="font-bold border-b border-zinc-200 pb-2 mb-4">打卡任务设置</h4>
+                <textarea rows="3" placeholder="描述任务内容..." class="w-full bg-white p-3 rounded-xl border border-zinc-200"></textarea>
+                <button onclick="alert('✅ 任务发布成功')" class="w-full bg-amber-500 text-white py-2 rounded-lg font-bold">确认发布任务</button>
               </div>
            </div>
         </div>
 
         <div id="museum-admin-avatar-panel" class="hidden bg-white border border-zinc-200 p-10 rounded-3xl shadow-xl">
-           <h3 class="text-2xl font-bold mb-8" data-i18n="admin.avTitle"></h3>
+           <h3 class="text-2xl font-bold mb-8">导览形象设置</h3>
            <div class="max-w-2xl space-y-6">
-             <input type="text" data-i18n-placeholder="admin.avPh" placeholder="形象代号" class="w-full bg-zinc-50 p-4 rounded-xl border border-zinc-200">
-             <button onclick="alert(VMI18n.t('alert.adminAvatar'))" class="w-full py-4 bg-zinc-900 text-white font-bold rounded-xl" data-i18n="admin.avSave"></button>
+             <input type="text" placeholder="形象代号" class="w-full bg-zinc-50 p-4 rounded-xl border border-zinc-200">
+             <button onclick="alert('✅ 形象已更新')" class="w-full py-4 bg-zinc-900 text-white font-bold rounded-xl">更新全局配置</button>
            </div>
         </div>
       </div>
@@ -642,20 +612,17 @@
     <div class="bg-white rounded-3xl max-w-2xl w-full mx-4 overflow-hidden border border-zinc-200 shadow-2xl scale-in-center text-zinc-900">
       <div id="modal-content"></div>
       <div class="p-4 sm:p-8 border-t border-zinc-100 flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 bg-zinc-50">
-        <button type="button" onclick="hideModal()" class="w-full sm:w-auto px-8 py-3 text-zinc-600 hover:text-zinc-900 transition font-bold border border-zinc-200 rounded-xl hover:bg-white" data-i18n="modal.back"></button>
-        <button type="button" onclick="selectMuseum()" class="w-full sm:w-auto bg-amber-500 text-white px-10 py-3 rounded-2xl font-bold hover:bg-amber-600 transition shadow-lg text-center" data-i18n="modal.confirm"></button>
+        <button type="button" onclick="hideModal()" class="w-full sm:w-auto px-8 py-3 text-zinc-600 hover:text-zinc-900 transition font-bold border border-zinc-200 rounded-xl hover:bg-white">返回上一页</button>
+        <button type="button" onclick="selectMuseum()" class="w-full sm:w-auto bg-amber-500 text-white px-10 py-3 rounded-2xl font-bold hover:bg-amber-600 transition shadow-lg text-center">选定展馆并开始定制 →</button>
       </div>
     </div>
   </div>
 
-  <script src="i18n.js"></script>
   <script>
     const museums = [
       { id: 1, name: "苏州博物馆", desc: "吴地文化精华，贝聿铭设计代表作", img: "MuseumSource/苏州博物馆.png", location: "苏州平江路", highlights: "吴门画派、古玉、明清家具", tasks: [{ item: "秘色瓷莲花碗", intro: "寻找五代时期的瓷中极品，观察其如雨后晴天的色彩。", reward: "线上纪念勋章 + 纸质明信片" }, { item: "紫藤园合影", intro: "在贝聿铭亲手选植的紫藤下与虚拟形象合影。", reward: "文创店咖啡 8 折券" }] },
       { id: 2, name: "苏州丝绸博物馆", desc: "千年丝绸之路活化石", img: "MuseumSource/苏州丝绸博物馆.png", location: "苏州南门", highlights: "宋锦、缂丝、刺绣", tasks: [{ item: "缂丝织机", intro: "通过 AR 观察“通经断纬”的织造过程并完成互动问答。", reward: "数字缂丝样本藏品" }, { item: "龙袍展区", intro: "扫描龙袍图案，识别出三处不同的云纹装饰。", reward: "精美桑蚕丝小方巾抽奖券" }] },
-      { id: 3, name: "苏州吴文化博物馆", desc: "时光里的文化摆渡", img: "MuseumSource/苏州吴文化博物馆.png", location: "苏州市吴中区", highlights: "吴文化历史 + 传统工艺", tasks: [{ item: "双塔模型", intro: "利用 AR 还原罗汉院双塔的建造过程。", reward: "虚拟建筑成就徽章" }, { item: "吴王余眜剑", intro: "近距离观察青铜剑铭文并完成拼图游戏。", reward: "吴文化文具套装优惠" }] },
-      { id: 4, name: "苏州教育博物馆", desc: "江南文教记忆，书院与学堂的缩影", img: "MuseumSource/苏州教育博物馆.png", location: "苏州姑苏区醋库巷", highlights: "科举档案、私塾场景、近代学制", tasks: [{ item: "状元卷轴寻踪", intro: "在 AR 中展开清代状元殿试卷复刻件，完成三处批注点选读。", reward: "数字「金榜题名」纪念卡" }, { item: "私塾课桌互动", intro: "与虚拟先生对坐，跟读一篇蒙学节选并完成声调小游戏。", reward: "教育主题书签套装兑换券" }] },
-      { id: 5, name: "苏州民俗博物馆", desc: "姑苏烟火气，节令与礼俗的活态展陈", img: "MuseumSource/苏州民俗博物馆.png", location: "苏州东北街潘儒巷", highlights: "节令风俗、婚嫁礼俗、民间工艺", tasks: [{ item: "婚俗花轿巡游", intro: "用 AR 复原花轿出巡路线，在展厅地标处打卡并收集三枚喜字贴。", reward: "民俗主题电子贴纸包" }, { item: "岁时节令图谱", intro: "对照展陈找出「冬至」「端午」两处节令器物，完成配对连线。", reward: "非遗手作体验优先预约码" }] }
+      { id: 3, name: "苏州吴文化博物馆", desc: "时光里的文化摆渡", img: "MuseumSource/苏州吴文化博物馆.png", location: "苏州市吴中区", highlights: "吴文化历史 + 传统工艺", tasks: [{ item: "双塔模型", intro: "利用 AR 还原罗汉院双塔的建造过程。", reward: "虚拟建筑成就徽章" }, { item: "吴王余眜剑", intro: "近距离观察青铜剑铭文并完成拼图游戏。", reward: "吴文化文具套装优惠" }] }
     ];
 
     const avatars = [
@@ -676,40 +643,6 @@
     let viewingPlanId = null;
     let viewingCompletedPlanId = null;
     let planDetailReturnMode = null;
-    let museumAdminActivePanel = null;
-
-    function setVisitorTitle(key) {
-      const el = document.getElementById('visitor-title');
-      if (!el || !window.VMI18n) return;
-      el.dataset.titleKey = key;
-      el.textContent = VMI18n.t(key);
-    }
-
-    window.vmRefreshPlanKeywords = function () {
-      if (!window.VMI18n) return;
-      document.querySelectorAll('#plan-keywords button[data-kw]').forEach(function (b) {
-        const k = b.getAttribute('data-kw');
-        if (k) b.textContent = VMI18n.t('kw.' + k);
-      });
-    };
-
-    window.vmAfterLocaleChange = function () {
-      if (!window.VMI18n) return;
-      const vt = document.getElementById('visitor-title');
-      if (vt && vt.dataset.titleKey) vt.textContent = VMI18n.t(vt.dataset.titleKey);
-      if (typeof visitorSubpanelVisible === 'function' && visitorSubpanelVisible('uncompleted-plan-detail')) updatePlanDetailChrome();
-      if (typeof visitorSubpanelVisible === 'function' && visitorSubpanelVisible('my-plans-panel') && typeof renderMyPlansLists === 'function') renderMyPlansLists();
-      const adminModal = document.getElementById('museum-admin-modal');
-      const adminTitle = document.getElementById('admin-title');
-      if (adminModal && !adminModal.classList.contains('hidden') && adminTitle) {
-        if (museumAdminActivePanel === 'certification') adminTitle.textContent = VMI18n.t('admin.sub.cert');
-        else if (museumAdminActivePanel === 'exhibit') adminTitle.textContent = VMI18n.t('admin.sub.exhibit');
-        else if (museumAdminActivePanel === 'avatar') adminTitle.textContent = VMI18n.t('admin.sub.avatar');
-        else adminTitle.textContent = VMI18n.t('admin.hubTitle');
-      }
-      const mm = document.getElementById('museum-modal');
-      if (selectedMuseum && mm && !mm.classList.contains('hidden')) showMuseumDetail(selectedMuseum.id);
-    };
 
     const VISITOR_FLOW_PANEL_IDS = ['step-0', 'step-1', 'step-2', 'step-2-5', 'step-3', 'formal-flow', 'feature-1-detail', 'feature-2-detail', 'feature-3-detail', 'my-plans-panel', 'uncompleted-plan-detail', 'completed-plans-panel'];
 
@@ -787,16 +720,15 @@
       const postWrap = document.getElementById('plan-detail-postgen-next-wrap');
       const act = document.getElementById('plan-detail-actions-row');
       const delWrap = document.getElementById('plan-detail-delete-wrap');
-      const T = (k) => (window.VMI18n ? VMI18n.t(k) : k);
       if (planDetailReturnMode === 'postGenerate') {
-        title.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500"></i> ' + T('planDetail.titleGenerated');
-        bottom.textContent = T('planDetail.backContinue');
+        title.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500"></i> 计划已生成';
+        bottom.textContent = '返回上一页（继续编辑计划）';
         postWrap.classList.remove('hidden');
         act.classList.add('hidden');
         delWrap.classList.add('hidden');
       } else {
-        title.innerHTML = '<i class="fa-solid fa-clipboard-list text-amber-500"></i> ' + T('planDetail.title');
-        bottom.textContent = T('planDetail.backPlans');
+        title.innerHTML = '<i class="fa-solid fa-clipboard-list text-amber-500"></i> 游览计划详情';
+        bottom.textContent = '返回我的计划';
         postWrap.classList.add('hidden');
         act.classList.remove('hidden');
         delWrap.classList.remove('hidden');
@@ -869,7 +801,7 @@
       const backBtn = document.getElementById('visitor-back-btn');
       backBtn.classList.remove('hidden');
       backBtn.classList.add('flex');
-      setVisitorTitle('visitor.titlePostGenerate');
+      document.getElementById('visitor-title').innerText = '计划已生成';
       initRouteMapImages();
     }
 
@@ -920,8 +852,7 @@
       if (!iso) return '—';
       try {
         const d = new Date(iso);
-        const loc = (window.VMI18n && VMI18n.getLocale() === 'en') ? 'en-US' : 'zh-CN';
-        return d.toLocaleString(loc, { dateStyle: 'medium', timeStyle: 'short' });
+        return d.toLocaleString('zh-CN', { dateStyle: 'medium', timeStyle: 'short' });
       } catch (e) {
         return '—';
       }
@@ -950,12 +881,13 @@
       hideAllVisitorFlowPanels();
       
       const backBtn = document.getElementById('visitor-back-btn');
+      const title = document.getElementById('visitor-title');
 
       if (step === 0) {
         document.getElementById('step-0').classList.remove('hidden');
         backBtn.classList.add('hidden');
         backBtn.classList.remove('flex');
-        setVisitorTitle('visitor.titleOverview');
+        title.innerText = '趣味功能概览';
         
         refreshPlanEntryButton();
       } else {
@@ -965,12 +897,12 @@
           document.getElementById('formal-flow').classList.remove('hidden');
           if(step === 2.5) {
              document.getElementById('step-2-5').classList.remove('hidden');
-             setVisitorTitle('visitor.stepCustomPlan');
+             title.innerText = '③ 定制计划';
           } else {
              document.getElementById('step-' + step).classList.remove('hidden');
-             if(step === 1) { renderMuseums(); setVisitorTitle('visitor.stepPickMuseum'); }
-             if(step === 2) { renderAvatars(); setVisitorTitle('visitor.stepAvatar'); }
-             if(step === 3) { setVisitorTitle('visitor.stepSuccess'); }
+             if(step === 1) { renderMuseums(); title.innerText = '① 选择博物馆'; }
+             if(step === 2) { renderAvatars(); title.innerText = '② 定制导览'; }
+             if(step === 3) { title.innerText = '定制成功'; }
           }
         }
       }
@@ -979,7 +911,7 @@
     function showFeatureDetail(id) {
       showStep(-1);
       document.getElementById('feature-' + id + '-detail').classList.remove('hidden');
-      setVisitorTitle('visitor.titleFeatureDetail');
+      document.getElementById('visitor-title').innerText = '功能详情';
     }
 
     function refreshPlanEntryButton() {
@@ -1006,12 +938,11 @@
 
     function showMuseumDetail(id) {
       selectedMuseum = museums.find(m => m.id === id);
-      const Tk = (k) => (window.VMI18n ? VMI18n.t(k) : k);
       const tasksHtml = selectedMuseum.tasks.map(t => `
         <div class="bg-zinc-50 p-4 rounded-xl border border-zinc-200 mb-3 shadow-sm text-left">
           <h5 class="text-amber-700 font-bold text-sm"><i class="fa-solid fa-camera-retro mr-2"></i>${t.item}</h5>
           <p class="text-zinc-500 text-xs mb-1">${t.intro}</p>
-          <div class="text-[10px] text-zinc-600 font-medium italic">${Tk('modal.reward')}${t.reward}</div>
+          <div class="text-[10px] text-zinc-600 font-medium italic">奖励：${t.reward}</div>
         </div>
       `).join('');
 
@@ -1021,8 +952,8 @@
           <h2 class="text-3xl font-bold mb-1 text-zinc-900">${selectedMuseum.name}</h2>
           <p class="text-amber-600 mb-6 text-sm font-bold">${selectedMuseum.location}</p>
           <div class="grid md:grid-cols-2 gap-6">
-            <div><h4 class="text-zinc-400 font-bold text-xs uppercase mb-2 border-l-4 border-amber-500 pl-2">${Tk('modal.highlights')}</h4><p class="text-zinc-600 text-sm">${selectedMuseum.highlights}</p></div>
-            <div><h4 class="text-zinc-400 font-bold text-xs uppercase mb-2 border-l-4 border-amber-500 pl-2">${Tk('modal.tasks')}</h4>${tasksHtml}</div>
+            <div><h4 class="text-zinc-400 font-bold text-xs uppercase mb-2 border-l-4 border-amber-500 pl-2">场馆亮点</h4><p class="text-zinc-600 text-sm">${selectedMuseum.highlights}</p></div>
+            <div><h4 class="text-zinc-400 font-bold text-xs uppercase mb-2 border-l-4 border-amber-500 pl-2">打卡任务</h4>${tasksHtml}</div>
           </div>
         </div>
       `;
@@ -1053,18 +984,17 @@
     }
 
     function goToPlanStep() {
-      if(!selectedAvatar) return alert(VMI18n.t('alert.selectAvatar'));
+      if(!selectedAvatar) return alert('请先选择一个导览形象');
       showStep(2.5);
     }
 
     function toggleKeyword(btn) {
-      const kw = btn.getAttribute('data-kw');
-      if (!kw) return;
-      if(selectedKeywords.includes(kw)) {
-        selectedKeywords = selectedKeywords.filter(k => k !== kw);
+      const text = btn.innerText;
+      if(selectedKeywords.includes(text)) {
+        selectedKeywords = selectedKeywords.filter(k => k !== text);
         btn.classList.remove('tag-selected');
       } else {
-        selectedKeywords.push(kw);
+        selectedKeywords.push(text);
         btn.classList.add('tag-selected');
       }
     }
@@ -1073,24 +1003,22 @@
       const customInput = document.getElementById('custom-plan-input').value.trim();
       let feedback = "";
       let finalPlanStr = "";
-      const T = (k) => VMI18n.t(k);
-      const kwLabels = selectedKeywords.map(function (k) { return T('kw.' + k); });
-      const kwPart = kwLabels.length > 0 ? (T('plan.kwPrefix') + kwLabels.join(T('plan.kwJoin'))) : '';
-      const customPart = customInput ? (T('plan.customPrefix') + customInput) : '';
+      const kwPart = selectedKeywords.length > 0 ? ('路线偏好：' + selectedKeywords.join('、')) : '';
+      const customPart = customInput ? ('个性化需求：' + customInput) : '';
 
       if (kwPart && customPart) {
         finalPlanStr = kwPart + '；' + customPart;
-        feedback = T('fb.combined1');
+        feedback = '已结合您选择的关键词与下方个性化说明生成游览计划。';
       } else if (kwPart) {
         finalPlanStr = kwPart;
-        feedback = T('fb.prefixKw') + kwLabels.join(T('fb.midKw')) + T('fb.sufKw');
+        feedback = `你要的“${selectedKeywords.join('”“')}”游览计划已生成。`;
       } else if (customPart) {
         finalPlanStr = customPart;
         const short = customInput.length > 14 ? customInput.substring(0, 14) + '…' : customInput;
-        feedback = T('fb.combined2') + short + T('fb.combined2suf');
+        feedback = `已根据您的个性化说明「${short}」生成游览计划。`;
       } else {
-        finalPlanStr = T('plan.standardRoute');
-        feedback = T('fb.standard');
+        finalPlanStr = '标准推荐路线';
+        feedback = '标准游览计划已为您生成。';
       }
 
       const voiceLabel = document.getElementById('voice-select').value;
@@ -1120,9 +1048,8 @@
       const incEl = document.getElementById('incomplete-plans-list');
       const compEl = document.getElementById('completed-plans-list');
 
-      const delTitle = escapeHtml(VMI18n.t('common.delete'));
       if (!incomplete.length) {
-        incEl.innerHTML = '<p class="text-zinc-400 text-sm text-center py-10">' + escapeHtml(VMI18n.t('plans.emptyIncomplete')) + '</p>';
+        incEl.innerHTML = '<p class="text-zinc-400 text-sm text-center py-10 leading-relaxed">暂无进行中的计划<br><span class="text-xs text-zinc-400">在「定制游览计划」中生成后会自动保存在此</span></p>';
       } else {
         incEl.innerHTML = incomplete.map(p => `
           <div class="flex gap-0 rounded-2xl border border-amber-200 bg-white hover:border-amber-500 hover:shadow-md transition overflow-hidden">
@@ -1132,8 +1059,8 @@
               <p class="text-xs text-zinc-500 line-clamp-2 mt-1">${escapeHtml(planSnippet(p))}</p>
               <p class="text-[10px] text-amber-800/70 mt-2">${escapeHtml(formatPlanDate(p.createdAt))}</p>
             </button>
-            <button type="button" onclick="deletePlanFromList('${p.id}')" title="${delTitle}"
-              class="shrink-0 w-11 flex items-center justify-center border-l border-amber-100 text-red-500 hover:bg-red-50 transition" aria-label="${delTitle}">
+            <button type="button" onclick="deletePlanFromList('${p.id}')" title="删除"
+              class="shrink-0 w-11 flex items-center justify-center border-l border-amber-100 text-red-500 hover:bg-red-50 transition" aria-label="删除">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -1141,7 +1068,7 @@
       }
 
       if (!completed.length) {
-        compEl.innerHTML = '<p class="text-zinc-400 text-sm text-center py-10">' + escapeHtml(VMI18n.t('plans.emptyCompleted')) + '</p>';
+        compEl.innerHTML = '<p class="text-zinc-400 text-sm text-center py-10">暂无已完成记录<br><span class="text-xs">在计划详情中可标记为已完成</span></p>';
       } else {
         compEl.innerHTML = completed.map(p => `
           <div class="flex gap-0 rounded-2xl border border-emerald-200 bg-white hover:border-emerald-500 hover:shadow-md transition overflow-hidden">
@@ -1151,8 +1078,8 @@
               <p class="text-xs text-zinc-500 line-clamp-2 mt-1">${escapeHtml(planSnippet(p))}</p>
               <p class="text-[10px] text-emerald-800/70 mt-2">${escapeHtml(formatPlanDate(p.completedAt || p.createdAt))}</p>
             </button>
-            <button type="button" onclick="deletePlanFromList('${p.id}')" title="${delTitle}"
-              class="shrink-0 w-11 flex items-center justify-center border-l border-emerald-100 text-red-500 hover:bg-red-50 transition" aria-label="${delTitle}">
+            <button type="button" onclick="deletePlanFromList('${p.id}')" title="删除"
+              class="shrink-0 w-11 flex items-center justify-center border-l border-emerald-100 text-red-500 hover:bg-red-50 transition" aria-label="删除">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -1162,7 +1089,7 @@
 
     function showMyPlans() {
       showStep(-1);
-      setVisitorTitle('visitor.titlePlans');
+      document.getElementById('visitor-title').innerText = '我的游览计划';
       document.getElementById('my-plans-panel').classList.remove('hidden');
       renderMyPlansLists();
     }
@@ -1174,7 +1101,7 @@
     }
 
     function deletePlanFromList(id) {
-      if (!confirm(VMI18n.t('confirm.deletePlan'))) return;
+      if (!confirm('确定删除该游览计划？删除后无法恢复。')) return;
       deletePlanById(id);
       if (viewingPlanId === id) viewingPlanId = null;
       if (viewingCompletedPlanId === id) viewingCompletedPlanId = null;
@@ -1184,25 +1111,25 @@
 
     function deleteViewingIncompletePlan() {
       if (!viewingPlanId) return;
-      if (!confirm(VMI18n.t('confirm.deletePlan'))) return;
+      if (!confirm('确定删除该游览计划？删除后无法恢复。')) return;
       deletePlanById(viewingPlanId);
       viewingPlanId = null;
       planDetailReturnMode = null;
       document.getElementById('uncompleted-plan-detail').classList.add('hidden');
       document.getElementById('my-plans-panel').classList.remove('hidden');
-      setVisitorTitle('visitor.titlePlans');
+      document.getElementById('visitor-title').innerText = '我的游览计划';
       renderMyPlansLists();
       refreshPlanEntryButton();
     }
 
     function deleteViewingCompletedPlan() {
       if (!viewingCompletedPlanId) return;
-      if (!confirm(VMI18n.t('confirm.deleteCompleted'))) return;
+      if (!confirm('确定删除该已完成记录？删除后无法恢复。')) return;
       deletePlanById(viewingCompletedPlanId);
       viewingCompletedPlanId = null;
       document.getElementById('completed-plans-panel').classList.add('hidden');
       document.getElementById('my-plans-panel').classList.remove('hidden');
-      setVisitorTitle('visitor.titlePlans');
+      document.getElementById('visitor-title').innerText = '我的游览计划';
       renderMyPlansLists();
       refreshPlanEntryButton();
     }
@@ -1210,14 +1137,14 @@
     function openIncompletePlanDetail(id) {
       loadPlansFromStorage();
       const p = visitPlans.find(x => x.id === id && !x.completed);
-      if (!p) return alert(VMI18n.t('alert.planNotFound'));
+      if (!p) return alert('未找到该计划，或该计划已标记为已完成。');
 
       planDetailReturnMode = 'myPlans';
       viewingPlanId = id;
       viewingCompletedPlanId = null;
       document.getElementById('my-plans-panel').classList.add('hidden');
       document.getElementById('uncompleted-plan-detail').classList.remove('hidden');
-      setVisitorTitle('visitor.titlePlanDetail');
+      document.getElementById('visitor-title').innerText = '计划详情';
 
       fillPlanDetailFromObject(p);
       updatePlanDetailChrome();
@@ -1227,13 +1154,13 @@
     function openCompletedPlanDetail(id) {
       loadPlansFromStorage();
       const p = visitPlans.find(x => x.id === id && x.completed);
-      if (!p) return alert(VMI18n.t('alert.completedNotFound'));
+      if (!p) return alert('未找到该已完成记录。');
 
       viewingCompletedPlanId = id;
       viewingPlanId = null;
       document.getElementById('my-plans-panel').classList.add('hidden');
       document.getElementById('completed-plans-panel').classList.remove('hidden');
-      setVisitorTitle('visitor.titleCompleted');
+      document.getElementById('visitor-title').innerText = '已完成记录';
 
       document.getElementById('completed-museum').textContent = p.museum;
       document.getElementById('completed-avatar').textContent = p.avatar || '—';
@@ -1258,7 +1185,7 @@
 
       document.getElementById('uncompleted-plan-detail').classList.add('hidden');
       document.getElementById('my-plans-panel').classList.remove('hidden');
-      setVisitorTitle('visitor.titlePlans');
+      document.getElementById('visitor-title').innerText = '我的游览计划';
       renderMyPlansLists();
       refreshPlanEntryButton();
     }
@@ -1267,16 +1194,15 @@
       document.getElementById('uncompleted-plan-detail').classList.add('hidden');
       document.getElementById('completed-plans-panel').classList.add('hidden');
       document.getElementById('my-plans-panel').classList.remove('hidden');
-      setVisitorTitle('visitor.titlePlans');
+      document.getElementById('visitor-title').innerText = '我的游览计划';
       viewingPlanId = null;
       viewingCompletedPlanId = null;
       planDetailReturnMode = null;
       renderMyPlansLists();
     }
 
-    function openAIMemorialForCompletedTrip() {
-      if (!viewingCompletedPlanId) return;
-      window.open('ai-memorial.html?trip=' + encodeURIComponent(viewingCompletedPlanId), '_blank');
+    function generateMemorialVideo() {
+      alert("🎬 AI共创纪念视频正在生成中...\n\n（模拟）视频已生成成功！\n您可以在相册中查看精美游览回忆视频。");
     }
 
     function openMuseumAdminModule() {
@@ -1289,29 +1215,25 @@
       document.body.classList.remove('overflow-hidden');
     }
     function openMuseumAdminPanel(type) {
-      museumAdminActivePanel = type;
       document.getElementById('museum-admin-hub').classList.add('hidden');
       const ab = document.getElementById('admin-back-btn');
       ab.classList.remove('hidden');
       ab.classList.add('inline-flex');
       document.getElementById('museum-admin-' + type + '-panel').classList.remove('hidden');
-      const map = { certification: 'admin.sub.cert', exhibit: 'admin.sub.exhibit', avatar: 'admin.sub.avatar' };
-      document.getElementById('admin-title').innerText = VMI18n.t(map[type] || 'admin.hubTitle');
+      document.getElementById('admin-title').innerText = type === 'certification' ? '身份入驻' : (type === 'exhibit' ? '素材与任务' : '形象管理');
     }
     function backToMuseumAdminHub() {
-      museumAdminActivePanel = null;
       const ab = document.getElementById('admin-back-btn');
       ab.classList.add('hidden');
       ab.classList.remove('inline-flex');
       document.getElementById('museum-admin-hub').classList.remove('hidden');
       ['certification', 'exhibit', 'avatar'].forEach(t => document.getElementById('museum-admin-' + t + '-panel').classList.add('hidden'));
-      document.getElementById('admin-title').innerText = VMI18n.t('admin.hubTitle');
+      document.getElementById('admin-title').innerText = '后台内容管理系统';
     }
 
     window.onload = () => {
       loadPlansFromStorage();
       initRouteMapImages();
-      if (typeof window.vmRefreshPlanKeywords === 'function') window.vmRefreshPlanKeywords();
       console.log('✅ V-Museum Visitor Module Loaded with Updated Plan System.');
     };
   </script>

@@ -32,32 +32,15 @@
     </div>
   </nav>
 
-  <div class="bg-amber-50 border-b border-amber-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 text-sm sm:text-[15px] text-amber-950 leading-relaxed">
-      <p class="font-bold text-base text-amber-900 mb-2 flex items-center gap-2">
-        <i class="fa-solid fa-triangle-exclamation text-amber-600 shrink-0" aria-hidden="true"></i>
-        关于本页的 WebAR 演示（重要说明）
-      </p>
-      <ul class="list-disc pl-5 space-y-2 text-amber-950/95">
-        <li>本页基于浏览器的 WebAR（如 <code class="text-xs bg-white/80 px-1 rounded border border-amber-200">model-viewer</code> 与外链模型）<strong>纯粹是对游客在实际博物馆 AR 展区扫码、解锁馆内 AR 设备之后所见内容的粗略、早期模仿</strong>，仅用于早期概念与交互试探。</li>
-        <li><strong>该 WebAR 路线已废弃</strong>：<strong>不代表</strong> V-Museum 项目以 WebAR 作为最终实现形态；在<strong>考虑到馆内网络可能不稳定</strong>（依赖 CDN / 外链资源、弱网或防火墙场景下体验不可靠）等因素后，我们<strong>已不再采用</strong>此路径作为交付方案。</li>
-        <li>若需查看<strong>更生动的 AR 展区模拟画面</strong>，请在参观者工作台完成计划生成，在<strong>「计划生成成功！」</strong>界面点击<strong>「沉浸式模拟：博物馆 AR 展区画面」</strong>，打开
-          <a href="vmuseum-ar-simulation.html" class="font-semibold text-amber-900 underline underline-offset-2 hover:text-amber-700">沉浸式模拟页面（静态效果图集）</a>。
-        </li>
-      </ul>
-    </div>
-  </div>
-
   <section class="h-[85vh] flex flex-col items-center justify-center text-center px-6 bg-zinc-50 border-b border-zinc-100">
     <div class="max-w-3xl mx-auto">
       <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-8 shadow-sm">
         <i class="fa-solid fa-vr-cardboard"></i>
       </div>
-      <h1 class="text-5xl md:text-6xl font-bold text-zinc-900 mb-4 tracking-tight">XR 展区模拟体验</h1>
-      <p class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-6">早期 WebAR 演示 · 已废弃 · 保留仅供对照</p>
+      <h1 class="text-5xl md:text-6xl font-bold text-zinc-900 mb-6 tracking-tight">XR 展区模拟体验</h1>
       <p class="text-xl text-zinc-500 leading-relaxed mb-12">
-        下方交互为<strong class="text-zinc-700">历史遗留</strong>的浏览器端粗糙演示，<strong class="text-amber-700">不能代表</strong>馆内正式 AR 设备解锁后的真实画质与稳定性。<br>
-        当前产品侧更推荐通过「计划生成成功」页的<strong class="text-amber-600">沉浸式模拟</strong>浏览高保真静态示意。
+        欢迎进入 V-Museum 的 XR 展区模拟。<br>
+        此处展示的是当您步入拟参观博物馆的线下 XR 互动区时，佩戴 XR 设备（或使用手机 AR 扫描）所能看到的<span class="text-amber-600 font-bold">沉浸式虚拟展品与导览影像</span>。
       </p>
       <button onclick="document.getElementById('ar-workspace').scrollIntoView({behavior:'smooth'})" 
               class="bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-2xl text-lg font-bold flex items-center gap-3 mx-auto transition-transform hover:scale-105 shadow-xl">
@@ -67,9 +50,7 @@
   </section>
 
   <div id="ar-workspace" class="max-w-7xl mx-auto px-6 py-20 min-h-screen">
-    <p class="text-center text-xs text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-      以下模型区仍为早期 WebAR 试验代码；正式叙事与视觉呈现请以参观者流程中「计划生成成功」→「沉浸式模拟：博物馆 AR 展区画面」为准。
-    </p>
+    
     <div class="grid lg:grid-cols-3 gap-10">
       
       <div class="lg:col-span-2 flex flex-col gap-6">
